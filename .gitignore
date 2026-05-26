@@ -1,0 +1,27 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# Backups y secretos
+*.bak
+*.backup
+*.sql
+*.sql.gz
+secrets.env
+.env
+.env.*
+credentials.json
+
+# Logs
+*.log
+
+# Sin caches
+node_modules/
+__pycache__/
