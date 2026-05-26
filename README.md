@@ -4,8 +4,8 @@ Sitio web oficial de **Infosystem — Centro de Educación Polivalente**, especi
 
 - **Dominio actual (staging)**: `https://friendly-sutherland.5-175-47-192.plesk.page`
 - **Dominio definitivo previsto**: `centrosinfosystem.com`
-- **Email institucional (pendiente SMTP)**: `info@centrosinfosystem.com`
-- **Email actual**: `info@infosystem.net`
+- **Email institucional (SMTP ACTIVO IONOS)**: `info@centrosinfosystem.com`
+- **Email de respaldo**: `info@infosystem.net`
 - **Teléfono**: `+34 926 33 11 62`
 
 ---
@@ -20,7 +20,7 @@ Sitio web oficial de **Infosystem — Centro de Educación Polivalente**, especi
 | Formularios | Contact Form 7 + Flamingo | Inscripción curso, "Trabaja con nosotros" |
 | Integración CF7 + WC | WooCommerce Quote or Enquiry Contact Form 7 | Sustituye "Añadir al carrito" por el formulario |
 | SEO | Rank Math SEO + WPCode (snippet propio) | Schemas JSON-LD custom complementarios |
-| SMTP | WP Mail SMTP | **Pendiente** de configurar con `info@centrosinfosystem.com` |
+| SMTP | WP Mail SMTP + IONOS | ✅ Activo: `info@centrosinfosystem.com` vía `smtp.ionos.es:587/TLS` |
 | Caché | WP Rocket | Purgar manualmente tras cambios grandes |
 | Hosting | Plesk | Cuidado con WAF para edición masiva de `functions.php` |
 
@@ -92,10 +92,13 @@ CentrosInfoSystem/
 
 Ver detalle completo en [`docs/10-pending-tasks.md`](docs/10-pending-tasks.md):
 
-1. **Configurar SMTP real** (`info@centrosinfosystem.com`) en WP Mail SMTP cuando esté operativo.
+1. ✅ ~~Configurar SMTP real~~ — **HECHO** (IONOS activo 26/05/2026).
 2. **Purgar caché del sitemap** (`/post-sitemap.xml`) — está cacheado a fichero estático por WP Rocket.
 3. **Validar schemas** en `https://search.google.com/test/rich-results` tras pasar al dominio definitivo.
 4. **Mover el sitio al dominio definitivo** `centrosinfosystem.com` (incluye redirects 301).
+5. **Configurar DNS SPF/DKIM/DMARC** en el DNS de `centrosinfosystem.com` para evitar SPAM:
+   - SPF: `v=spf1 include:_spf.kundenserver.de ~all`
+   - DKIM y DMARC: los registros que indique el panel IONOS.
 
 ---
 

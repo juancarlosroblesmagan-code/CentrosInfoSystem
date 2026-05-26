@@ -94,34 +94,94 @@ Formulario standard de "Contact Us" del tema, con:
 
 ---
 
-## SMTP (PENDIENTE)
+## SMTP — Configuración IONOS ✅ ACTIVO
 
-El envío de emails actualmente falla porque **no hay un SMTP configurado**. Síntomas observados:
+Buzón corporativo: **`info@centrosinfosystem.com`** alojado en **IONOS**. Configurado y funcionando desde el 26 de mayo de 2026.
 
-- Los formularios se envían y guardan correctamente en **Flamingo**.
-- El email **no llega** a la academia ni al usuario.
-- WP Mail SMTP marca el envío como fallido en su log.
+### Parámetros IMAP (recepción)
 
-### Configuración objetivo
+| Campo | Valor |
+|-------|-------|
+| Servidor entrante | `imap.ionos.es` |
+| Puerto | `993` |
+| Seguridad | SSL/TLS |
+| Usuario | `info@centrosinfosystem.com` |
+| Contraseña | (la del buzón en el panel IONOS) |
 
-Cuando esté listo el dominio `centrosinfosystem.com`:
+> El IMAP es para que el equipo lea el buzón desde cliente de correo. WordPress no lo necesita.
 
-1. Crear buzón `info@centrosinfosystem.com` en el panel de Plesk.
-2. **Plugin WP Mail SMTP** → Settings:
-   - From Email: `info@centrosinfosystem.com`
-   - From Name: `Infosystem`
-   - Mailer: `Other SMTP` (o `Sendinblue/Brevo` si se quiere transaccional).
-   - Host: `smtp.centrosinfosystem.com` (Plesk lo dirá exactamente)
-   - Port: `587`
-   - Encryption: `TLS`
-   - Authentication: ON
-   - Username: `info@centrosinfosystem.com`
-   - Password: (contraseña del buzón)
-3. Hacer un envío de prueba desde *WP Mail SMTP → Tools → Email Test*.
-4. **Actualizar destinatario en los 3 CF7** (`To`) a `info@centrosinfosystem.com`.
-5. Hacer envío de prueba real desde cada formulario.
+### Parámetros SMTP (envío — lo que usa WordPress)
+
+| Campo | Valor |
+|-------|-------|
+| Servidor saliente | `smtp.ionos.es` |
+| Puerto | `587` |
+| Encriptación | `TLS (STARTTLS)` |
+| Autenticación | **Sí** (obligatorio) |
+| Usuario | `info@centrosinfosystem.com` |
+| Contraseña | (la del buzón en el panel IONOS) |
+
+### Configuración aplicada en WP Mail SMTP
+
+`WordPress admin → WP Mail SMTP → Settings → General`:
+
+| Campo | Valor |
+|-------|-------|
+| **From Email** | `info@centrosinfosystem.com` |
+| **Force From Email** | ✅ ON |
+| **From Name** | `Infosystem` |
+| **Force From Name** | ✅ ON |
+| **Return Path** | ✅ ON |
+| **Mailer** | `Other SMTP` |
+| **SMTP Host** | `smtp.ionos.es` |
+| **Encryption** | `TLS` |
+| **SMTP Port** | `587` |
+| **Auto TLS** | ✅ ON |
+| **Authentication** | ✅ ON |
+| **SMTP Username** | `info@centrosinfosystem.com` |
+| **SMTP Password** | ✅ Encriptada en BD (no visible en UI, oculta tras botón "Quitar la contraseña") |
+
+> **Mejora futura recomendada (no urgente)**: mover la contraseña a una constante en `wp-config.php` para que ni siquiera quede encriptada en la base de datos:
+>
+> ```php
+> define( 'WPMS_ON', true );
+> define( 'WPMS_SMTP_PASS', 'tu_password_aqui' );
+> ```
+>
+> Después, en la UI de WP Mail SMTP el campo aparecerá oculto y un aviso indicará que se está leyendo desde `wp-config.php`. Requiere acceso por FTP/Plesk al `wp-config.php`.
+
+### Pasos ya realizados (26/05/2026)
+
+1. ✅ Buzón `info@centrosinfosystem.com` creado y activo en IONOS.
+2. ✅ Configurado WP Mail SMTP con los parámetros de la tabla anterior.
+3. ✅ Configuración guardada.
+4. ✅ Email Test ejecutado dos veces → ambos respondieron *"El correo de prueba HTML se ha enviado correctamente"*:
+   - Test 1 → `info@infosystem.net`
+   - Test 2 → `info@centrosinfosystem.com` (autotest, verificable en webmail IONOS)
+5. ✅ Destinatarios CF7 actualizados a `info@centrosinfosystem.com` en los 5 formularios (ver tabla siguiente).
+
+### Recipientes CF7 (estado actual)
+
+| ID | Form | Asunto | Destinatario | Remitente |
+|----|------|--------|--------------|-----------|
+| 7 | Información Cursos (inscripción) | `Nueva inscripcion - [product-name] - Infosystem` | `info@centrosinfosystem.com` | `Infosystem <info@centrosinfosystem.com>` |
+| 13916 | Contact Us (/contacto/) | `Nuevo contacto - Infosystem - [your-subject]` | `info@centrosinfosystem.com` | `Infosystem <info@centrosinfosystem.com>` |
+| 13917 | Contact Home Page | `Nuevo contacto desde la web - Infosystem` | `info@centrosinfosystem.com` | `Infosystem <info@centrosinfosystem.com>` |
+| 14376 | Trabaja con nosotros | `Nueva candidatura - Trabaja con nosotros - Infosystem` | `info@centrosinfosystem.com` | `Infosystem <info@centrosinfosystem.com>` |
+| 14853 | Contact One Course | `Nueva consulta curso - Infosystem - [your-subject]` | `info@centrosinfosystem.com` | `Infosystem <info@centrosinfosystem.com>` |
+
+### Troubleshooting
+
+| Síntoma | Posible causa | Solución |
+|---------|---------------|----------|
+| "Authentication failed" | Contraseña incorrecta o cuenta no creada | Verificar credenciales en panel IONOS |
+| "Connection timed out" | Hosting bloquea puerto 587 saliente | Pedir a Plesk que abra puerto SMTP saliente o probar puerto 465 con SSL |
+| Email llega marcado como SPAM | Falta SPF/DKIM | Configurar en el DNS de `centrosinfosystem.com` los registros que indica IONOS:
+| | | • SPF: `v=spf1 include:_spf.kundenserver.de ~all` |
+| | | • DKIM: el selector que dé IONOS |
+| | | • DMARC: `v=DMARC1; p=quarantine; rua=mailto:info@centrosinfosystem.com` |
+| Auto-respuesta no llega al alumno | CF7 con un solo "Mail" configurado | Activar también "Mail (2)" en cada formulario CF7 |
 
 ### Mientras tanto
 
-- Revisar los envíos en `wp-admin → Flamingo → Mensajes entrantes` (todos quedan registrados ahí).
-- Configurar un **email de respaldo personal** en WP Mail SMTP para no perder leads (opcional).
+- Revisar los envíos en `wp-admin → Flamingo → Mensajes entrantes` (todos quedan registrados ahí, incluso si el SMTP falla).

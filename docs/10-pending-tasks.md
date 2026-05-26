@@ -6,13 +6,14 @@ Tareas que **no se pueden resolver vía API/automatización** o que dependen de 
 
 ## ALTA prioridad
 
-### 1. Configurar SMTP real
+### 1. ✅ HECHO — Configurar SMTP real
 
-- **Email definitivo**: `info@centrosinfosystem.com`.
-- **Estado**: pendiente de que el buzón esté operativo en Plesk.
-- **Plugin**: WP Mail SMTP (instalado).
-- **Pasos**: ver [`docs/07-forms-cf7.md`](07-forms-cf7.md) sección "SMTP (PENDIENTE)".
-- **Impacto**: sin SMTP **no se envían emails** desde los formularios. Los leads quedan en Flamingo pero no llegan al equipo.
+- **Email definitivo**: `info@centrosinfosystem.com` (IONOS).
+- **Estado**: ✅ **Activo desde el 26/05/2026**.
+- **Plugin**: WP Mail SMTP configurado con `smtp.ionos.es:587/TLS`.
+- **Tests realizados**: 2 envíos de prueba exitosos (a `info@infosystem.net` y al propio buzón IONOS).
+- **CF7**: los 5 formularios (Inscripción, Contacto, Trabaja con nosotros, Contact Home Page, Contact One Course) ya apuntan a `info@centrosinfosystem.com`.
+- **Contraseña**: encriptada en BD (oculta en la UI). Recomendado en el futuro pasarla a `WPMS_SMTP_PASS` en `wp-config.php` (ver [`docs/07-forms-cf7.md`](07-forms-cf7.md)).
 
 ### 2. Purgar caché del sitemap
 

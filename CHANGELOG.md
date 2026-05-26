@@ -4,6 +4,22 @@ Historial cronológico de todos los cambios realizados sobre el sitio.
 
 ---
 
+## 2026-05-26 · SMTP IONOS operativo + recipientes CF7 unificados
+
+- **WP Mail SMTP** configurado con IONOS (`smtp.ionos.es:587/TLS`, autenticación con `info@centrosinfosystem.com`).
+- **From Email / From Name** forzados a `info@centrosinfosystem.com` / `Infosystem`.
+- **Contraseña**: encriptada en BD, no visible en UI; recomendación futura: pasar a `WPMS_SMTP_PASS` en `wp-config.php`.
+- **Test Email** del plugin realizado correctamente (2 veces, a 2 buzones distintos).
+- **CF7 — 5 formularios actualizados** (recipient + sender + subject):
+  - 7 (Información Cursos / inscripción)
+  - 13916 (Contact Us / `/contacto/`)
+  - 13917 (Contact Home Page)
+  - 14376 (Trabaja con nosotros)
+  - 14853 (Contact One Course)
+- Todos ahora envían a `info@centrosinfosystem.com` con remitente `Infosystem <info@centrosinfosystem.com>` y asuntos prefijados con "Infosystem" para fácil filtrado.
+
+---
+
 ## 2026-05-26 · SEO masivo + 10 posts + FAQ + cross-linking
 
 ### SEO
