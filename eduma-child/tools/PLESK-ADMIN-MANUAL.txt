@@ -1,0 +1,45 @@
+================================================================================
+  ARREGLAR PLESK / WP-ADMIN (error stdClass) — SIN SCRIPTS
+================================================================================
+
+Si fix-plesk-admin.php solo muestra el título y nada más:
+
+  A) Caché: WP Rocket puede estar guardando una página vacía.
+     Plesk → Archivos → borra carpeta wp-content/cache/wp-rocket/
+     (o WP Toolkit → Mantenimiento → vaciar caché)
+
+  B) Dominio correcto: en Plesk abre centrosinfosystem.com
+     (NO cursospremiumonline.es ni otros sitios)
+
+--------------------------------------------------------------------------------
+  MÉTODO MANUAL (2 minutos, el más fiable)
+--------------------------------------------------------------------------------
+
+1. En tu PC abre esta carpeta del proyecto:
+   eduma-child\tools\mu-plugins\
+
+2. Copia el archivo:
+   infosystem-plesk-user-query-fix.php
+
+3. Plesk → centrosinfosystem.com → Archivos →
+   httpdocs → wp-content → mu-plugins →
+
+4. Pulsa "Subir" y deja ese archivo ahí.
+
+5. Plesk → WordPress → Abrir administrador de WordPress
+
+--------------------------------------------------------------------------------
+  MÉTODO SCRIPT NUEVO (texto plano, sin HTML)
+--------------------------------------------------------------------------------
+
+1. Sube a httpdocs:
+   eduma-child\tools\plesk-install.php
+
+2. Abre en el navegador (prueba en ventana privada):
+   https://centrosinfosystem.com/plesk-install.php?clave=infosystem-recuperar
+
+3. Debes ver líneas que empiezan por "INFOSYSTEM PLESK FIX" y "OK escrito..."
+
+4. Borra plesk-install.php del servidor.
+
+================================================================================

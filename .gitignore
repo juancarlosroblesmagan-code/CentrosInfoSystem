@@ -9,6 +9,38 @@ desktop.ini
 *.swp
 *~
 
+# WordPress parent theme + assets locales (no versionar)
+eduma/
+Imagenes/
+assets/
+.claude/
+
+# Scripts de automatización CDP (no versionar)
+eduma-child/tools/*.mjs
+eduma-child/tools/*.js
+eduma-child/tools/browser-*
+eduma-child/tools/cdp-*
+eduma-child/tools/css-patch-*
+eduma-child/tools/snippet-*
+
+# Artefactos temporales / despliegues obsoletos
+chunk_*.txt
+*.b64
+*.zip
+infosystem-SUBIR-AHORA/
+eduma-child/tools/plugin-infosystem-fixes/
+eduma-child/tools/bc*.txt
+eduma-child/tools/b64*.txt
+eduma-child/tools/gv2*.txt
+eduma-child/tools/tv2*.txt
+eduma-child/tools/pb*.txt
+eduma-child/tools/pbchunk*.txt
+flatten-b64.ps1
+split-b64.ps1
+faq-content.html
+infosystem-seo-additions.php
+infosystem-seo-snippet.php
+
 # Backups y secretos
 *.bak
 *.backup
@@ -19,9 +51,8 @@ secrets.env
 .env.*
 credentials.json
 
-# Logs
+# Logs / caches
 *.log
-
-# Sin caches
+*.tmp
 node_modules/
-__pycache__/
+__pycache/

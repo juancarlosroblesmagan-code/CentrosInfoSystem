@@ -41,23 +41,11 @@ Herramienta: `https://search.google.com/test/rich-results`.
 
 ## MEDIA prioridad
 
-### 4. Migrar al dominio definitivo
+### 4. ✅ HECHO — Dominio definitivo
 
-Cuando esté listo `centrosinfosystem.com`:
-
-1. **Backup completo** (Plesk → Backup Manager).
-2. Configurar dominio + DNS apuntando al hosting Plesk.
-3. Instalar **SSL Let's Encrypt** (Plesk lo hace en 1 click).
-4. WordPress: cambiar `siteurl` y `home` (`wp-options`) o vía WP-CLI:
-   ```bash
-   wp option update home https://centrosinfosystem.com
-   wp option update siteurl https://centrosinfosystem.com
-   wp search-replace 'friendly-sutherland.5-175-47-192.plesk.page' 'centrosinfosystem.com' --skip-columns=guid
-   ```
-5. Forzar HTTPS (WP Rocket o Really Simple SSL).
-6. **Redirect 301** del dominio antiguo al nuevo (si se mantiene activo el de Plesk un tiempo).
-7. Re-enviar sitemap a Google Search Console con el dominio nuevo.
-8. Re-validar schemas.
+- **Dominio activo**: `https://centrosinfosystem.com` con SSL.
+- **Redirect 301** del dominio temporal Plesk: snippet WPCode activo.
+- **Pendiente**: re-enviar sitemap en Google Search Console y re-validar schemas (ver §3).
 
 ### 5. Crear Google Business Profile para cada centro
 

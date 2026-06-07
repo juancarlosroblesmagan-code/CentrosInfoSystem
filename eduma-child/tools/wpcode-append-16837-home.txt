@@ -1,0 +1,138 @@
+
+// --- Infosystem: home enlaces + landing Cómo funciona (SEPE CLM) ---
+if ( ! function_exists( 'infosystem_wc_cursos_url' ) ) {
+	function infosystem_wc_cursos_url() {
+		$t = get_term_by( 'slug', 'cursos-subvencionados-castilla-la-mancha', 'product_cat' );
+		if ( $t && ! is_wp_error( $t ) ) {
+			$l = get_term_link( $t );
+			if ( ! is_wp_error( $l ) ) {
+				return $l;
+			}
+		}
+		return home_url( '/cursos-subvencionados-castilla-la-mancha/' );
+	}
+}
+if ( ! function_exists( 'infosystem_como_funciona_url' ) ) {
+	function infosystem_como_funciona_url() {
+		return home_url( '/como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha/' );
+	}
+}
+if ( ! function_exists( 'infosystem_como_funciona_html' ) ) {
+	function infosystem_como_funciona_html() {
+		$c = infosystem_wc_cursos_url();
+		$h = '<article class="infosystem-page infosystem-landing-como-funciona"><header class="infosystem-landing-hero"><p class="infosystem-landing-kicker">Formación para el empleo · Castilla-La Mancha</p>';
+		$h .= '<h1>Cómo funcionan los cursos subvencionados por el SEPE en Castilla-La Mancha</h1>';
+		$h .= '<p class="infosystem-lead">Guía paso a paso: requisitos, inscripción gratuita, formación online y certificado con Infosystem.</p>';
+		$h .= '<p><a class="infosystem-cta" href="' . esc_url( $c ) . '">Ver catálogo de cursos</a> <a class="infosystem-cta infosystem-cta--ghost" href="' . esc_url( home_url( '/contacto/' ) ) . '">Solicitar información</a></p></header>';
+		$h .= '<section><h2>El proceso en 5 pasos</h2><ol class="infosystem-steps"><li><h3>1. Comprueba tu perfil</h3><p>Trabajadores, desempleados o empresa bonificada. Documentación DNI/NIE y vida laboral.</p></li>';
+		$h .= '<li><h3>2. Elige tu curso</h3><p>Digitalización, ofimática, idiomas, PRL y más en CLM.</p></li><li><h3>3. Inscríbete gratis</h3><p>Sin coste de matrícula en acciones subvencionadas.</p></li>';
+		$h .= '<li><h3>4. Formación online a tu ritmo</h3><p>Ordenador, tablet o móvil con tutores especializados.</p></li><li><h3>5. Certificación</h3><p>Certificado al superar la evaluación.</p></li></ol></section>';
+		$h .= '<section><h2>¿Quién financia estos cursos?</h2><p>La formación está subvencionada por la <strong>Junta de Castilla-La Mancha</strong>, el <strong>Ministerio de Educación, Formación Profesional y Deportes</strong> y el <strong>SEPE</strong>.</p></section>';
+		$h .= '<section class="infosystem-landing-cta-block"><h2>¿Listo para empezar?</h2><p><a class="infosystem-cta" href="' . esc_url( $c ) . '">Ver todos los cursos gratuitos</a></p></section></article>';
+		return $h;
+	}
+}
+add_action( 'init', function () {
+	$slug = 'como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha';
+	$opt  = 'infosystem_como_funciona_page_id';
+	$id   = (int) get_option( $opt );
+	if ( $id && 'publish' === get_post_status( $id ) ) {
+		return;
+	}
+	$p = get_page_by_path( $slug, OBJECT, 'page' );
+	if ( $p instanceof WP_Post ) {
+		update_option( $opt, $p->ID );
+		return;
+	}
+	$nid = wp_insert_post( array( 'post_title' => 'Cómo funcionan los cursos subvencionados por el SEPE en Castilla-La Mancha', 'post_name' => $slug, 'post_status' => 'publish', 'post_type' => 'page', 'post_content' => infosystem_como_funciona_html() ), true );
+	if ( ! is_wp_error( $nid ) && $nid ) {
+		update_option( $opt, $nid );
+		update_post_meta( $nid, 'rank_math_title', 'Cómo funcionan los cursos subvencionados SEPE en Castilla-La Mancha | Infosystem' );
+		update_post_meta( $nid, 'rank_math_description', 'Requisitos, inscripción gratuita, formación online y certificado de cursos subvencionados por el SEPE en Castilla-La Mancha.' );
+	}
+}, 20 );
+add_filter( 'the_content', function ( $content ) {
+	if ( is_page( 'como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha' ) && strlen( trim( wp_strip_all_tags( $content ) ) ) < 80 ) {
+		return infosystem_como_funciona_html();
+	}
+	return $content;
+}, 5 );
+add_filter( 'the_content', function ( $content ) {
+	if ( ! is_page( array( 16852, 'como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha' ) ) ) {
+		return $content;
+	}
+	if ( strpos( $content, 'cf-blog-cards' ) === false ) {
+		return $content;
+	}
+	$content = preg_replace(
+		'/<a class="cf-blog-card"([^>]*)><img([^>]*?)>\s*<\/p>\s*<div class="cf-blog-card__body">/i',
+		'<a class="cf-blog-card"$1><img$2><div class="cf-blog-card__body">',
+		$content
+	);
+	$content = preg_replace(
+		'/<p class="cf-blog-card__excerpt">/i',
+		'<div class="cf-blog-card__excerpt">',
+		$content
+	);
+	$content = preg_replace(
+		'/<\/p>\s*(<span class="cf-blog-card__more">)/i',
+		'</div>$1',
+		$content
+	);
+	$content = preg_replace(
+		'/<\/div>\s*<p><\/a>(?:<br\s*\/?>)?\s*/i',
+		'</div></a>',
+		$content
+	);
+	return $content;
+}, 12 );
+add_action( 'template_redirect', function () {
+	if ( is_admin() || ! is_front_page() ) {
+		return;
+	}
+	$cursos   = esc_url( infosystem_wc_cursos_url() );
+	$como     = esc_url( infosystem_como_funciona_url() );
+	$contacto = esc_url( home_url( '/contacto/' ) );
+	$home     = esc_url( home_url( '/' ) );
+	ob_start( function ( $html ) use ( $cursos, $como, $contacto, $home ) {
+		if ( ! is_string( $html ) ) {
+			return $html;
+		}
+		$html = preg_replace(
+			'/(<a[^>]*class="[^"]*e-c2f467e-da956f3[^"]*"[^>]*href=")[^"]*("/iu',
+			'$1' . $contacto . '$2',
+			$html,
+			1
+		);
+		$html = preg_replace(
+			'/(<a[^>]*class="[^"]*tp-button-outline[^"]*"[^>]*href=")[^"]*("[^>]*>\s*Solicitar información\s*<\/a>)/iu',
+			'$1' . $contacto . '$2',
+			$html,
+			1
+		);
+		$html = str_replace( 'https://1.envato.market/Yx2YR', $contacto, $html );
+		$html = preg_replace( '#https?://1\.envato\.market/[^"\'<>\s]+#', $contacto, $html );
+		$html = str_replace( 'href="' . $home . '" target="_self" class="tp-button-outline e-415bdea', 'href="' . $cursos . '" target="_self" class="tp-button-outline e-415bdea', $html );
+		$html = str_replace( 'href="' . $home . '" target="_self" class="tp-button-outline e-5264a37', 'href="' . $contacto . '" target="_self" class="tp-button-outline e-5264a37', $html );
+		$html = str_replace( 'href="' . esc_url( home_url( '/packages/' ) ) . '"', 'href="' . $cursos . '"', $html );
+		$html = str_replace(
+			'data-interaction-id="85bed70"> Ver todos los cursos </a>',
+			'data-interaction-id="85bed70"> Ver itinerarios formativos </a>',
+			$html
+		);
+		$html = str_replace( 'View All Packages', 'Ver itinerarios formativos', $html );
+		$html = str_replace( 'href="' . esc_url( home_url( '/courses/' ) ) . '"', 'href="' . $cursos . '"', $html );
+		$html = str_replace( 'View All</a>', 'Ver todos los cursos</a>', $html );
+		$html = str_replace( 'Cursos completamente actualizados.', 'Aprende a tu ritmo. Cursos online actualizados, sin horarios fijos.', $html );
+		$html = preg_replace( '/<button(\s+class="tp-button-primary e-100c151[^"]*"[^>]*)>\s*Cómo funciona\s*<\/button>/iu', '<a$1 href="' . $como . '">Cómo funciona</a>', $html, 1 );
+		return $html;
+	} );
+}, 0 );
+add_action( 'wp_footer', function () {
+	if ( is_front_page() ) {
+		echo '<style id="infosystem-home-fixes">.elementor-element-263d9da{display:flex!important;flex-wrap:wrap;gap:24px;align-items:stretch!important}.elementor-element-263d9da>.elementor-element{flex:1 1 280px;display:flex!important}.elementor-element-263d9da .elementor-icon-box-wrapper{display:flex!important;align-items:flex-start;gap:16px;background:#fff;border:1px solid #eee;border-radius:12px;padding:28px 24px!important;box-shadow:0 4px 20px rgba(0,0,0,.06);min-height:160px;height:100%;box-sizing:border-box;width:100%}.elementor-element-263d9da .elementor-icon-box-description{min-height:3.2em}.tp-button-outline.e-button-base{color:#8B1A1A!important;border:2px solid #8B1A1A!important;background:#fff!important;padding:14px 32px!important;border-radius:999px!important;font-weight:600!important;text-decoration:none!important;display:inline-block!important}.tp-button-outline.e-button-base:hover{background:#8B1A1A!important;color:#fff!important}a.tp-button-primary.e-button-base{text-decoration:none!important;display:inline-block}</style>';
+	}
+	if ( is_page( 'como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha' ) ) {
+		echo '<style id="infosystem-como-funciona-css">.infosystem-landing-como-funciona{max-width:920px;margin:0 auto}.infosystem-landing-como-funciona h1{color:#8b1a1a}.infosystem-steps{list-style:none;padding:0}.infosystem-steps li{margin-bottom:1rem;padding:1rem;background:#fafafa;border-left:4px solid #ffb606}.infosystem-landing-cta-block{background:linear-gradient(135deg,#8b1a1a,#5c1010);color:#fff;padding:2rem;border-radius:12px;margin-top:2rem}.infosystem-cta{display:inline-block;padding:.75rem 1.5rem;background:#ffb606;color:#222!important;font-weight:600;text-decoration:none!important;margin:.5rem .5rem 0 0;border-radius:2px}</style>';
+	}
+}, 998 );
