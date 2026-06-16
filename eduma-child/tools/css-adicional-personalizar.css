@@ -1,10 +1,19 @@
 /* === Banner de cabecera para categorias de cursos === */
 body.tax-product_cat .top_heading,
 body.tax-product_cat .top_heading.style_heading_3_out,
+body.tax-product_cat .top_heading .top_site_main,
+body.tax-product_cat .top_heading .page-title-wrapper,
+body.tax-product_cat .top_heading .banner-wrapper,
 body.post-type-archive-product .top_heading,
 body.post-type-archive-product .top_heading.style_heading_3_out,
+body.post-type-archive-product .top_heading .top_site_main,
+body.post-type-archive-product .top_heading .page-title-wrapper,
+body.post-type-archive-product .top_heading .banner-wrapper,
 body.woocommerce.archive .top_heading,
-body.woocommerce.archive .top_heading.style_heading_3_out {
+body.woocommerce.archive .top_heading.style_heading_3_out,
+body.woocommerce.archive .top_heading .top_site_main,
+body.woocommerce.archive .top_heading .page-title-wrapper,
+body.woocommerce.archive .top_heading .banner-wrapper {
   background-image: linear-gradient(135deg, rgba(139,26,26,.72) 0%, rgba(40,12,12,.65) 100%),
                     url("https://centrosinfosystem.com/wp-content/uploads/2026/05/centrosinfosystem-banner.webp") !important;
   background-size: cover !important;
@@ -16,8 +25,12 @@ body.woocommerce.archive .top_heading.style_heading_3_out {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 body.tax-product_cat .top_heading.style_heading_3_out .page-title-wrapper,
 body.post-type-archive-product .top_heading.style_heading_3_out .page-title-wrapper {
@@ -28,11 +41,14 @@ body.post-type-archive-product .top_heading.style_heading_3_out .page-title-wrap
 body.tax-product_cat .top_heading.style_heading_3_out .page-title,
 body.post-type-archive-product .top_heading.style_heading_3_out .page-title {
   color: #fff !important;
-  text-shadow: 0 4px 28px rgba(0,0,0,.45);
+  text-shadow: 0 4px 28px rgba(0,0,0,.45) !important;
   font-size: clamp(28px, 4vw, 48px) !important;
   font-weight: 800 !important;
-  letter-spacing: .3px;
+  letter-spacing: .3px !important;
   margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
 }
 body.tax-product_cat .top_heading.style_heading_3_out .breadcrumb,
 body.tax-product_cat .top_heading.style_heading_3_out .breadcrumb a,

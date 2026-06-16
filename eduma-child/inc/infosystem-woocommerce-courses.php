@@ -171,3 +171,15 @@ add_action(
 	},
 	20
 );
+
+if ( ! function_exists( 'infosystem_wc_cursos_url' ) ) {
+	/**
+	 * Retorna la URL del catálogo de cursos WooCommerce.
+	 *
+	 * @return string
+	 */
+	function infosystem_wc_cursos_url() {
+		return eduma_child_wc_courses_category_url();
+	}
+}
+

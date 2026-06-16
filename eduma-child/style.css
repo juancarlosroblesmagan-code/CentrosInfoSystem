@@ -712,11 +712,7 @@ textarea:focus {
     display: none !important;
 }
 
-/* 2. Ocultar Talleres y Jornadas Formativas (Eventos) en la home */
-.elementor-element-745ca79,
-.elementor-element-bdb7343 {
-    display: none !important;
-}
+
 
 /* 3. Correcciones de la página de Cursos (ancho 100% y centrado) */
 body.tax-product_cat .site-content > .row {
@@ -879,47 +875,39 @@ body.single-product .course-price {
     display: none !important;
 }
 
-/* Centrar verticalmente el título del banner en el curso individual y fijar altura a 300px */
-body.single-product .top_heading,
-body.single-product .top_heading.style_heading_3_out {
-    background-image: linear-gradient(135deg, rgba(139,26,26,.72) 0%, rgba(40,12,12,.65) 100%),
-                      url("https://centrosinfosystem.com/wp-content/uploads/2026/05/centrosinfosystem-banner.webp") !important;
-    background-size: cover !important;
-    background-position: center 35% !important;
-    background-repeat: no-repeat !important;
+/* Centrar verticalmente el título de los banners de cabecera en todas las páginas internas y fijar altura a 300px */
+body:not(.home) .top_heading,
+body:not(.home) .top_heading.style_heading_3_out,
+body:not(.home) .top_heading .top_site_main,
+body:not(.home) .top_heading .page-title-wrapper,
+body:not(.home) .top_heading .banner-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
     height: 300px !important;
     min-height: 300px !important;
-    position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-body.single-product .top_heading .banner-wrapper,
-body.single-product .top_heading .page-title-wrapper {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 100% !important;
-    width: 100% !important;
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
+    box-sizing: border-box !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
 }
 
-body.single-product .top_heading h2.page-title,
-body.single-product .top_heading .page-title {
+body:not(.home) .top_heading h1.page-title,
+body:not(.home) .top_heading h2.page-title,
+body:not(.home) .top_heading .page-title {
     color: #fff !important;
-    text-shadow: 0 4px 28px rgba(0,0,0,.45);
+    text-shadow: 0 4px 28px rgba(0,0,0,.45) !important;
     font-size: clamp(28px, 4vw, 48px) !important;
     font-weight: 800 !important;
-    letter-spacing: .3px;
+    letter-spacing: .3px !important;
     margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.2 !important;
     text-align: center !important;
 }
+
 
 
