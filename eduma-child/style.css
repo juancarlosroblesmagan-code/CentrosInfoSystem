@@ -955,21 +955,32 @@ body:not(.home) .top_heading .page-title {
     text-align: center !important;
 }
 
-/* === Redes Sociales en Compartir (Instagram y TikTok) === */
-.thim-social-share li .instagram-social a.instagram {
-    background: #e1306c !important;
-    color: #fff !important;
+/* === Redes Sociales en Compartir (Instagram, TikTok, LinkedIn) === */
+.thim-social-share li .instagram-social a.instagram,
+.thim-social-share li .tiktok-social a.tiktok,
+.thim-social-share li .linkedin-social a.linkedin {
+    background: #ffffff !important;
+    border: 1px solid #eeeeee !important;
+    color: #999999 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
 }
 .thim-social-share li .instagram-social a.instagram:hover {
-    background: #c13584 !important;
-}
-.thim-social-share li .tiktok-social a.tiktok {
-    background: #000000 !important;
-    color: #fff !important;
+    background: #e1306c !important;
+    border-color: #e1306c !important;
+    color: #ffffff !important;
 }
 .thim-social-share li .tiktok-social a.tiktok:hover {
-    background: #25f4ee !important;
-    color: #000 !important;
+    background: #000000 !important;
+    border-color: #000000 !important;
+    color: #ffffff !important;
+}
+.thim-social-share li .linkedin-social a.linkedin:hover {
+    background: #0077b5 !important;
+    border-color: #0077b5 !important;
+    color: #ffffff !important;
 }
 
 
