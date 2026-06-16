@@ -36,7 +36,7 @@ if ( ! function_exists( 'infosystem_protected_email_addresses' ) ) {
 	 */
 	function infosystem_protected_email_addresses() {
 		$primary = defined( 'INFOSYSTEM_CONTACT_EMAIL' ) ? INFOSYSTEM_CONTACT_EMAIL : 'info@centrosinfosystem.com';
-		$emails  = array( $primary );
+		$emails  = array( $primary, 'info@infosystem.net' );
 		return array_unique( array_filter( $emails ) );
 	}
 }

@@ -35,9 +35,6 @@ add_action(
 		if ( is_admin() ) {
 			return;
 		}
-		if ( ! defined( 'INFOSYSTEM_DOMAIN_OUTPUT_BUFFER' ) || ! INFOSYSTEM_DOMAIN_OUTPUT_BUFFER ) {
-			return;
-		}
 		if ( defined( 'INFOSYSTEM_MU_PACK_ACTIVE' ) && INFOSYSTEM_MU_PACK_ACTIVE && is_front_page() ) {
 			return;
 		}

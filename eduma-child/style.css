@@ -1,9 +1,925 @@
 /*
- Theme Name:   Eduma Child - Infosystem
- Theme URI:    https://thimpress.com/eduma/
- Description:  Child theme Infosystem — rendimiento, páginas institucionales y limpieza del demo Eduma.
- Author:       Custom
- Template:     eduma
- Version:      1.3.1
- Text Domain:  eduma-child
+Theme Name:   Infosystem Child
+Theme URI:    https://www.infosystem.net
+Description:  Child Theme de Eduma para Infosystem - Centro de Educación Polivalente
+Author:       Juan Carlos Robles Magán
+Author URI:   http://roblesmagan.com/
+Template:     eduma
+Version:      1.0.0
+License:      GNU General Public License v2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:  infosystem-child
+Tags: education, e-learning, courses
 */
+
+/* ============================================================
+   INFOSYSTEM BRAND COLORS - VARIABLES CSS
+   ============================================================ */
+:root {
+    --color-primary:        #8B1A1A;   /* Granate principal */
+    --color-primary-dark:   #6B1212;   /* Granate oscuro hover */
+    --color-primary-light:  #A52020;   /* Granate claro */
+    --color-secondary:      #D4880A;   /* Dorado/Naranja corporativo */
+    --color-secondary-dark: #B8720A;   /* Dorado oscuro hover */
+    --color-secondary-light:#E8A020;   /* Dorado claro */
+    --color-accent:         #C0392B;   /* Rojo acento */
+    --color-text:           #2C2C2C;   /* Texto principal */
+    --color-text-light:     #666666;   /* Texto secundario */
+    --color-bg:             #FFFFFF;   /* Fondo principal */
+    --color-bg-light:       #F8F5F0;   /* Fondo suave cálido */
+    --color-bg-dark:        #1A0A0A;   /* Fondo oscuro footer */
+    --color-border:         #E8DDD0;   /* Bordes suaves */
+
+    --font-heading:         'Merriweather', Georgia, serif;
+    --font-body:            'Source Sans Pro', 'Open Sans', Arial, sans-serif;
+
+    --radius:               6px;
+    --shadow-sm:            0 2px 8px rgba(139,26,26,0.1);
+    --shadow-md:            0 4px 20px rgba(139,26,26,0.15);
+    --shadow-lg:            0 8px 40px rgba(139,26,26,0.2);
+
+    --transition:           all 0.3s ease;
+}
+
+/* ============================================================
+   TIPOGRAFÍA
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+}
+
+/* ============================================================
+   BOTONES — COLOR PRIMARIO
+   ============================================================ */
+.btn,
+button,
+input[type="submit"],
+input[type="button"],
+.button,
+a.btn,
+.thim-btn,
+.lp-button,
+a.lp-button {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    color: #fff !important;
+    border-radius: var(--radius) !important;
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+    transition: var(--transition) !important;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+.button:hover,
+a.btn:hover,
+.thim-btn:hover,
+.lp-button:hover,
+a.lp-button:hover {
+    background-color: var(--color-secondary) !important;
+    border-color: var(--color-secondary) !important;
+    color: #fff !important;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Botones secundarios/outline */
+.btn-outline,
+.button-outline {
+    background-color: transparent !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+}
+
+.btn-outline:hover {
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+}
+
+/* ============================================================
+   HEADER / NAVEGACIÓN
+   ============================================================ */
+#header,
+.site-header,
+header.header,
+.thim-header {
+    background-color: var(--color-bg) !important;
+    border-bottom: 3px solid var(--color-secondary) !important;
+    box-shadow: 0 2px 15px rgba(139,26,26,0.08) !important;
+}
+
+/* Menú de navegación - enlaces */
+#header .nav > li > a,
+.site-header .nav > li > a,
+header nav ul li a,
+.main-navigation a,
+.thim-header .nav > li > a {
+    color: var(--color-primary) !important;
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    transition: var(--transition) !important;
+}
+
+#header .nav > li > a:hover,
+.site-header .nav > li > a:hover,
+header nav ul li a:hover,
+.main-navigation a:hover {
+    color: var(--color-secondary) !important;
+}
+
+/* Menú activo */
+#header .nav > li.current-menu-item > a,
+#header .nav > li.active > a {
+    color: var(--color-secondary) !important;
+    border-bottom: 2px solid var(--color-secondary);
+}
+
+/* Submenú dropdown */
+#header .nav .sub-menu,
+.main-navigation .sub-menu {
+    border-top: 3px solid var(--color-primary) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+#header .nav .sub-menu a,
+.main-navigation .sub-menu a {
+    color: var(--color-text) !important;
+}
+
+#header .nav .sub-menu a:hover,
+.main-navigation .sub-menu a:hover {
+    color: var(--color-primary) !important;
+    background-color: var(--color-bg-light) !important;
+}
+
+/* ============================================================
+   TOPBAR (barra superior)
+   ============================================================ */
+.topbar,
+#topbar,
+.thim-topbar {
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+}
+
+.topbar a,
+#topbar a,
+.thim-topbar a {
+    color: #fff !important;
+}
+
+.topbar a:hover,
+.thim-topbar a:hover {
+    color: var(--color-secondary) !important;
+}
+
+/* ============================================================
+   HERO / REVOLUTION SLIDER
+   ============================================================ */
+.rev_slider_wrapper,
+.tp-banner-container {
+    border-bottom: 4px solid var(--color-secondary);
+}
+
+/* Overlay en slides */
+.tp-caption a,
+.tp-caption .btn,
+.rev_slider .tp-caption a {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+}
+
+/* ============================================================
+   SECCIÓN DE PLANES / CURSOS
+   ============================================================ */
+.section-plans,
+.thim-sc-courses,
+.lp-archive-courses {
+    background-color: var(--color-bg-light);
+}
+
+/* Tarjetas de cursos */
+.course-item,
+.item-course,
+.lp-course-item,
+.learnpress-courses .course {
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--color-border) !important;
+    transition: var(--transition) !important;
+    overflow: hidden;
+}
+
+.course-item:hover,
+.item-course:hover,
+.lp-course-item:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: var(--shadow-lg) !important;
+    border-color: var(--color-secondary) !important;
+}
+
+/* Precio de curso */
+.course-price,
+.lp-course-price,
+.price {
+    color: var(--color-primary) !important;
+    font-weight: 700 !important;
+}
+
+/* Badge GRATIS */
+.course-free,
+.free-badge,
+span.free {
+    background-color: var(--color-secondary) !important;
+    color: #fff !important;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   SECCIÓN "POR QUÉ ELEGIRNOS" / ICONOS
+   ============================================================ */
+.why-choose-us .icon,
+.thim-sc-icon-box .icon,
+.elementor-icon,
+.icon-box .icon {
+    color: var(--color-primary) !important;
+}
+
+.thim-sc-icon-box:hover .icon,
+.icon-box:hover .icon {
+    color: var(--color-secondary) !important;
+}
+
+.thim-sc-icon-box h3,
+.icon-box h3 {
+    color: var(--color-primary) !important;
+}
+
+/* ============================================================
+   SECCIÓN REGISTRO / NEWSLETTER
+   ============================================================ */
+.section-register,
+.newsletter-section,
+.thim-sc-register {
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+}
+
+.section-register h2,
+.section-register h3,
+.newsletter-section h2,
+.thim-sc-register h2 {
+    color: #fff !important;
+}
+
+/* Input de email en newsletter */
+.newsletter-section input[type="email"],
+.newsletter-section input[type="text"],
+.mc4wp-form input[type="email"] {
+    border: 2px solid var(--color-secondary) !important;
+    border-radius: var(--radius) !important;
+    padding: 12px 16px !important;
+}
+
+.newsletter-section input[type="submit"],
+.mc4wp-form input[type="submit"] {
+    background-color: var(--color-secondary) !important;
+    border-color: var(--color-secondary) !important;
+    color: #fff !important;
+}
+
+/* ============================================================
+   SECCIÓN DE TESTIMONIOS
+   ============================================================ */
+.testimonials-section,
+.thim-sc-testimonials {
+    background-color: var(--color-bg-light) !important;
+}
+
+.testimonial-item .quote-icon,
+.testimonials .quote {
+    color: var(--color-secondary) !important;
+}
+
+.testimonial-item .author-name,
+.testimonials .name {
+    color: var(--color-primary) !important;
+    font-weight: 700;
+}
+
+/* Estrellas de valoración */
+.star-rating span::before,
+.ratings .star::before {
+    color: var(--color-secondary) !important;
+}
+
+/* ============================================================
+   BLOG - ENTRADAS
+   ============================================================ */
+.post-title a,
+.entry-title a,
+h2.entry-title a {
+    color: var(--color-primary) !important;
+    transition: var(--transition);
+}
+
+.post-title a:hover,
+.entry-title a:hover {
+    color: var(--color-secondary) !important;
+}
+
+.category-label,
+.post-categories a {
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+    border-radius: 4px;
+    padding: 2px 8px;
+}
+
+.read-more a,
+a.more-link {
+    color: var(--color-primary) !important;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-secondary);
+}
+
+.read-more a:hover,
+a.more-link:hover {
+    color: var(--color-secondary) !important;
+}
+
+/* ============================================================
+   BREADCRUMBS
+   ============================================================ */
+.breadcrumbs,
+.breadcrumb {
+    background-color: var(--color-bg-light) !important;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.breadcrumbs a,
+.breadcrumb a {
+    color: var(--color-primary) !important;
+}
+
+.breadcrumbs .current,
+.breadcrumb .active {
+    color: var(--color-secondary) !important;
+}
+
+/* ============================================================
+   PAGINACIÓN
+   ============================================================ */
+.pagination .current,
+.page-numbers.current {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    color: #fff !important;
+}
+
+.pagination a,
+.page-numbers a {
+    color: var(--color-primary) !important;
+    border-color: var(--color-border) !important;
+}
+
+.pagination a:hover,
+.page-numbers a:hover {
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer,
+.site-footer,
+footer.footer,
+.thim-footer {
+    background-color: var(--color-bg-dark) !important;
+    color: #ccc !important;
+    border-top: 4px solid var(--color-secondary) !important;
+}
+
+#footer h3,
+#footer h4,
+.site-footer h3,
+.site-footer h4,
+.thim-footer h3,
+.thim-footer .widget-title {
+    color: var(--color-secondary) !important;
+    font-family: var(--font-heading) !important;
+    border-bottom: 1px solid rgba(212,136,10,0.3);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+#footer a,
+.site-footer a,
+.thim-footer a {
+    color: #bbb !important;
+    transition: var(--transition);
+}
+
+#footer a:hover,
+.site-footer a:hover,
+.thim-footer a:hover {
+    color: var(--color-secondary) !important;
+}
+
+/* Footer bottom bar */
+.footer-bottom,
+.copyright-bar,
+#footer .bottom {
+    background-color: #0D0505 !important;
+    border-top: 1px solid rgba(212,136,10,0.2) !important;
+    color: #999 !important;
+}
+
+.footer-bottom a {
+    color: var(--color-secondary) !important;
+}
+
+/* Iconos RRSS */
+.social-icons a,
+.social-links a,
+.thim-social a {
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    text-align: center !important;
+    display: inline-block !important;
+    transition: var(--transition) !important;
+}
+
+.social-icons a:hover,
+.social-links a:hover {
+    background-color: var(--color-secondary) !important;
+    transform: translateY(-2px);
+}
+
+/* ============================================================
+   LEARNPRESS — PÁGINA DE CURSO INDIVIDUAL
+   ============================================================ */
+.course-summary,
+.single-course .course-info {
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius) !important;
+}
+
+.course-info .price,
+.single-course .course-price {
+    color: var(--color-primary) !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+}
+
+.lp-buy-course,
+.course-enroll-btn,
+.btn-enroll {
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    padding: 14px 28px !important;
+    border-radius: var(--radius) !important;
+    width: 100% !important;
+    text-align: center !important;
+    font-weight: 700 !important;
+}
+
+.lp-buy-course:hover,
+.course-enroll-btn:hover {
+    background-color: var(--color-secondary) !important;
+}
+
+/* Tabs del curso */
+.lp-course-nav li a,
+.course-tabs li a {
+    color: var(--color-text) !important;
+    border-bottom: 3px solid transparent;
+}
+
+.lp-course-nav li.active a,
+.lp-course-nav li a:hover,
+.course-tabs li.active a {
+    color: var(--color-primary) !important;
+    border-bottom-color: var(--color-primary) !important;
+}
+
+/* ============================================================
+   SECCIÓN DE PLANES DESTACADOS (Cards de Plan)
+   ============================================================ */
+.plan-card,
+.pricing-table,
+.thim-sc-pricing {
+    border: 2px solid var(--color-border) !important;
+    border-radius: var(--radius) !important;
+    transition: var(--transition) !important;
+}
+
+.plan-card:hover,
+.pricing-table:hover {
+    border-color: var(--color-primary) !important;
+    box-shadow: var(--shadow-lg) !important;
+    transform: translateY(-5px);
+}
+
+.plan-card .plan-header,
+.pricing-table .plan-name {
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+    padding: 20px !important;
+    border-radius: var(--radius) var(--radius) 0 0 !important;
+}
+
+.plan-card.featured,
+.pricing-table.featured {
+    border-color: var(--color-secondary) !important;
+}
+
+.plan-card.featured .plan-header {
+    background-color: var(--color-secondary) !important;
+}
+
+/* ============================================================
+   FORMULARIOS — CONTACTO
+   ============================================================ */
+.contact-form input,
+.contact-form textarea,
+.wpcf7 input,
+.wpcf7 textarea,
+.wpcf7 select {
+    border: 2px solid var(--color-border) !important;
+    border-radius: var(--radius) !important;
+    padding: 12px 16px !important;
+    transition: var(--transition) !important;
+    font-family: var(--font-body) !important;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.wpcf7 input:focus,
+.wpcf7 textarea:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+    outline: none !important;
+}
+
+.wpcf7-submit,
+.contact-form [type="submit"] {
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 14px 32px !important;
+    border-radius: var(--radius) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+}
+
+.wpcf7-submit:hover,
+.contact-form [type="submit"]:hover {
+    background-color: var(--color-secondary) !important;
+}
+
+/* ============================================================
+   WIDGETS — BARRA LATERAL
+   ============================================================ */
+.widget-title,
+.widget h3,
+aside .widget h2 {
+    color: var(--color-primary) !important;
+    border-left: 4px solid var(--color-secondary) !important;
+    padding-left: 12px !important;
+    font-family: var(--font-heading) !important;
+}
+
+/* ============================================================
+   SECCIÓN HERO / BANNER INTERIOR DE PÁGINAS
+   ============================================================ */
+.page-header-banner,
+.thim-page-header,
+.inner-page-header {
+    background-color: var(--color-primary) !important;
+    position: relative;
+}
+
+.page-header-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
+}
+
+.page-header-banner h1,
+.thim-page-header h1 {
+    color: #fff !important;
+    font-family: var(--font-heading) !important;
+}
+
+/* ============================================================
+   ACCESIBILIDAD — FOCUS
+   ============================================================ */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 3px solid var(--color-secondary) !important;
+    outline-offset: 2px !important;
+}
+
+/* ============================================================
+   SCROLLBAR PERSONALIZADO (Chrome/Edge)
+   ============================================================ */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary);
+}
+
+/* ============================================================
+   RESPONSIVE — AJUSTES MÓVIL
+   ============================================================ */
+@media (max-width: 768px) {
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.2rem; }
+
+    .course-item,
+    .plan-card {
+        margin-bottom: 20px;
+    }
+
+    #header .nav {
+        background-color: var(--color-bg) !important;
+    }
+
+    /* Botón hamburguesa */
+    .navbar-toggle span,
+    .menu-toggle span {
+        background-color: var(--color-primary) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn, button, .button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ============================================================
+   ANTI-GRAVITY: CORRECCIONES DE MAQUETACIÓN E INICIO
+   ============================================================ */
+
+/* 1. Ocultar Itinerarios Formativos en la home */
+.elementor-element-97858f2 {
+    display: none !important;
+}
+
+/* 2. Ocultar Talleres y Jornadas Formativas (Eventos) en la home */
+.elementor-element-745ca79,
+.elementor-element-bdb7343 {
+    display: none !important;
+}
+
+/* 3. Correcciones de la página de Cursos (ancho 100% y centrado) */
+body.tax-product_cat .site-content > .row {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+body.tax-product_cat .site-content #sidebar,
+body.tax-product_cat .site-content .widget-area {
+    display: none !important;
+    width: 0 !important;
+    overflow: hidden !important;
+}
+
+body.tax-product_cat .site-content main.site-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    float: none !important;
+}
+
+/* Ajustes de Grid de Cursos (WooCommerce) */
+body.tax-product_cat .product-grid {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    column-gap: 30px !important;
+    row-gap: 40px !important;
+}
+
+@media (max-width: 991px) {
+    body.tax-product_cat .product-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    body.tax-product_cat .product-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Tarjetas de Cursos Simétricas de Alta Calidad */
+body.tax-product_cat .product-grid .product {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+body.tax-product_cat .product-grid .product .content__product {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    background: #ffffff !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 8px !important;
+    padding: 24px !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: var(--transition) !important;
+    box-sizing: border-box !important;
+}
+
+body.tax-product_cat .product-grid .product .content__product:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: var(--shadow-md) !important;
+    border-color: var(--color-secondary) !important;
+}
+
+/* Tipografía de las Tarjetas */
+body.tax-product_cat .product-grid .product .product__title {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    margin-top: 15px !important;
+}
+
+body.tax-product_cat .product-grid .product .product__title a.title {
+    font-family: var(--font-heading) !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: var(--color-primary) !important;
+    line-height: 1.4 !important;
+    text-decoration: none !important;
+    margin-bottom: 10px !important;
+}
+
+body.tax-product_cat .product-grid .product .product__title a.title:hover {
+    color: var(--color-secondary) !important;
+}
+
+body.tax-product_cat .product-grid .product .product__title .price {
+    font-family: var(--font-body) !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: var(--color-secondary) !important;
+    margin-bottom: 12px !important;
+}
+
+body.tax-product_cat .product-grid .product .product__title .description {
+    flex-grow: 1 !important;
+    margin-bottom: 20px !important;
+}
+
+body.tax-product_cat .product-grid .product .product__title .description p {
+    font-family: var(--font-body) !important;
+    font-size: 0.9rem !important;
+    color: var(--color-text-light) !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+
+/* Botones Granate de la Tarjeta */
+body.tax-product_cat .product-grid .product .product__title a.button {
+    font-family: var(--font-body) !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    background-color: var(--color-primary) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 12px 24px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: var(--transition) !important;
+}
+
+body.tax-product_cat .product-grid .product .product__title a.button:hover {
+    background-color: var(--color-secondary) !important;
+    color: #ffffff !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* 4. Correcciones de la página de Curso Individual (ancho 100% y centrado) */
+body.single-product .site-content > .row {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+body.single-product .site-content #sidebar,
+body.single-product .site-content .widget-area {
+    display: none !important;
+    width: 0 !important;
+    overflow: hidden !important;
+}
+
+body.single-product .site-content main.site-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    float: none !important;
+}
+
+/* Ocultar precios e importes en la página de curso individual */
+body.single-product .price,
+body.single-product .amount,
+body.single-product .woocommerce-Price-amount,
+body.single-product .course-price {
+    display: none !important;
+}
+
+/* Centrar verticalmente el título del banner en el curso individual y fijar altura a 300px */
+body.single-product .top_heading,
+body.single-product .top_heading.style_heading_3_out {
+    background-image: linear-gradient(135deg, rgba(139,26,26,.72) 0%, rgba(40,12,12,.65) 100%),
+                      url("https://centrosinfosystem.com/wp-content/uploads/2026/05/centrosinfosystem-banner.webp") !important;
+    background-size: cover !important;
+    background-position: center 35% !important;
+    background-repeat: no-repeat !important;
+    height: 300px !important;
+    min-height: 300px !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+body.single-product .top_heading .banner-wrapper,
+body.single-product .top_heading .page-title-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+    width: 100% !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body.single-product .top_heading h2.page-title,
+body.single-product .top_heading .page-title {
+    color: #fff !important;
+    text-shadow: 0 4px 28px rgba(0,0,0,.45);
+    font-size: clamp(28px, 4vw, 48px) !important;
+    font-weight: 800 !important;
+    letter-spacing: .3px;
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+

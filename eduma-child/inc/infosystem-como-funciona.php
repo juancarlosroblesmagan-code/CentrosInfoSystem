@@ -7,10 +7,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const INFOSYSTEM_COMO_FUNCIONA_SLUG    = 'como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha';
-const INFOSYSTEM_COMO_FUNCIONA_OPTION  = 'infosystem_como_funciona_page_id';
-const INFOSYSTEM_COMO_FUNCIONA_VER     = 'infosystem_como_funciona_content_ver';
-const INFOSYSTEM_COMO_FUNCIONA_VERSION = 4;
+const INFOSYSTEM_COMO_FUNCIONA_SLUG   = 'como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha';
+const INFOSYSTEM_COMO_FUNCIONA_OPTION = 'infosystem_como_funciona_page_id';
+const INFOSYSTEM_COMO_FUNCIONA_VER    = 'infosystem_como_funciona_content_ver';
+const INFOSYSTEM_COMO_FUNCIONA_VERSION = 3;
 
 /**
  * @return string
@@ -32,192 +32,102 @@ function infosystem_como_funciona_cursos_url() {
 	return home_url( '/cursos-subvencionados-castilla-la-mancha/' );
 }
 
-if ( ! function_exists( 'infosystem_como_funciona_blog_cards_html' ) ) :
-/**
- * Tres entradas recientes en franja horizontal al pie.
- *
- * @return string
- */
-function infosystem_como_funciona_blog_cards_html() {
-	$posts = get_posts(
-		array(
-			'post_type'           => 'post',
-			'post_status'         => 'publish',
-			'posts_per_page'      => 3,
-			'ignore_sticky_posts' => true,
-		)
-	);
-	if ( empty( $posts ) ) {
-		return '';
-	}
-
-	$out = '';
-	foreach ( $posts as $post ) {
-		$img   = get_the_post_thumbnail_url( $post, 'medium_large' );
-		$img   = $img ? $img : content_url( '/uploads/2026/05/centrosinfosystem-banner.webp' );
-		$title = get_the_title( $post );
-		$excerpt = wp_trim_words( wp_strip_all_tags( get_the_excerpt( $post ) ), 18, '…' );
-		$link  = get_permalink( $post );
-
-		$out .= '<a class="cf-blog-card" href="' . esc_url( $link ) . '">';
-		$out .= '<img class="cf-blog-card__img" src="' . esc_url( $img ) . '" alt="" loading="lazy" width="400" height="250" />';
-		$out .= '<div class="cf-blog-card__body">';
-		$out .= '<h3 class="cf-blog-card__title">' . esc_html( $title ) . '</h3>';
-		$out .= '<div class="cf-blog-card__excerpt">' . esc_html( $excerpt ) . '</div>';
-		$out .= '<span class="cf-blog-card__more">' . esc_html__( 'Leer artículo', 'eduma-child' ) . '</span>';
-		$out .= '</div></a>';
-	}
-
-	return $out;
-}
-endif;
-
 if ( ! function_exists( 'infosystem_como_funciona_content_html' ) ) :
 /**
- * HTML de la landing (UTF-8, diseño v4).
+ * HTML de la landing (UTF-8, diseño moderno).
  *
  * @return string
  */
 function infosystem_como_funciona_content_html() {
-	$cursos_url   = esc_url( infosystem_como_funciona_cursos_url() );
-	$contacto_url = esc_url( home_url( '/contacto/' ) );
-	$faq_url      = esc_url( home_url( '/preguntas-frecuentes/' ) );
-	$blog_url     = esc_url( home_url( '/blog/' ) );
-	$img_hero     = esc_url( content_url( '/uploads/2026/06/centrosinfosystem-nosotros.webp' ) );
-	$img_banner   = esc_url( content_url( '/uploads/2026/05/centrosinfosystem-banner.webp' ) );
-	$blog_cards   = infosystem_como_funciona_blog_cards_html();
+	$cursos_url   = infosystem_como_funciona_cursos_url();
+	$contacto_url = home_url( '/contacto/' );
+	$faq_url      = home_url( '/preguntas-frecuentes/' );
+	$img_hero     = esc_url( content_url( '/uploads/2026/05/centrosinfosystem-banner.webp' ) );
+	$img_online   = esc_url( content_url( '/uploads/2026/05/centrosinfosystem-banner.webp' ) );
 
 	ob_start();
 	?>
 	<article class="infosystem-page infosystem-landing-como-funciona infosystem-landing-modern">
-		<div class="cf-hero-band" role="banner">
-			<div class="cf-hero-band__inner">
-				<p class="infosystem-landing-kicker"><?php esc_html_e( 'Formación para el empleo · Castilla-La Mancha', 'eduma-child' ); ?></p>
-				<p class="cf-hero-lead"><?php esc_html_e( 'Guía clara para acceder a cursos subvencionados por la Junta de Castilla-La Mancha, el Ministerio de Educación, Formación Profesional y Deportes y el SEPE: requisitos, inscripción gratuita, formación presencial en nuestros centros y certificado con Infosystem.', 'eduma-child' ); ?></p>
+		<div class="cf-intro-grid">
+			<div class="cf-intro-copy">
+				<p class="infosystem-landing-kicker">Formación para el empleo · Castilla-La Mancha</p>
+				<p class="infosystem-lead">En <strong>Infosystem</strong> te guiamos en todo el proceso: comprobar requisitos, inscripción gratuita, formación <strong>100&nbsp;% online</strong> y certificado al finalizar.</p>
 				<div class="cf-cta-row">
-					<a class="infosystem-cta" href="<?php echo $cursos_url; ?>"><?php esc_html_e( 'Ver catálogo de cursos', 'eduma-child' ); ?></a>
-					<a class="infosystem-cta infosystem-cta--ghost" href="<?php echo esc_url( $contacto_url ); ?>"><?php esc_html_e( 'Solicitar información', 'eduma-child' ); ?></a>
+					<a class="infosystem-cta" href="<?php echo esc_url( $cursos_url ); ?>">Ver catálogo de cursos</a>
+					<a class="infosystem-cta infosystem-cta--ghost" href="<?php echo esc_url( $contacto_url ); ?>">Solicitar información</a>
 				</div>
-			</div>
-		</div>
-
-		<div class="cf-page-wrap">
-			<section class="cf-intro-panel" aria-labelledby="cf-intro-title">
-				<div class="cf-intro-panel__grid">
-					<div class="cf-intro-panel__content">
-						<p class="cf-intro-kicker"><?php esc_html_e( 'Formación presencial · 4 centros en CLM', 'eduma-child' ); ?></p>
-						<h2 id="cf-intro-title" class="cf-intro-title"><?php esc_html_e( 'Tu formación subvencionada, paso a paso', 'eduma-child' ); ?></h2>
-						<p class="cf-intro-lead"><?php esc_html_e( 'En Infosystem te acompañamos desde la consulta del catálogo hasta la obtención del certificado. Sin coste de matrícula en acciones subvencionadas y con tutores especializados en el aula.', 'eduma-child' ); ?></p>
-						<ul class="cf-stats" aria-label="<?php esc_attr_e( 'Datos Infosystem', 'eduma-child' ); ?>">
-							<li class="cf-stat">
-								<strong class="cf-stat__num">+500</strong>
-								<span class="cf-stat__label"><?php esc_html_e( 'cursos', 'eduma-child' ); ?></span>
-							</li>
-							<li class="cf-stat">
-								<strong class="cf-stat__num">+2.000</strong>
-								<span class="cf-stat__label"><?php esc_html_e( 'alumnos', 'eduma-child' ); ?></span>
-							</li>
-							<li class="cf-stat cf-stat--highlight">
-								<strong class="cf-stat__num">4</strong>
-								<span class="cf-stat__label"><?php esc_html_e( 'centros presenciales', 'eduma-child' ); ?></span>
-							</li>
-						</ul>
-						<p class="cf-intro-centers"><?php esc_html_e( 'Santa Cruz de Mudela · Viso del Marqués · Fuente del Fresno · Membrilla', 'eduma-child' ); ?></p>
-						<div class="cf-intro-actions">
-							<a class="infosystem-cta cf-intro-actions__primary" href="<?php echo $cursos_url; ?>"><?php esc_html_e( 'Ver catálogo', 'eduma-child' ); ?></a>
-							<a class="cf-intro-actions__link" href="<?php echo esc_url( $contacto_url ); ?>"><?php esc_html_e( 'Solicitar información', 'eduma-child' ); ?></a>
-						</div>
-					</div>
-					<figure class="cf-intro-media">
-						<div class="cf-intro-media__frame">
-							<img src="<?php echo esc_url( $img_hero ); ?>" alt="<?php esc_attr_e( 'Alumnos en formación presencial en un centro Infosystem de Castilla-La Mancha', 'eduma-child' ); ?>" width="720" height="480" loading="eager" decoding="async" />
-							<figcaption class="cf-intro-media__caption"><?php esc_html_e( 'Aulas equipadas en nuestros centros de Castilla-La Mancha', 'eduma-child' ); ?></figcaption>
-						</div>
-					</figure>
-				</div>
-			</section>
-
-			<section class="cf-section" aria-labelledby="cf-pasos">
-				<h2 id="cf-pasos"><?php esc_html_e( 'El proceso en 5 pasos', 'eduma-child' ); ?></h2>
-				<p class="cf-section-lead"><?php esc_html_e( 'Desde la consulta del catálogo hasta tu certificado: un recorrido claro y sin coste de matrícula en cursos subvencionados.', 'eduma-child' ); ?></p>
-				<ol class="infosystem-steps cf-steps-grid">
-					<li>
-						<span class="cf-step-num" aria-hidden="true">1</span>
-						<h3><?php esc_html_e( 'Comprueba tu perfil', 'eduma-child' ); ?></h3>
-						<p><?php esc_html_e( 'Trabajadores en activo, desempleados o empresas que bonifican la formación. Documentación habitual: DNI/NIE y vida laboral.', 'eduma-child' ); ?></p>
-					</li>
-					<li>
-						<span class="cf-step-num" aria-hidden="true">2</span>
-						<h3><?php esc_html_e( 'Elige tu curso', 'eduma-child' ); ?></h3>
-						<p><?php esc_html_e( 'Digitalización, ofimática en la nube, idiomas, PRL, hostelería y competencias transversales en Castilla-La Mancha.', 'eduma-child' ); ?></p>
-					</li>
-					<li>
-						<span class="cf-step-num" aria-hidden="true">3</span>
-						<h3><?php esc_html_e( 'Inscríbete gratis', 'eduma-child' ); ?></h3>
-						<p><?php esc_html_e( 'Sin coste de matrícula en acciones subvencionadas. Te ayudamos con el formulario y el alta en la plataforma.', 'eduma-child' ); ?></p>
-					</li>
-					<li>
-						<span class="cf-step-num" aria-hidden="true">4</span>
-						<h3><?php esc_html_e( 'Formación en nuestros centros', 'eduma-child' ); ?></h3>
-						<p><?php esc_html_e( 'Cursos presenciales en Santa Cruz de Mudela, Viso del Marqués, Fuente del Fresno y Membrilla, con tutores especializados y contenidos actualizados.', 'eduma-child' ); ?></p>
-					</li>
-					<li>
-						<span class="cf-step-num" aria-hidden="true">5</span>
-						<h3><?php esc_html_e( 'Obtén tu certificado', 'eduma-child' ); ?></h3>
-						<p><?php esc_html_e( 'Al superar la evaluación recibes certificado acreditativo para tu empleo actual o tu búsqueda de trabajo.', 'eduma-child' ); ?></p>
-					</li>
-				</ol>
-			</section>
-
-			<section class="cf-split" aria-labelledby="cf-quien">
-				<div class="cf-split-copy">
-					<h2 id="cf-quien"><?php esc_html_e( '¿Quién financia estos cursos?', 'eduma-child' ); ?></h2>
-					<p><?php echo wp_kses_post( infosystem_subsidizers_financing_paragraph_html() ); ?></p>
-					<p><?php esc_html_e( 'Infosystem es centro colaborador que imparte acciones formativas adaptadas al mercado laboral de la región. La formación bonificada para empresas se gestiona además a través de FUNDAE.', 'eduma-child' ); ?></p>
-					<?php
-					if ( function_exists( 'infosystem_subsidizers_logos_html' ) ) {
-						echo infosystem_subsidizers_logos_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					}
-					?>
-				</div>
-				<figure class="cf-split-media">
-					<img src="<?php echo esc_url( $img_banner ); ?>" alt="<?php esc_attr_e( 'Formación presencial subvencionada en centros Infosystem', 'eduma-child' ); ?>" width="640" height="420" loading="lazy" decoding="async" />
-				</figure>
-			</section>
-
-			<section class="cf-section" aria-labelledby="cf-ventajas">
-				<h2 id="cf-ventajas"><?php esc_html_e( 'Ventajas de formarte con Infosystem', 'eduma-child' ); ?></h2>
-				<ul class="cf-benefits">
-					<li><?php esc_html_e( 'Más de 500 cursos y nuevas incorporaciones periódicas', 'eduma-child' ); ?></li>
-					<li><?php esc_html_e( 'Cursos presenciales en 4 centros de Castilla-La Mancha con tutorización', 'eduma-child' ); ?></li>
-					<li><?php esc_html_e( 'Especialización en empleo, digitalización y competencias transversales', 'eduma-child' ); ?></li>
-					<li><?php esc_html_e( 'Atención en español para toda Castilla-La Mancha', 'eduma-child' ); ?></li>
+				<ul class="cf-stats" aria-label="Datos Infosystem">
+					<li><strong>+500</strong><span>cursos</span></li>
+					<li><strong>+2.000</strong><span>alumnos</span></li>
+					<li><strong>100&nbsp;%</strong><span>online</span></li>
 				</ul>
-			</section>
-
-			<section class="infosystem-landing-cta-block" aria-labelledby="cf-cta">
-				<h2 id="cf-cta"><?php esc_html_e( '¿Listo para empezar?', 'eduma-child' ); ?></h2>
-				<p><?php esc_html_e( 'Consulta el catálogo actualizado o escríbenos si tienes dudas sobre plazas, convocatorias o documentación.', 'eduma-child' ); ?></p>
-				<div class="cf-cta-row">
-					<a class="infosystem-cta" href="<?php echo $cursos_url; ?>"><?php esc_html_e( 'Ver todos los cursos gratuitos', 'eduma-child' ); ?></a>
-					<a class="infosystem-cta infosystem-cta--ghost" href="<?php echo esc_url( $faq_url ); ?>"><?php esc_html_e( 'Preguntas frecuentes', 'eduma-child' ); ?></a>
-				</div>
-			</section>
+			</div>
+			<figure class="cf-intro-media">
+				<img src="<?php echo esc_url( $img_hero ); ?>" alt="Alumnos en formación online con Infosystem en Castilla-La Mancha" width="720" height="480" loading="eager" decoding="async" />
+			</figure>
 		</div>
 
-		<?php if ( $blog_cards ) : ?>
-		<section class="cf-blog-strip" aria-labelledby="cf-blog-title">
-			<div class="cf-blog-strip__inner">
-				<div class="cf-blog-strip__head">
-					<h2 id="cf-blog-title"><?php esc_html_e( 'Artículos relacionados en el blog', 'eduma-child' ); ?></h2>
-					<a class="cf-blog-strip__all" href="<?php echo esc_url( $blog_url ); ?>"><?php esc_html_e( 'Ver todo el blog', 'eduma-child' ); ?></a>
-				</div>
-				<!-- wp:html -->
-				<div class="cf-blog-cards"><?php echo $blog_cards; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
-				<!-- /wp:html -->
+		<section class="cf-section" aria-labelledby="cf-pasos">
+			<h2 id="cf-pasos">El proceso en 5 pasos</h2>
+			<p class="cf-section-lead">Desde la consulta del catálogo hasta tu certificado: un recorrido claro y sin coste de matrícula en cursos subvencionados.</p>
+			<ol class="infosystem-steps cf-steps-grid">
+				<li>
+					<span class="cf-step-num" aria-hidden="true">1</span>
+					<h3>Comprueba tu perfil</h3>
+					<p>Trabajadores en activo, desempleados o empresas que bonifican la formación. Documentación habitual: DNI/NIE y vida laboral.</p>
+				</li>
+				<li>
+					<span class="cf-step-num" aria-hidden="true">2</span>
+					<h3>Elige tu curso</h3>
+					<p>Digitalización, ofimática en la nube, idiomas, PRL, hostelería y competencias transversales en Castilla-La Mancha.</p>
+				</li>
+				<li>
+					<span class="cf-step-num" aria-hidden="true">3</span>
+					<h3>Inscríbete gratis</h3>
+					<p>Sin coste de matrícula en acciones subvencionadas. Te ayudamos con el formulario y el alta en la plataforma.</p>
+				</li>
+				<li>
+					<span class="cf-step-num" aria-hidden="true">4</span>
+					<h3>Formación a tu ritmo</h3>
+					<p>Desde ordenador, tablet o móvil, con tutores especializados y contenidos actualizados.</p>
+				</li>
+				<li>
+					<span class="cf-step-num" aria-hidden="true">5</span>
+					<h3>Obtén tu certificado</h3>
+					<p>Al superar la evaluación recibes certificado acreditativo para tu empleo actual o tu búsqueda de trabajo.</p>
+				</li>
+			</ol>
+		</section>
+
+		<section class="cf-split" aria-labelledby="cf-quien">
+			<div class="cf-split-copy">
+				<h2 id="cf-quien">¿Quién financia estos cursos?</h2>
+				<p>La <strong>formación programada para el empleo</strong> se articula con fondos del <strong>SEPE</strong>, la <strong>Junta de Castilla-La Mancha</strong> y, en formación bonificada, las cotizaciones de las empresas.</p>
+				<p>Infosystem es centro colaborador que imparte acciones formativas adaptadas al mercado laboral de la región.</p>
+			</div>
+			<figure class="cf-split-media">
+				<img src="<?php echo esc_url( $img_online ); ?>" alt="Formación subvencionada online con apoyo de tutores" width="640" height="420" loading="lazy" decoding="async" />
+			</figure>
+		</section>
+
+		<section class="cf-section" aria-labelledby="cf-ventajas">
+			<h2 id="cf-ventajas">Ventajas de formarte con Infosystem</h2>
+			<ul class="cf-benefits">
+				<li>Más de <strong>500 cursos</strong> y nuevas incorporaciones periódicas</li>
+				<li>Modalidad <strong>100&nbsp;% online</strong> con tutorización</li>
+				<li>Especialización en empleo, digitalización y competencias transversales</li>
+				<li>Atención en español para toda <strong>Castilla-La Mancha</strong></li>
+			</ul>
+		</section>
+
+		<section class="infosystem-landing-cta-block" aria-labelledby="cf-cta">
+			<h2 id="cf-cta">¿Listo para empezar?</h2>
+			<p>Consulta el catálogo actualizado o escríbenos si tienes dudas sobre plazas, convocatorias o documentación.</p>
+			<div class="cf-cta-row">
+				<a class="infosystem-cta" href="<?php echo esc_url( $cursos_url ); ?>">Ver todos los cursos gratuitos</a>
+				<a class="infosystem-cta infosystem-cta--ghost" href="<?php echo esc_url( $faq_url ); ?>">Preguntas frecuentes</a>
 			</div>
 		</section>
-		<?php endif; ?>
 	</article>
 	<?php
 	return (string) ob_get_clean();
@@ -252,7 +162,7 @@ function infosystem_sync_como_funciona_page_content() {
 
 	if ( class_exists( '\RankMath\Helper' ) ) {
 		update_post_meta( $page->ID, 'rank_math_title', 'Cómo funcionan los cursos subvencionados SEPE en Castilla-La Mancha | Infosystem' );
-		update_post_meta( $page->ID, 'rank_math_description', 'Guía paso a paso: requisitos, inscripción gratuita, formación presencial en nuestros centros y certificado de cursos subvencionados por el SEPE en Castilla-La Mancha con Infosystem.' );
+		update_post_meta( $page->ID, 'rank_math_description', 'Guía paso a paso: requisitos, inscripción gratuita, formación online y certificado de cursos subvencionados por el SEPE en Castilla-La Mancha con Infosystem.' );
 	}
 
 	update_option( INFOSYSTEM_COMO_FUNCIONA_VER, INFOSYSTEM_COMO_FUNCIONA_VERSION );
@@ -264,11 +174,243 @@ if ( ! function_exists( 'infosystem_como_funciona_page_css' ) ) :
  * @return string
  */
 function infosystem_como_funciona_page_css() {
-	$path = dirname( __DIR__ ) . '/tools/css-patch-como-funciona-v4.css';
-	if ( is_readable( $path ) ) {
-		return (string) file_get_contents( $path );
-	}
-	return '';
+	return '
+body.infosystem-page-como-funciona #sidebar,
+body.infosystem-page-como-funciona .widget-area,
+body.infosystem-page-como-funciona .sticky-sidebar,
+body.infosystem-page-como-funciona aside.sidebar,
+body.infosystem-page-como-funciona .col-sm-3:not(.cf-intro-grid *) {
+	display:none!important;
+}
+body.infosystem-page-como-funciona main.site-main,
+body.infosystem-page-como-funciona .content-area,
+body.infosystem-page-como-funciona .col-sm-9 {
+	width:100%!important;max-width:100%!important;flex:0 0 100%!important;
+}
+body.infosystem-page-como-funciona .container.site-content {
+	max-width:1140px;
+}
+.infosystem-landing-modern {
+	max-width:100%;
+	padding:0 0 3rem;
+}
+.cf-intro-grid {
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap:2.5rem;
+	align-items:center;
+	margin-bottom:3rem;
+	padding:2rem;
+	background:linear-gradient(135deg,#faf8f6 0%,#fff 55%);
+	border-radius:16px;
+	border:1px solid #eee;
+}
+.cf-intro-media img,
+.cf-split-media img {
+	width:100%;
+	height:auto;
+	border-radius:12px;
+	box-shadow:0 12px 40px rgba(0,0,0,.12);
+	object-fit:cover;
+}
+.infosystem-landing-kicker {
+	text-transform:uppercase;
+	letter-spacing:.08em;
+	font-size:.8rem;
+	color:#8b1a1a;
+	font-weight:700;
+	margin:0 0 1rem;
+}
+.infosystem-landing-modern .infosystem-lead {
+	font-size:1.125rem;
+	line-height:1.75;
+	color:#444;
+	margin:0 0 1.5rem;
+}
+.cf-cta-row {
+	display:flex;
+	flex-wrap:wrap;
+	gap:12px;
+	margin-bottom:1.5rem;
+}
+.cf-stats {
+	list-style:none;
+	display:flex;
+	flex-wrap:wrap;
+	gap:1.25rem;
+	padding:0;
+	margin:0;
+}
+.cf-stats li {
+	background:#fff;
+	border:1px solid #eee;
+	border-radius:10px;
+	padding:.75rem 1.25rem;
+	min-width:100px;
+	text-align:center;
+	box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.cf-stats strong {
+	display:block;
+	font-size:1.35rem;
+	color:#8b1a1a;
+}
+.cf-stats span {
+	font-size:.8rem;
+	color:#666;
+	text-transform:uppercase;
+	letter-spacing:.04em;
+}
+.cf-section {
+	margin-bottom:3rem;
+}
+.cf-section h2 {
+	color:#8b1a1a;
+	font-size:clamp(1.5rem,3vw,2rem);
+	margin-bottom:.75rem;
+}
+.cf-section-lead {
+	color:#555;
+	max-width:640px;
+	margin-bottom:1.75rem;
+	line-height:1.7;
+}
+.cf-steps-grid {
+	list-style:none;
+	padding:0;
+	margin:0;
+	display:grid;
+	grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+	gap:1.25rem;
+}
+.cf-steps-grid > li {
+	position:relative;
+	margin:0;
+	padding:1.5rem 1.25rem 1.25rem 1.25rem;
+	background:#fff;
+	border:1px solid #eee;
+	border-radius:12px;
+	box-shadow:0 4px 24px rgba(0,0,0,.06);
+}
+.cf-step-num {
+	position:absolute;
+	top:1rem;
+	right:1rem;
+	width:2rem;
+	height:2rem;
+	line-height:2rem;
+	text-align:center;
+	background:#ffb606;
+	color:#1a1a1a;
+	font-weight:800;
+	border-radius:50%;
+	font-size:.9rem;
+}
+.cf-steps-grid h3 {
+	margin:0 2.5rem .5rem 0;
+	color:#8b1a1a;
+	font-size:1.05rem;
+}
+.cf-steps-grid p {
+	margin:0;
+	line-height:1.65;
+	color:#444;
+	font-size:.95rem;
+}
+.cf-split {
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap:2rem;
+	align-items:center;
+	margin-bottom:3rem;
+	padding:2rem;
+	background:#8b1a1a;
+	border-radius:16px;
+	color:#fff;
+}
+.cf-split h2,
+.cf-split p {
+	color:#fff;
+}
+.cf-split p {
+	line-height:1.75;
+	opacity:.95;
+}
+.cf-benefits {
+	list-style:none;
+	padding:0;
+	margin:0;
+	display:grid;
+	grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+	gap:1rem;
+}
+.cf-benefits li {
+	padding:1rem 1.25rem;
+	background:#fafafa;
+	border-left:4px solid #ffb606;
+	border-radius:0 8px 8px 0;
+	line-height:1.6;
+}
+.infosystem-landing-cta-block {
+	background:linear-gradient(135deg,#5c1010 0%,#8b1a1a 100%);
+	color:#fff;
+	padding:2.5rem 2rem;
+	border-radius:16px;
+	text-align:center;
+}
+.infosystem-landing-cta-block h2,
+.infosystem-landing-cta-block p {
+	color:#fff;
+}
+.infosystem-landing-cta-block .cf-cta-row {
+	justify-content:center;
+	margin-top:1rem;
+}
+.infosystem-landing-cta-block .infosystem-cta {
+	background:#ffb606;
+	color:#1a1a1a!important;
+	border:2px solid #ffb606;
+	padding:14px 28px;
+	border-radius:8px;
+	font-weight:700;
+	text-decoration:none;
+	display:inline-block;
+}
+.infosystem-landing-cta-block .infosystem-cta--ghost {
+	background:transparent;
+	color:#fff!important;
+	border:2px solid #fff;
+	border-radius:999px;
+}
+.infosystem-landing-modern .infosystem-cta:not(.infosystem-cta--ghost) {
+	background:#ffb606;
+	color:#1a1a1a!important;
+	border:2px solid #ffb606;
+	padding:14px 28px;
+	border-radius:8px;
+	font-weight:700;
+	text-decoration:none;
+	display:inline-block;
+}
+.infosystem-landing-modern .infosystem-cta--ghost {
+	background:transparent;
+	color:#8b1a1a!important;
+	border:2px solid #8b1a1a;
+	padding:14px 28px;
+	border-radius:999px;
+	font-weight:600;
+	text-decoration:none;
+	display:inline-block;
+}
+.infosystem-landing-modern .infosystem-cta--ghost:hover {
+	background:#8b1a1a;
+	color:#fff!important;
+}
+@media (max-width:900px){
+	.cf-intro-grid,.cf-split{grid-template-columns:1fr;}
+	.cf-intro-media{order:-1;}
+}
+';
 }
 endif;
 
@@ -328,20 +470,18 @@ function infosystem_ensure_como_funciona_page() {
 	}
 }
 
-add_filter(
-	'the_content',
-	static function ( $content ) {
-		if ( ! is_page( INFOSYSTEM_COMO_FUNCIONA_SLUG ) ) {
-			return $content;
-		}
-		$modern = strpos( $content, 'infosystem-landing-modern' ) !== false;
-		if ( ! $modern || strlen( trim( wp_strip_all_tags( $content ) ) ) < 200 ) {
+if ( ! defined( 'INFOSYSTEM_CF_SLUG' ) ) {
+	add_filter(
+		'the_content',
+		static function ( $content ) {
+			if ( ! is_page( INFOSYSTEM_COMO_FUNCIONA_SLUG ) ) {
+				return $content;
+			}
 			return infosystem_como_funciona_content_html();
-		}
-		return $content;
-	},
-	999
-);
+		},
+		999
+	);
+}
 
 add_filter(
 	'body_class',
@@ -364,34 +504,24 @@ add_filter(
 );
 
 add_action(
-	'wp_head',
+	'wp_enqueue_scripts',
 	static function () {
 		if ( ! is_page( INFOSYSTEM_COMO_FUNCIONA_SLUG ) || ! function_exists( 'infosystem_como_funciona_page_css' ) ) {
 			return;
 		}
-		$css = infosystem_como_funciona_page_css();
-		if ( $css === '' ) {
-			return;
-		}
-		echo '<style id="infosystem-como-funciona-v4">' . $css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	},
-	99
-);
-
-add_action(
-	'wp_enqueue_scripts',
-	static function () {
-		if ( ! is_page( INFOSYSTEM_COMO_FUNCIONA_SLUG ) ) {
-			return;
-		}
-		$css = infosystem_como_funciona_page_css();
-		if ( $css === '' ) {
+		if ( defined( 'INFOSYSTEM_CF_SLUG' ) && wp_style_is( 'infosystem-site-fixes', 'enqueued' ) ) {
 			return;
 		}
 		$handle = 'infosystem-como-funciona-inline';
 		wp_register_style( $handle, false, array(), (string) INFOSYSTEM_COMO_FUNCIONA_VERSION );
 		wp_enqueue_style( $handle );
-		wp_add_inline_style( $handle, $css );
+		wp_add_inline_style( $handle, infosystem_como_funciona_page_css() );
+		wp_enqueue_style(
+			'infosystem-como-funciona',
+			get_stylesheet_directory_uri() . '/assets/css/infosystem-como-funciona.css',
+			array( $handle ),
+			defined( 'EDUMA_CHILD_VERSION' ) ? EDUMA_CHILD_VERSION : '1.0'
+		);
 	},
 	100000
 );

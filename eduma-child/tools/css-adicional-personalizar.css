@@ -1,84 +1,635 @@
-/* Pegar en: Apariencia → Personalizar → CSS adicional
-   No sube archivos. No rompe la web. Vacía caché WP Rocket después. */
-
-#menu-item-16477 .thim-ekits-menu__icon,.menu-item-16477 .thim-ekits-menu__icon,
-#menu-item-16477 > .arrow,#menu-item-16477 > .dropdown-toggle,
-#menu-item-16477 a i,#menu-item-16477 a .fa,#menu-item-16477 a .fa-angle-down{
-	display:none!important;visibility:hidden!important;width:0!important;height:0!important;overflow:hidden!important;
+/* === Banner de cabecera para categorias de cursos === */
+body.tax-product_cat .top_heading,
+body.tax-product_cat .top_heading.style_heading_3_out,
+body.post-type-archive-product .top_heading,
+body.post-type-archive-product .top_heading.style_heading_3_out,
+body.woocommerce.archive .top_heading,
+body.woocommerce.archive .top_heading.style_heading_3_out {
+  background-image: linear-gradient(135deg, rgba(139,26,26,.72) 0%, rgba(40,12,12,.65) 100%),
+                    url("https://centrosinfosystem.com/wp-content/uploads/2026/05/centrosinfosystem-banner.webp") !important;
+  background-size: cover !important;
+  background-position: center 35% !important;
+  background-repeat: no-repeat !important;
+  height: 300px !important;
+  min-height: 300px !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
-#menu-item-16477 .thim-ekits-menu__content,.menu-item-16477 .thim-ekits-menu__content,
-#menu-item-16477 .sub-menu,#menu-item-16477 .dropdown-menu,#menu-item-16477 .thim-ekits-mega-menu-content,
-#menu-item-16477 .elementor-13633,#menu-item-16477 [data-elementor-id="13633"],
-#menu-item-16477 ul.thim-ekits-menu__content{
-	display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;
-	height:0!important;max-height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;
+body.tax-product_cat .top_heading.style_heading_3_out .page-title-wrapper,
+body.post-type-archive-product .top_heading.style_heading_3_out .page-title-wrapper {
+  background: transparent !important;
+  text-align: center;
+  width: 100%;
 }
-#menu-item-16477 .thim-ekits-menu__nav-link::before,#menu-item-16477 .thim-ekits-menu__nav-link::after,
-#menu-item-16477 > a::after{display:none!important;content:none!important;}
-
-body:not(.home) .top_heading .breadcrumbs-wrapper,body:not(.home) .top_heading .breadcrumbs,
-body:not(.home) .top_heading #breadcrumbs,body:not(.home) .top_heading .banner-wrapper .breadcrumbs-wrapper{
-	display:none!important;height:0!important;padding:0!important;margin:0!important;overflow:hidden!important;
+body.tax-product_cat .top_heading.style_heading_3_out .page-title,
+body.post-type-archive-product .top_heading.style_heading_3_out .page-title {
+  color: #fff !important;
+  text-shadow: 0 4px 28px rgba(0,0,0,.45);
+  font-size: clamp(28px, 4vw, 48px) !important;
+  font-weight: 800 !important;
+  letter-spacing: .3px;
+  margin: 0 !important;
 }
-body:not(.home) .top_heading .banner-wrapper{background:transparent!important;width:100%!important;text-align:center!important;}
-body:not(.home) .top_heading .banner-wrapper .container,body:not(.home) .top_heading .top_site_main .container{
-	display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;width:100%!important;
+body.tax-product_cat .top_heading.style_heading_3_out .breadcrumb,
+body.tax-product_cat .top_heading.style_heading_3_out .breadcrumb a,
+body.tax-product_cat .top_heading.style_heading_3_out .breadcrumb li,
+body.tax-product_cat .top_heading.style_heading_3_out .breadcrumb li a,
+body.tax-product_cat .top_heading.style_heading_3_out .breadcrumb li span,
+body.post-type-archive-product .top_heading.style_heading_3_out .breadcrumb,
+body.post-type-archive-product .top_heading.style_heading_3_out .breadcrumb a {
+  color: rgba(255,255,255,.92) !important;
+  background: transparent !important;
 }
-body:not(.home) .top_heading .page-title-wrapper{
-	padding-top:0!important;padding-bottom:0!important;display:flex!important;align-items:center!important;justify-content:center!important;min-height:inherit!important;width:100%!important;
-}
-body:not(.home) .top_heading .top_site_main.style_heading_3{
-	min-height:inherit!important;height:100%!important;flex:1 1 auto!important;
-}
-body:not(.home) .top_heading h1.page-title,body:not(.home) .top_heading .page-title{
-	display:block!important;width:100%!important;max-width:960px!important;margin-left:auto!important;margin-right:auto!important;text-align:center!important;
-}
-body:not(.home) .top_heading span.overlay-top-header,body:not(.home) .top_heading .overlay-top-header,
-body:not(.home) .top_site_main.style_heading_3 > span.overlay-top-header{
-	background-image:linear-gradient(135deg,rgba(139,26,26,.78) 0%,rgba(40,12,12,.65) 100%),url("https://centrosinfosystem.com/wp-content/uploads/2026/05/centrosinfosystem-banner.webp")!important;
-	background-size:cover!important;background-position:center 35%!important;background-repeat:no-repeat!important;opacity:1!important;
-}
-body:not(.home) .top_heading .top_site_main.style_heading_3{
-	min-height:300px!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;
-}
-body:not(.home) .top_heading .page-title{color:#fff!important;text-shadow:0 2px 20px rgba(0,0,0,.35)!important;font-weight:800!important;}
-
-body.tax-product_cat.term-cursos-subvencionados-castilla-la-mancha .woocommerce-result-count,
-body.tax-product_cat.term-cursos-subvencionados-castilla-la-mancha .woocommerce-ordering,
-body.term-cursos-subvencionados-castilla-la-mancha .woocommerce-result-count,
-body.term-cursos-subvencionados-castilla-la-mancha .woocommerce-ordering{
-	display:none!important;height:0!important;margin:0!important;padding:0!important;
-}
-
-body.blog #sidebar,body.blog .widget-area,body.blog .col-sm-3.sticky-sidebar,
-body.single-post #sidebar,body.single-post .widget-area,
-body.page-id-16729 #sidebar,body.page-id-16729 .widget-area,body.page-id-16729 .sticky-sidebar,
-body.page-id-16705 #sidebar,body.page-id-16705 .widget-area,body.page-id-16705 .sticky-sidebar{
-	display:none!important;width:0!important;overflow:hidden!important;
-}
-body.blog main.site-main.col-sm-9,body.single-post main.site-main.col-sm-9,
-body.page-id-16729 main.site-main,body.page-id-16729 .col-sm-9,
-body.page-id-16705 main.site-main,body.page-id-16705 .col-sm-9{
-	width:100%!important;max-width:100%!important;flex:0 0 100%!important;
-}
-body.blog .blog-grid-3 article.post h2.entry-title,body.blog .blog-grid-3 article.post .entry-title{
-	display:block!important;visibility:visible!important;color:#8B1A1A!important;min-height:2.5em!important;
+body.tax-product_cat .top_heading.style_heading_3_out .breadcrumb-wrapper,
+body.tax-product_cat .top_heading.style_heading_3_out .banner-wrapper,
+body.post-type-archive-product .top_heading.style_heading_3_out .banner-wrapper {
+  background: transparent !important;
+  border: 0 !important;
 }
 
-.elementor-element-263d9da{display:flex!important;flex-wrap:wrap;gap:24px;align-items:stretch!important;}
-.elementor-element-263d9da > .elementor-element{flex:1 1 280px;display:flex!important;align-self:stretch!important;}
-.elementor-element-263d9da .elementor-widget-container,.elementor-element-263d9da .elementor-icon-box-wrapper{height:100%!important;width:100%!important;}
-.elementor-element-263d9da .elementor-icon-box-wrapper{
-	display:flex!important;align-items:flex-start;gap:16px;background:#fff;border:1px solid #eee;border-radius:12px;
-	padding:28px 24px!important;box-shadow:0 4px 20px rgba(0,0,0,.06);min-height:200px!important;
+/* === Barra de resultados + orden modernizada === */
+.woocommerce .thim-product-switch-wrap.switch-layout-container,
+.woocommerce-page .thim-product-switch-wrap.switch-layout-container {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 22px;
+  margin: 28px 0 32px;
+  background: #fff;
+  border: 1px solid #f0e6e6;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(139, 26, 26, 0.05);
 }
-body.home a.e-850d728-551d77c.tp-button-primary.e-button-base{
-	background:#ffb606!important;color:#1a1a1a!important;border:2px solid #ffb606!important;padding:14px 28px!important;border-radius:8px!important;font-weight:700!important;
+.woocommerce .woocommerce-result-count {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6a4a4a;
+  letter-spacing: .2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
-body.home a.e-c2f467e-da956f3.tp-button-outline.e-button-base{
-	background:transparent!important;color:#fff!important;border:2px solid rgba(255,255,255,.92)!important;padding:14px 28px!important;border-radius:999px!important;
+.woocommerce .woocommerce-result-count::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8B1A1A;
+  box-shadow: 0 0 0 4px rgba(139,26,26,.12);
 }
-body.home .elementor-element-263d9da .tp-button-outline.e-button-base{
-	color:#8B1A1A!important;border:2px solid #8B1A1A!important;background:#fff!important;padding:14px 32px!important;border-radius:999px!important;
+.woocommerce form.woocommerce-ordering { margin: 0 !important; }
+.woocommerce form.woocommerce-ordering select.orderby {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%238B1A1A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px;
+  border: 1.5px solid #efe2e2;
+  border-radius: 999px;
+  padding: 10px 42px 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8B1A1A;
+  cursor: pointer;
+  transition: all .2s ease;
+  outline: none;
+  min-width: 240px;
+  height: auto;
+  line-height: 1.4;
 }
-@media (max-width:640px){body:not(.home) .top_heading .top_site_main.style_heading_3{min-height:220px!important;}}
+.woocommerce form.woocommerce-ordering select.orderby:hover,
+.woocommerce form.woocommerce-ordering select.orderby:focus {
+  border-color: #8B1A1A;
+  background-color: #fdf7f7;
+  box-shadow: 0 4px 14px rgba(139, 26, 26, 0.14);
+}
+/* Hide layout switcher icons if present (cleaner) */
+.thim-product-switch-wrap .switch-layout-list { display: none; }
+
+@media (max-width: 640px) {
+  body.tax-product_cat .top_heading.style_heading_3_out { min-height: 220px !important; }
+  .woocommerce .thim-product-switch-wrap.switch-layout-container { justify-content: center; padding: 14px; }
+  .woocommerce form.woocommerce-ordering select.orderby { width: 100%; min-width: 0; }
+}
+/* === Página del curso (single product): repartir el contenido por toda la página === */
+.single-product .product-info {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: flex-start;
+}
+.single-product .product-info .images,
+.single-product .product-info .woocommerce-product-gallery {
+  flex: 0 0 calc(45% - 24px) !important;
+  max-width: calc(45% - 24px) !important;
+  width: calc(45% - 24px) !important;
+  margin: 0 !important;
+}
+.single-product .product-info .summary {
+  flex: 1 1 auto !important;
+  max-width: calc(55% - 24px) !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 0 0 8px;
+}
+/* Gallery image: hacer que ocupe el alto del summary mejor */
+.single-product .woocommerce-product-gallery .flex-viewport,
+.single-product .woocommerce-product-gallery .woocommerce-product-gallery__image {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.single-product .woocommerce-product-gallery img {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(139,26,26,.08);
+}
+/* Título del curso más impactante */
+.single-product .product-info .summary .product_title {
+  font-size: clamp(24px, 2.4vw, 34px) !important;
+  line-height: 1.15 !important;
+  margin: 0 0 14px !important;
+  font-weight: 800 !important;
+}
+.single-product .product-info .summary .woocommerce-product-details__short-description {
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+  color: #444 !important;
+}
+/* Botón Solicitar Información full-width más prominente */
+.single-product .product-info .summary .single_add_to_cart_button,
+.single-product .product-info .summary .button[href*="contacto"],
+.single-product .product-info .summary .request-info-button,
+.single-product .product-info .summary a.button {
+  padding: 14px 28px !important;
+  font-size: 15px !important;
+  border-radius: 10px !important;
+}
+/* Logos institucionales: centrarlos y darles aire */
+.single-product .product-info .images + .gallery,
+.single-product .images .institutional-logos,
+.single-product .images img[src*="Castilla"],
+.single-product .images img[src*="SEPE"],
+.single-product .images img[src*="UnionEuropea"] {
+  max-height: 56px !important;
+  width: auto !important;
+}
+
+/* Ampliar el container del single product al máximo cómodo */
+.single-product .site-content > .container,
+.single-product .content-area > .container {
+  max-width: 1320px !important;
+}
+
+/* Pestañas Descripción/Valoraciones: que ocupen también el ancho completo y estén más pulidas */
+.single-product .woocommerce-tabs {
+  margin-top: 60px !important;
+}
+.single-product .woocommerce-tabs ul.tabs.wc-tabs {
+  display: flex !important;
+  gap: 0;
+  border-bottom: 2px solid #f0e6e6 !important;
+  padding: 0 !important;
+  margin-bottom: 28px !important;
+}
+.single-product .woocommerce-tabs ul.tabs.wc-tabs li {
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+.single-product .woocommerce-tabs ul.tabs.wc-tabs li a {
+  display: block;
+  padding: 14px 24px !important;
+  font-weight: 600 !important;
+  color: #6a4a4a !important;
+  border-bottom: 3px solid transparent !important;
+  transition: all .2s;
+}
+.single-product .woocommerce-tabs ul.tabs.wc-tabs li.active a,
+.single-product .woocommerce-tabs ul.tabs.wc-tabs li a:hover {
+  color: #8B1A1A !important;
+  border-bottom-color: #8B1A1A !important;
+}
+
+@media (max-width: 880px) {
+  .single-product .product-info { gap: 24px; }
+  .single-product .product-info .images,
+  .single-product .product-info .woocommerce-product-gallery,
+  .single-product .product-info .summary {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+}
+/* === Cuando no hay sidebar visible, ocupar el ancho completo === */
+.single-product .container.site-content > .row {
+  display: flex !important;
+  flex-wrap: wrap;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.single-product main.site-main,
+.single-product main.site-main.col-sm-9,
+.single-product main.site-main.col-sm-9.alignleft {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+  margin: 0 !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  float: none !important;
+}
+.single-product .product {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+/* Ocultar la sidebar vacía del single product si está presente */
+.single-product .col-sm-3.sidebar:empty,
+.single-product aside.sidebar:empty { display: none !important; }
+
+/* === Tamaño correcto de la imagen del curso (flexslider) === */
+.single-product .woocommerce-product-gallery .flex-viewport,
+.single-product .woocommerce-product-gallery .woocommerce-product-gallery__image,
+.single-product .woocommerce-product-gallery .woocommerce-product-gallery__image > a {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+/* === FlexSlider: liberar el ancho del UL/LI/A para que la imagen ocupe la columna === */
+.single-product .woocommerce-product-gallery .flexslider,
+.single-product .woocommerce-product-gallery ul.slides,
+.single-product .woocommerce-product-gallery ul.slides li,
+.single-product .woocommerce-product-gallery .main_product_thumbnai,
+.single-product .woocommerce-product-gallery .thim-image-popup,
+.single-product .woocommerce-product-gallery .woocommerce-product-gallery__image,
+.single-product .woocommerce-product-gallery .woocommerce-product-gallery__image a {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block;
+  float: none !important;
+}
+.single-product .woocommerce-product-gallery img.wp-post-image,
+.single-product .woocommerce-product-gallery .woocommerce-product-gallery__image img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(139,26,26,.10);
+}
+/* === Tabs content: limitar el ancho de la descripción para mejor lectura === */
+.single-product .woocommerce-tabs .panel,
+.single-product .woocommerce-tabs .wc-tab,
+.single-product .woocommerce-tabs #tab-description,
+.single-product .woocommerce-tabs #tab-reviews {
+  max-width: 980px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 28px 24px !important;
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  color: #333 !important;
+  background: #fafafa;
+  border-radius: 12px;
+  border: 1px solid #f0e6e6;
+}
+.single-product .woocommerce-tabs .panel h2 {
+  color: #8B1A1A !important;
+  border-bottom: 2px solid #f5e0e0;
+  padding-bottom: 8px;
+  margin-bottom: 18px !important;
+}
+.single-product .woocommerce-tabs .panel ul li,
+.single-product .woocommerce-tabs .panel ol li {
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+
+/* Related products: centrarlos también */
+.single-product .related.products {
+  max-width: 1320px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-top: 40px;
+}
+.single-product .related.products > h2 {
+  text-align: center;
+  color: #8B1A1A !important;
+  margin-bottom: 28px !important;
+}
+
+
+
+/* ============================================================
+   ANTI-GRAVITY LAYOUT OVERRIDES FOR COURSE ARCHIVE / CATEGORY
+   ============================================================ */
+
+/* 1. Centrado vertical y horizontal en el banner de cabecera */
+body.tax-product_cat .top_heading.style_heading_3_out .top_site_main,
+body.post-type-archive-product .top_heading.style_heading_3_out .top_site_main,
+body.woocommerce.archive .top_heading.style_heading_3_out .top_site_main {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-height: inherit !important;
+  height: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+body.tax-product_cat .top_heading.style_heading_3_out .page-title-wrapper,
+body.post-type-archive-product .top_heading.style_heading_3_out .page-title-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.tax-product_cat .top_heading.style_heading_3_out .banner-wrapper,
+body.post-type-archive-product .top_heading.style_heading_3_out .banner-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 2. Ocultar sidebar y ocupar ancho completo (100%) en el listado de cursos */
+body.tax-product_cat #sidebar,
+body.post-type-archive-product #sidebar,
+body.woocommerce.archive #sidebar,
+body.tax-product_cat .col-sm-3.sticky-sidebar,
+body.post-type-archive-product .col-sm-3.sticky-sidebar,
+body.woocommerce.archive .col-sm-3.sticky-sidebar {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.tax-product_cat #main.col-sm-9,
+body.post-type-archive-product #main.col-sm-9,
+body.woocommerce.archive #main.col-sm-9,
+body.tax-product_cat main.site-main.col-sm-9.alignleft,
+body.post-type-archive-product main.site-main.col-sm-9.alignleft,
+body.woocommerce.archive main.site-main.col-sm-9.alignleft {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+  float: none !important;
+  margin: 0 !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+/* 3. Cuadrícula de cursos flexible y alineada */
+body.tax-product_cat ul.product-grid,
+body.post-type-archive-product ul.product-grid,
+body.woocommerce.archive ul.product-grid,
+body.tax-product_cat ul.products,
+body.post-type-archive-product ul.products,
+body.woocommerce.archive ul.products {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 30px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* 4. Tarjetas de cursos uniformes y responsivas */
+body.tax-product_cat ul.product-grid li.product,
+body.post-type-archive-product ul.product-grid li.product,
+body.woocommerce.archive ul.product-grid li.product,
+body.tax-product_cat ul.products li.product,
+body.post-type-archive-product ul.products li.product,
+body.woocommerce.archive ul.products li.product {
+  flex: 0 1 calc(33.333% - 20px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 0 !important;
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  border: 1px solid #efe2e2 !important;
+  box-shadow: 0 4px 18px rgba(139, 26, 26, 0.04) !important;
+  transition: all 0.3s ease !important;
+  overflow: hidden !important;
+}
+
+body.tax-product_cat ul.product-grid li.product:hover,
+body.post-type-archive-product ul.product-grid li.product:hover,
+body.woocommerce.archive ul.product-grid li.product:hover,
+body.tax-product_cat ul.products li.product:hover,
+body.post-type-archive-product ul.products li.product:hover,
+body.woocommerce.archive ul.products li.product:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 30px rgba(139, 26, 26, 0.12) !important;
+  border-color: #D4880A !important;
+}
+
+body.tax-product_cat ul.product-grid li.product .content__product,
+body.post-type-archive-product ul.product-grid li.product .content__product,
+body.woocommerce.archive ul.product-grid li.product .content__product,
+body.tax-product_cat ul.products li.product .content__product,
+body.post-type-archive-product ul.products li.product .content__product,
+body.woocommerce.archive ul.products li.product .content__product {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  flex: 1 1 auto !important;
+}
+
+/* 5. Alturas e imágenes uniformes de tarjetas */
+body.tax-product_cat ul.product-grid li.product .product_thumb,
+body.post-type-archive-product ul.product-grid li.product .product_thumb,
+body.woocommerce.archive ul.product-grid li.product .product_thumb,
+body.tax-product_cat ul.products li.product .product_thumb,
+body.post-type-archive-product ul.products li.product .product_thumb,
+body.woocommerce.archive ul.products li.product .product_thumb {
+  position: relative !important;
+  width: 100% !important;
+  padding-bottom: 56.25% !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin-bottom: 0 !important;
+}
+
+body.tax-product_cat ul.product-grid li.product .product_thumb img,
+body.post-type-archive-product ul.product-grid li.product .product_thumb img,
+body.woocommerce.archive ul.product-grid li.product .product_thumb img,
+body.tax-product_cat ul.products li.product .product_thumb img,
+body.post-type-archive-product ul.products li.product .product_thumb img,
+body.woocommerce.archive ul.products li.product .product_thumb img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+body.tax-product_cat ul.product-grid li.product .product__title,
+body.post-type-archive-product ul.product-grid li.product .product__title,
+body.woocommerce.archive ul.product-grid li.product .product__title,
+body.tax-product_cat ul.products li.product .product__title,
+body.post-type-archive-product ul.products li.product .product__title,
+body.woocommerce.archive ul.products li.product .product__title {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  padding: 24px !important;
+  background: #ffffff !important;
+}
+
+/* 6. Formato del título y de la descripción */
+body.tax-product_cat ul.product-grid li.product .product__title a.title,
+body.post-type-archive-product ul.product-grid li.product .product__title a.title,
+body.woocommerce.archive ul.product-grid li.product .product__title a.title,
+body.tax-product_cat ul.products li.product .product__title a.title,
+body.post-type-archive-product ul.products li.product .product__title a.title,
+body.woocommerce.archive ul.products li.product .product__title a.title {
+  font-family: Merriweather, Georgia, serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  color: #8B1A1A !important;
+  text-decoration: none !important;
+  margin-bottom: 12px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  min-height: 44px !important;
+}
+
+body.tax-product_cat ul.product-grid li.product .product__title .description,
+body.post-type-archive-product ul.product-grid li.product .product__title .description,
+body.woocommerce.archive ul.product-grid li.product .product__title .description,
+body.tax-product_cat ul.products li.product .product__title .description,
+body.post-type-archive-product ul.products li.product .product__title .description,
+body.woocommerce.archive ul.products li.product .product__title .description {
+  font-family: 'Source Sans Pro', Arial, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  color: #666666 !important;
+  margin-bottom: 20px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  min-height: 63px !important;
+}
+
+/* 7. Botones premium legibles y estilizados en granate */
+body.tax-product_cat ul.product-grid li.product .product__title a.button,
+body.tax-product_cat ul.product-grid li.product .product__title a.button.product_type_simple,
+body.post-type-archive-product ul.product-grid li.product .product__title a.button,
+body.post-type-archive-product ul.product-grid li.product .product__title a.button.product_type_simple,
+body.woocommerce.archive ul.product-grid li.product .product__title a.button,
+body.woocommerce.archive ul.product-grid li.product .product__title a.button.product_type_simple,
+body.tax-product_cat ul.products li.product .product__title a.button,
+body.tax-product_cat ul.products li.product .product__title a.button.product_type_simple,
+body.post-type-archive-product ul.products li.product .product__title a.button,
+body.post-type-archive-product ul.products li.product .product__title a.button.product_type_simple,
+body.woocommerce.archive ul.products li.product .product__title a.button,
+body.woocommerce.archive ul.products li.product .product__title a.button.product_type_simple {
+  margin-top: auto !important;
+  align-self: center !important;
+  background-color: #8B1A1A !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  padding: 10px 24px !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 10px rgba(139, 26, 26, 0.1) !important;
+  width: auto !important;
+}
+
+body.tax-product_cat ul.product-grid li.product .product__title a.button:hover,
+body.tax-product_cat ul.product-grid li.product .product__title a.button.product_type_simple:hover,
+body.post-type-archive-product ul.product-grid li.product .product__title a.button:hover,
+body.post-type-archive-product ul.product-grid li.product .product__title a.button.product_type_simple:hover,
+body.woocommerce.archive ul.product-grid li.product .product__title a.button:hover,
+body.woocommerce.archive ul.product-grid li.product .product__title a.button.product_type_simple:hover,
+body.tax-product_cat ul.products li.product .product__title a.button:hover,
+body.tax-product_cat ul.products li.product .product__title a.button.product_type_simple:hover,
+body.post-type-archive-product ul.products li.product .product__title a.button:hover,
+body.post-type-archive-product ul.products li.product .product__title a.button.product_type_simple:hover,
+body.woocommerce.archive ul.products li.product .product__title a.button:hover,
+body.woocommerce.archive ul.products li.product .product__title a.button.product_type_simple:hover {
+  background-color: #D4880A !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 15px rgba(212, 136, 10, 0.2) !important;
+}
+
+/* Responsivo para el Grid de Cursos */
+@media (max-width: 991px) {
+  body.tax-product_cat ul.product-grid li.product,
+  body.post-type-archive-product ul.product-grid li.product,
+  body.woocommerce.archive ul.product-grid li.product {
+    flex: 0 1 calc(50% - 15px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body.tax-product_cat ul.product-grid li.product,
+  body.post-type-archive-product ul.product-grid li.product,
+  body.woocommerce.archive ul.product-grid li.product {
+    flex: 0 1 100% !important;
+  }
+}
+
+/* === ANTI-GRAVITY: OCULTAR PRECIOS E ICONOS EN CATÁLOGO === */
+body.tax-product_cat .price, 
+body.tax-product_cat .amount, 
+body.post-type-archive-product .price, 
+body.post-type-archive-product .amount, 
+body.woocommerce.archive .price, 
+body.woocommerce.archive .amount {
+  display: none !important;
+}
+
+body.tax-product_cat ul.product-grid li.product .product__title a.button::before,
+body.tax-product_cat ul.products li.product .product__title a.button::before,
+body.post-type-archive-product ul.product-grid li.product .product__title a.button::before,
+body.post-type-archive-product ul.products li.product .product__title a.button::before,
+body.woocommerce.archive ul.product-grid li.product .product__title a.button::before,
+body.woocommerce.archive ul.products li.product .product__title a.button::before {
+  display: none !important;
+  content: none !important;
+}

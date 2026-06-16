@@ -37,7 +37,7 @@ add_action(
 				max-width: none;
 				overflow: visible;
 			}
-			body.page-id-16705 .cis-about-page section:not(.cis-about-cta-final) {
+			body.page-id-16705 .cis-about-page section {
 				position: relative;
 				z-index: 0;
 				padding: clamp(72px, 8vw, 96px) 24px !important;

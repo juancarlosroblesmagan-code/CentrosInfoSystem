@@ -15,15 +15,13 @@ Tareas que **no se pueden resolver vía API/automatización** o que dependen de 
 - **CF7**: los 5 formularios (Inscripción, Contacto, Trabaja con nosotros, Contact Home Page, Contact One Course) ya apuntan a `info@centrosinfosystem.com`.
 - **Contraseña**: encriptada en BD (oculta en la UI). Recomendado en el futuro pasarla a `WPMS_SMTP_PASS` en `wp-config.php` (ver [`docs/07-forms-cf7.md`](07-forms-cf7.md)).
 
-### 2. Purgar caché del sitemap
+### 2. Purgar caché tras cambios (WP Rocket)
 
-- **Síntoma**: `/post-sitemap.xml` sigue mostrando los 18 posts demo eliminados y NO muestra los 10 posts reales.
-- **Causa**: WP Rocket cachea el XML como fichero estático en `/wp-content/cache/wp-rocket/`.
+- **Síntoma**: Los cambios de CSS en la home o la página de cursos pueden tardar en verse en el navegador debido al sistema de caché.
 - **Solución manual**:
   1. WordPress admin → **WP Rocket → Dashboard → "Borrar caché"** (botón rojo).
   2. Si no basta, vía Plesk **borrar el directorio** `/wp-content/cache/wp-rocket/` y `/wp-content/cache/min/`.
   3. Refrescar `/post-sitemap.xml?cb=1` para regenerar.
-- **Verificación**: visitando `/post-sitemap.xml` deben aparecer los 10 slugs de posts (`cursos-subvencionados-sepe…`, `cursos-gratis-desempleados…`, etc.) y ningún slug de 2022/2025.
 
 ### 3. Validar schemas externamente
 
@@ -45,7 +43,6 @@ Herramienta: `https://search.google.com/test/rich-results`.
 
 - **Dominio activo**: `https://centrosinfosystem.com` con SSL.
 - **Redirect 301** del dominio temporal Plesk: snippet WPCode activo.
-- **Pendiente**: re-enviar sitemap en Google Search Console y re-validar schemas (ver §3).
 
 ### 5. Crear Google Business Profile para cada centro
 
@@ -54,7 +51,7 @@ Herramienta: `https://search.google.com/test/rich-results`.
 - Centro 3: Fuente el Fresno (Plaza de España s/n · 13412).
 - Centro 4: Membrilla (C. Mayor s/n · 13230).
 
-Cada perfil debe enlazar a su `LocalBusiness` correspondiente del schema (en realidad lo hace Google automáticamente cuando ve coincidencia de NAP).
+Cada perfil debe enlazar a su `LocalBusiness` correspondiente del schema.
 
 ### 6. Redes sociales
 
@@ -65,11 +62,11 @@ Actualizar `sameAs` del schema (snippets/infosystem-seo-snippet.php) con URLs re
 - LinkedIn (cuenta de empresa)
 - YouTube (si se hace canal con vídeo)
 
-### 7. Imágenes con texto demo en home
+### 7. ✅ HECHO — Ajustes de Cursos y Layout de Catálogo
 
-Algunas tarjetas de categoría de la home aún tienen imágenes con texto incrustado en inglés del tema Eduma. Sustituirlas por imágenes propias (mejor SEO + branding):
-
-- Categorías: subir imágenes generadas con texto español o sin texto y poner el título por overlay HTML.
+- **Cursos centrados y alineados**: Forzado el contenedor principal a 100% de la caja de ancho (centrado) ocultando el sidebar vacío.
+- **Tipografías y Botones**: Aplicada tipografía Merriweather y Source Sans Pro de forma consistente. Botón de producto visible en granate con hover dorado.
+- **Tarjetas simétricas**: Aplicado diseño flexbox para que todas las tarjetas de la fila tengan la misma altura y los botones queden perfectamente alineados en la parte inferior.
 
 ---
 
@@ -93,40 +90,23 @@ Tras migrar al dominio:
 
 - Auditar con PageSpeed Insights / GTmetrix.
 - Activar **lazy loading** de imágenes en WP Rocket si no está.
-- Convertir imágenes pesadas a **WebP** (Smush, ShortPixel, o el optimizador integrado de WP Rocket).
+- Convertir imágenes pesadas a **WebP**.
 - Revisar **CLS** en home (que las cargas asíncronas no muevan layout).
 
 ### 10. Reviews / Aggregate Rating
 
 Si en algún momento hay reseñas verificables (Google, Trustpilot), añadir `AggregateRating` al schema de cada centro y/o de los cursos.
 
-### 11. Eliminar restos demo del child setup
+### 11. ✅ HECHO — Sincronizar archivos del child theme en Git
 
-La página `themes.php?page=eduma-child-infosystem-setup` daba 404 al inicio porque el child theme estaba incompleto. Tras subir el child completo se resolvió, pero conviene comprobar que el child theme tiene **todos** los archivos (`functions.php`, `style.css`, `screenshot.png`, plantillas heredadas si se modifican).
-
-### 12. Hardening de seguridad
-
-- **Actualizar contraseñas** de los usuarios administradores periódicamente.
-- Habilitar **2FA** en Rank Math / WP Mail SMTP / WordPress.
-- Revisar permisos: `CursorAgent` (si aún existe) puede eliminarse después.
-- Activar logs de actividad (plugin opcional).
+- **Acción**: Copiado el child theme completo (estilos y scripts actualizados) al directorio canónico `eduma-child/` en la raíz del repositorio de desarrollo para asegurar un control de versiones limpio y centralizado.
 
 ---
 
-## Notas históricas (problemas resueltos)
+## Directrices para Futuras Modificaciones
 
-Estas cosas ya están resueltas pero conviene tenerlas documentadas por si vuelven a aparecer:
-
-| Problema | Cómo se resolvió |
-|----------|------------------|
-| Nulled code en `eduma/functions.php` | Eliminado manualmente |
-| Edición directa de `functions.php` fallaba sin error | Usar WPCode en lugar del editor de temas |
-| WPCode con error "unexpected identifier application" | Cambiar `echo "<script…\"...\"…>"` a comillas simples para HTML |
-| Schemas no aparecían en frontend | Cambiar ubicación del snippet de `site_wide_header` a `frontend_only` |
-| Login con `CursorAgent` fallaba | Crear correctamente el usuario con rol Administrador |
-| Imagen 15102 (Ofimática) daba 404 | Re-subir la imagen y reasignarla |
-| Categoría "Cursos Castilla la Mancha" no persistía en plugin Quote | Seleccionar la opción vía CDP en el `<select>` oculto y submit |
-| `/trabaja-con-nosotros/` daba 404 | Crear página + form CF7 14376; fusionar duplicado y borrarlo |
-| Posts demo persistían en frontend tras borrarlos | Purgar caché de WP Rocket y regenerar CSS de Elementor |
-| "Buy Now" persistía pese al CSS | Reemplazar contenido del widget `text-1210022` vía REST API |
-| Mega-menú "Cursos Gratis" demo persistía | CSS específico + cambio de URL del menu item |
+> [!CAUTION]
+> **REGLA DE NO-CÓDIGO PHP/TEMPLATES INNECESARIOS:**
+> No reescribir plantillas de php ni sobrecargar el backend con código innecesario.
+> Si se necesitan añadir funcionalidades estéticas a WooCommerce o Elementor, hacerlo mediante selectores CSS en el archivo `style.css` del Child Theme o a través de los ajustes visuales en el editor de Elementor/WordPress. 
+> Mantener las plantillas php nativas del tema Eduma para asegurar que no se produzcan incompatibilidades al actualizar WordPress, WooCommerce o Elementor.

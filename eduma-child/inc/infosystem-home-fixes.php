@@ -43,20 +43,20 @@ function infosystem_replace_home_why_accordion( $html, $cursos, $como ) {
 
 	$panels = array(
 		'920e3b8' => sprintf(
-			'Si trabajas en activo en <strong>Castilla-La Mancha</strong>, puedes acceder a <strong>cursos gratuitos subvencionados para trabajadores</strong> (SEPE y Junta), compatibles con tu jornada laboral. Formaci\xc3\xb3n <strong>100&nbsp;%% online</strong>, sin coste de matr\xc3\xadcula y con certificado al finalizar: digitalizaci\xc3\xb3n, ofim\xc3\xa1tica, idiomas, PRL y competencias transversales. <a href="%1$s">Consulta el cat\xc3\xa1logo de cursos</a> o <a href="%2$s">descubre c\xc3\xb3mo inscribirte paso a paso</a>.',
+			'Si trabajas en activo en <strong>Castilla-La Mancha</strong>, puedes acceder a <strong>cursos gratuitos subvencionados para trabajadores</strong> (SEPE y Junta), compatibles con tu jornada laboral. Formación <strong>100&nbsp;%% online</strong>, sin coste de matrícula y con certificado al finalizar: digitalización, ofimática, idiomas, PRL y competencias transversales. <a href="%1$s">Consulta el catálogo de cursos</a> o <a href="%2$s">descubre cómo inscribirte paso a paso</a>.',
 			$cursos,
 			$como
 		),
 		'95852de' => sprintf(
-			'En situaci\xc3\xb3n de <strong>desempleo</strong>, la formaci\xc3\xb3n programada para el empleo te permite reforzar tu curr\xc3\xadculum sin pagar matr\xc3\xadcula. Ofrecemos cientos de <strong>cursos subvencionados online en Castilla-La Mancha</strong>: orientaci\xc3\xb3n laboral, ofim\xc3\xa1tica en la nube, atenci\xc3\xb3n al cliente, log\xc3\xadstica y sectores con demanda actual. Te orientamos en requisitos, plazas y documentaci\xc3\xb3n ante el SEPE. <a href="%1$s">Ver todos los cursos gratuitos</a>.',
+			'En situación de <strong>desempleo</strong>, la formación programada para el empleo te permite reforzar tu currículum sin pagar matrícula. Ofrecemos cientos de <strong>cursos subvencionados online en Castilla-La Mancha</strong>: orientación laboral, ofimática en la nube, atención al cliente, logística y sectores con demanda actual. Te orientamos en requisitos, plazas y documentación ante el SEPE. <a href="%1$s">Ver todos los cursos gratuitos</a>.',
 			$cursos
 		),
 		'2d48fb3' => sprintf(
-			'Tu empresa puede <strong>bonificar la formaci\xc3\xb3n de la plantilla</strong> mediante el cr\xc3\xa9dito de formaci\xc3\xb3n (antiguo Fundae): formaci\xc3\xb3n subvencionada sin coste para el empleado y con retorno en productividad. En Infosystem impartimos acciones en digitalizaci\xc3\xb3n, prevenci\xc3\xb3n de riesgos, idiomas y liderazgo en toda <strong>Castilla-La Mancha</strong>. Gestionamos documentaci\xc3\xb3n e impartici\xc3\xb3n online. <a href="%1$s">Solicita informaci\xc3\xb3n para empresas</a>.',
+			'Tu empresa puede <strong>bonificar la formación de la plantilla</strong> mediante el crédito de formación (antiguo Fundae): formación subvencionada sin coste para el empleado y con retorno en productividad. En Infosystem impartimos acciones en digitalización, prevención de riesgos, idiomas y liderazgo en toda <strong>Castilla-La Mancha</strong>. Gestionamos documentación e impartición online. <a href="%1$s">Solicita información para empresas</a>.',
 			$contacto
 		),
 		'189de56' => sprintf(
-			'Cada curso cuenta con <strong>tutores especializados</strong> en su materia: no es solo v\xc3\xaddeo sin acompa\xc3\xb1amiento. Resolvemos dudas, revisamos ejercicios y te guiamos hasta la evaluaci\xc3\xb3n final con contenidos actualizados y enfoque pr\xc3\xa1ctico para el empleo. Centro de referencia en formaci\xc3\xb3n para el empleo en la regi\xc3\xb3n. <a href="%1$s">Explora nuestras \xc3\xa1reas formativas</a>.',
+			'Cada curso cuenta con <strong>tutores especializados</strong> en su materia: no es solo vídeo sin acompañamiento. Resolvemos dudas, revisamos ejercicios y te guiamos hasta la evaluación final con contenidos actualizados y enfoque práctico para el empleo. Centro de referencia en formación para el empleo en la región. <a href="%1$s">Explora nuestras áreas formativas</a>.',
 			$cursos
 		),
 	);
@@ -72,7 +72,7 @@ function infosystem_replace_home_why_accordion( $html, $cursos, $como ) {
 
 	$html = str_replace(
 		'Elige el plan que mejor se adapte a tu perfil y empieza hoy mismo.',
-		'M\xc3\xa1s de 500 cursos subvencionados en Castilla-La Mancha. Elige tu perfil y empieza hoy sin coste de matr\xc3\xadcula.',
+		'Más de 500 cursos subvencionados en Castilla-La Mancha. Elige tu perfil y empieza hoy sin coste de matrícula.',
 		$html
 	);
 
@@ -188,14 +188,7 @@ add_action(
 					return $html;
 				}
 				$html = infosystem_fix_home_page_links( $html, $cursos, $como, $contacto, $eventos, $home );
-				$html = infosystem_replace_home_why_accordion( $html, $cursos, $como );
-				if ( function_exists( 'infosystem_inject_home_events_strip' ) ) {
-					$html = infosystem_inject_home_events_strip( $html );
-				}
-				if ( function_exists( 'infosystem_fix_home_text_encoding' ) ) {
-					$html = infosystem_fix_home_text_encoding( $html );
-				}
-				return $html;
+				return infosystem_replace_home_why_accordion( $html, $cursos, $como );
 			}
 		);
 	},
@@ -280,19 +273,6 @@ add_action(
 			font-weight: 600 !important;
 			text-decoration: none !important;
 			display: inline-block !important;
-		}
-		body.home .elementor-element-1ce9889 .e-n-accordion-item > [role="region"] {
-			padding: 4px 20px 18px !important;
-			box-sizing: border-box;
-		}
-		body.home .elementor-element-1ce9889 .e-n-accordion-item [role="region"] p {
-			margin: 0 !important;
-			padding: 12px 16px 14px !important;
-			max-width: 100% !important;
-			box-sizing: border-box;
-			line-height: 1.65 !important;
-			background: #f7f5f4 !important;
-			border-radius: 0 0 10px 10px;
 		}
 		</style>
 		<?php

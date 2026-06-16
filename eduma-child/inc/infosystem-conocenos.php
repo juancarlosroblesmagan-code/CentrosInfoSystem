@@ -88,7 +88,7 @@ function infosystem_conocenos_page_html() {
 					<div class="cis-about-hero-text">
 						<span class="cis-about-tag">Desde 2007 · Centro de Educación Polivalente</span>
 						<h2 class="cis-about-hero-title">Formamos a Castilla-La Mancha para el empleo del <span class="cis-about-accent">futuro</span></h2>
-						<p class="cis-about-hero-lead">En <strong>Infosystem</strong> impartimos formación <strong>100&nbsp;% gratuita</strong> subvencionada por la <strong>Junta de Castilla-La Mancha</strong>, el <strong>Ministerio de Educación, Formación Profesional y Deportes</strong> y el <strong>SEPE</strong>. Más de 18 años acompañando a trabajadores, desempleados y empresas.</p>
+						<p class="cis-about-hero-lead">En <strong>Infosystem</strong> impartimos formación <strong>100&nbsp;% gratuita</strong> subvencionada por el <strong>SEPE</strong> y la <strong>Junta de Comunidades de Castilla-La Mancha</strong>. Más de 18 años acompañando a trabajadores, desempleados y empresas.</p>
 						<div class="cis-about-hero-ctas">
 							<a class="cis-btn cis-btn-primary" href="<?php echo $cursos; ?>">Ver cursos disponibles</a>
 							<a class="cis-btn cis-btn-ghost" href="<?php echo $contacto; ?>">Contactar con un centro</a>
@@ -122,7 +122,7 @@ function infosystem_conocenos_page_html() {
 				<div class="cis-about-story-grid">
 					<div class="cis-about-story-text">
 						<p>Nacimos en <strong>2007</strong> para acercar la <strong>formación profesional de calidad</strong> a Castilla-La Mancha, sin que la distancia ni el coste sean barreras.</p>
-						<p>Desde <strong>cuatro centros</strong> en Santa Cruz de Mudela, Viso del Marqués, Fuente del Fresno y Membrilla impartimos cursos subvencionados por la <strong>Junta de Castilla-La Mancha</strong>, el <strong>Ministerio de Educación, Formación Profesional y Deportes</strong> y el <strong>SEPE</strong>, y formación bonificada <strong>FUNDAE</strong>.</p>
+						<p>Desde <strong>cuatro centros</strong> en Santa Cruz de Mudela, Viso del Marqués, Fuente del Fresno y Membrilla impartimos cursos del <strong>SEPE</strong>, la <strong>JCCM</strong> y formación bonificada <strong>FUNDAE</strong>.</p>
 						<p>Nuestro equipo une <strong>experiencia profesional real</strong> y metodologías actuales orientadas al empleo.</p>
 						<ul class="cis-about-bullets">
 							<li>Cursos certificados y reconocidos oficialmente</li>
@@ -137,7 +137,7 @@ function infosystem_conocenos_page_html() {
 							<div class="cis-about-story-card-icon" aria-hidden="true">✓</div>
 							<div>
 								<div class="cis-about-story-card-title">Formación oficial</div>
-								<div class="cis-about-story-card-sub">JCCM · MEFP · SEPE</div>
+								<div class="cis-about-story-card-sub">SEPE · JCCM · FUNDAE</div>
 							</div>
 						</div>
 					</div>
@@ -222,7 +222,7 @@ function infosystem_conocenos_page_html() {
 				<div class="cis-about-why-grid">
 					<?php
 					$reasons = array(
-						'100&nbsp;% gratuito: subvencionado por la Junta de Castilla-La Mancha, el Ministerio de Educación, Formación Profesional y Deportes y el SEPE.',
+						'100&nbsp;% gratuito: subvencionado por SEPE y JCCM.',
 						'Certificación oficial reconocida a nivel estatal.',
 						'Docentes con experiencia profesional en activo.',
 						'Cuatro sedes en la comarca, sin desplazamientos largos.',
@@ -247,14 +247,10 @@ function infosystem_conocenos_page_html() {
 					<span class="cis-about-eyebrow">Acreditaciones</span>
 					<h2 class="cis-about-h2">Formación oficial respaldada</h2>
 				</header>
-				<p class="cis-about-trust-note">La formación de esta academia está subvencionada por la <strong>Junta de Castilla-La Mancha</strong>, el <strong>Ministerio de Educación, Formación Profesional y Deportes</strong> y el <strong>SEPE</strong>.</p>
-				<?php
-				if ( function_exists( 'infosystem_subsidizers_logos_html' ) ) {
-					echo infosystem_subsidizers_logos_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				}
-				?>
-				<p class="cis-about-trust-note">También impartimos formación bonificada para empresas (<strong>FUNDAE</strong>) y programas cofinanciados por la <strong>Unión Europea</strong>.</p>
-				<div class="cis-about-trust-row cis-about-trust-logos-extra">
+				<div class="cis-about-trust-row cis-about-trust-logos-only">
+					<img class="cis-about-trust-logo cis-about-trust-logo--jccm" src="<?php echo esc_url( content_url( '/uploads/2026/05/logo-jccm-castilla-la-mancha.png' ) ); ?>" alt="Junta de Castilla-La Mancha" width="164" height="109" loading="lazy" />
+					<img src="<?php echo esc_url( content_url( '/uploads/2026/05/InfoSystem-ministerio_educacion-300x61.png' ) ); ?>" alt="Ministerio de Educación" width="218" height="44" loading="lazy" />
+					<img src="<?php echo esc_url( content_url( '/uploads/2026/05/InfoSystem-ministerio_trabajo-300x64.png' ) ); ?>" alt="Ministerio de Trabajo" width="214" height="46" loading="lazy" />
 					<img class="cis-about-trust-logo cis-about-trust-logo--fundae" src="<?php echo esc_url( content_url( '/uploads/2026/05/logo-fundae.svg' ) ); ?>" alt="FUNDAE" width="185" height="44" loading="lazy" />
 					<img class="cis-about-trust-logo cis-about-trust-logo--ue" src="<?php echo esc_url( content_url( '/uploads/2026/05/logo-union-europea.png' ) ); ?>" alt="Unión Europea" width="117" height="117" loading="lazy" />
 				</div>

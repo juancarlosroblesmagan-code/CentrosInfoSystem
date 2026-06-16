@@ -42,7 +42,7 @@ function eduma_child_infosystem_setup_woocommerce_courses() {
 			'product_cat',
 			array(
 				'slug'        => EDUMA_CHILD_WC_CAT_SLUG,
-				'description' => 'Cursos gratuitos subvencionados en Castilla-La Mancha por la Junta de CLM, el Ministerio de Educación, Formación Profesional y Deportes y el SEPE.',
+				'description' => 'Cursos gratuitos subvencionados en Castilla-La Mancha por el SEPE y la Junta de CLM.',
 			)
 		);
 		if ( is_wp_error( $created ) ) {
@@ -125,7 +125,7 @@ add_filter(
 	'woocommerce_product_add_to_cart_text',
 	static function ( $text, $product ) {
 		if ( $product && (float) $product->get_price() <= 0 ) {
-			return __( 'Leer más', 'eduma-child' );
+			return __( 'Solicitar información', 'eduma-child' );
 		}
 		return $text;
 	},
