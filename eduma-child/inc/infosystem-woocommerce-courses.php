@@ -183,3 +183,103 @@ if ( ! function_exists( 'infosystem_wc_cursos_url' ) ) {
 	}
 }
 
+/**
+ * Añadir campos de metadatos del curso en la pestaña General de WooCommerce.
+ */
+add_action( 'woocommerce_product_options_general_product_data', 'infosystem_add_course_meta_fields' );
+function infosystem_add_course_meta_fields() {
+	echo '<div class="options_group">';
+
+	// Fecha de inicio
+	woocommerce_wp_text_input( array(
+		'id'          => '_fecha_inicio',
+		'label'       => __( 'Fecha de inicio del curso', 'infosystem-child' ),
+		'placeholder' => 'Ej: 15/09/2026',
+		'desc_tip'    => 'true',
+		'description' => __( 'Introduce la fecha de inicio del curso.', 'infosystem-child' ),
+		'type'        => 'text',
+	) );
+
+	// Fecha de fin
+	woocommerce_wp_text_input( array(
+		'id'          => '_fecha_fin',
+		'label'       => __( 'Fecha de finalización', 'infosystem-child' ),
+		'placeholder' => 'Ej: 20/12/2026',
+		'desc_tip'    => 'true',
+		'description' => __( 'Introduce la fecha de finalización del curso.', 'infosystem-child' ),
+		'type'        => 'text',
+	) );
+
+	// Centro donde se imparte (select con opciones)
+	woocommerce_wp_select( array(
+		'id'          => '_centro_imparticion',
+		'label'       => __( 'Centro donde se imparte', 'infosystem-child' ),
+		'options'     => array(
+			''                      => __( 'Selecciona un centro...', 'infosystem-child' ),
+			'Santa Cruz de Mudela'  => 'Santa Cruz de Mudela',
+			'Viso del Marqués'      => 'Viso del Marqués',
+			'Fuente el Fresno'      => 'Fuente el Fresno',
+			'Membrilla'             => 'Membrilla',
+			'Online / Aula Virtual' => 'Online / Aula Virtual',
+			'Varios Centros'        => 'Varios Centros',
+		),
+		'desc_tip'    => 'true',
+		'description' => __( 'Selecciona el centro donde se impartirá el curso.', 'infosystem-child' ),
+	) );
+
+	echo '</div>';
+}
+
+/**
+ * Guardar campos de metadatos del curso al guardar el producto.
+ */
+add_action( 'woocommerce_process_product_meta', 'infosystem_save_course_meta_fields' );
+function infosystem_save_course_meta_fields( $post_id ) {
+	$fields = array( '_fecha_inicio', '_fecha_fin', '_centro_imparticion' );
+	foreach ( $fields as $field ) {
+		if ( isset( $_POST[ $field ] ) ) {
+			update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+		}
+	}
+}
+
+/**
+ * Mostrar los campos de metadatos en la ficha del producto, debajo de categorías y etiquetas.
+ */
+add_action( 'woocommerce_product_meta_end', 'infosystem_display_course_meta_fields' );
+function infosystem_display_course_meta_fields() {
+	global $product;
+	if ( ! $product ) {
+		return;
+	}
+
+	$post_id = $product->get_id();
+	$fecha_inicio = get_post_meta( $post_id, '_fecha_inicio', true );
+	$fecha_fin    = get_post_meta( $post_id, '_fecha_fin', true );
+	$centro       = get_post_meta( $post_id, '_centro_imparticion', true );
+
+	if ( ! empty( $fecha_inicio ) || ! empty( $fecha_fin ) || ! empty( $centro ) ) {
+		echo '<div class="infosystem-course-details-meta" style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #e8ddd0;">';
+		
+		if ( ! empty( $fecha_inicio ) ) {
+			echo '<span class="course-meta-item fecha-inicio" style="display: block; margin-bottom: 6px; font-size: 14px; color: #555;">';
+			echo '<span style="color: #8B1A1A; margin-right: 6px;">📅</span><strong style="color: #2c2c2c;">' . esc_html__( 'Fecha de inicio:', 'infosystem-child' ) . '</strong> ' . esc_html( $fecha_inicio );
+			echo '</span>';
+		}
+		
+		if ( ! empty( $fecha_fin ) ) {
+			echo '<span class="course-meta-item fecha-fin" style="display: block; margin-bottom: 6px; font-size: 14px; color: #555;">';
+			echo '<span style="color: #8B1A1A; margin-right: 6px;">🏁</span><strong style="color: #2c2c2c;">' . esc_html__( 'Fecha de finalización:', 'infosystem-child' ) . '</strong> ' . esc_html( $fecha_fin );
+			echo '</span>';
+		}
+		
+		if ( ! empty( $centro ) ) {
+			echo '<span class="course-meta-item centro-imparticion" style="display: block; margin-bottom: 6px; font-size: 14px; color: #555;">';
+			echo '<span style="color: #8B1A1A; margin-right: 6px;">📍</span><strong style="color: #2c2c2c;">' . esc_html__( 'Centro:', 'infosystem-child' ) . '</strong> ' . esc_html( $centro );
+			echo '</span>';
+		}
+		
+		echo '</div>';
+	}
+}
+
