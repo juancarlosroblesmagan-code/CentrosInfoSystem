@@ -156,11 +156,25 @@
     // COLAPSO AUTOMÁTICO DE ACORDEÓN DE INICIO
     // ============================================================
     function infosystem_collapseAccordion() {
-        var $accordionItems = $('.e-n-accordion-item');
-        if ($accordionItems.length) {
-            $accordionItems.removeAttr('open');
-            $accordionItems.find('.e-n-accordion-item-title').attr('aria-expanded', 'false');
-        }
+        var collapseFn = function() {
+            var $accordionItems = $('.e-n-accordion-item');
+            if ($accordionItems.length) {
+                $accordionItems.removeAttr('open');
+                $accordionItems.find('.e-n-accordion-item-title').attr('aria-expanded', 'false');
+                $accordionItems.find('.e-n-accordion-item-title').removeClass('elementor-active');
+            }
+        };
+
+        // Ejecutar inmediatamente
+        collapseFn();
+
+        // Ejecutar al completar la carga de la ventana
+        $(window).on('load', collapseFn);
+
+        // Reintentos con retardos para sobreescribir la inicialización tardía de Elementor
+        setTimeout(collapseFn, 100);
+        setTimeout(collapseFn, 500);
+        setTimeout(collapseFn, 1000);
     }
 
     // ============================================================

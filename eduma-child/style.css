@@ -999,6 +999,13 @@ body.home .elementor-element-1023731 {
 /* === Ajustes del acordeón "¿Por Qué Elegirnos?" en el Inicio === */
 .e-n-accordion {
     gap: 12px !important; /* Reducir la separación general entre elementos */
+    margin-right: 45px !important; /* Espacio de más de 1 cm (45px) entre las cruces (+) y la imagen de la derecha */
+}
+
+@media (max-width: 768px) {
+    .e-n-accordion {
+        margin-right: 0 !important; /* Restablecer en móviles ya que se apilan verticalmente */
+    }
 }
 
 .e-n-accordion-item {
