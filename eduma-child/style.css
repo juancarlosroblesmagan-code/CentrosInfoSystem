@@ -988,9 +988,41 @@ body.home .elementor-element-1d02e56 {
     display: none !important;
 }
 
-/* === Ocultar las 3 tarjetas de estadísticas (badges) del Hero en el Inicio === */
+/* === Alinear y bajar las 3 tarjetas de estadísticas (badges) en el Inicio === */
 body.home .elementor-element-1023731 {
-    display: none !important;
+    display: flex !important;
+    align-self: center !important;
+    margin-top: 50px !important; /* Bajarlo para centrarlo verticalmente */
+    margin-bottom: 0 !important;
+}
+
+/* === Ajustes del acordeón "¿Por Qué Elegirnos?" en el Inicio === */
+.e-n-accordion {
+    gap: 12px !important; /* Reducir la separación general entre elementos */
+}
+
+.e-n-accordion-item {
+    margin-bottom: 8px !important; /* Reducir margen inferior */
+    border-bottom: 1px solid rgba(139, 26, 26, 0.1) !important; /* Línea divisoria muy sutil */
+}
+
+.e-n-accordion-item-title {
+    padding: 10px 0 !important; /* Reducir padding vertical del título */
+}
+
+.e-n-accordion-item-title-text {
+    font-size: 1.05rem !important;
+    margin: 0 !important;
+}
+
+.e-n-accordion-item[open] .e-n-accordion-item-title {
+    border-bottom: none !important;
+}
+
+.e-n-accordion-item div[role="region"] {
+    padding-top: 0 !important;
+    padding-bottom: 10px !important;
+    line-height: 1.5 !important;
 }
 
 /* === Quitar bordes y cuadros de los botones de navegación === */
