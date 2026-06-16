@@ -983,5 +983,52 @@ body:not(.home) .top_heading .page-title {
     color: #ffffff !important;
 }
 
+/* === Ocultar sección de eventos vacía en el Inicio === */
+body.home .elementor-element-1d02e56 {
+    display: none !important;
+}
 
+/* === Ocultar las 3 tarjetas de estadísticas (badges) del Hero en el Inicio === */
+body.home .elementor-element-1023731 {
+    display: none !important;
+}
 
+/* === Quitar bordes y cuadros de los botones de navegación === */
+#header .nav > li,
+#header .nav > li > a,
+.thim-ekits-menu__nav-link,
+.thim-ekits-menu__nav-link.active,
+.menu-item-16477,
+.menu-item-16477 > a,
+.current-menu-item > a,
+.active > a,
+.thim-ekits-menu__nav > li,
+.thim-ekits-menu__nav > li > a {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+/* === Centrado vertical y alineación del menú del Header === */
+#header .tm-table .table-cell,
+.site-header .tm-table .table-cell,
+#header .width-navigation,
+.site-header .width-navigation {
+    vertical-align: middle !important;
+}
+
+.thim-ekits-menu__nav {
+    display: flex !important;
+    align-items: center !important;
+    margin-top: 8px !important; /* Bajar un poco para centrarlo visualmente */
+}
+
+#header .nav > li,
+.thim-ekits-menu__nav > li {
+    float: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    vertical-align: middle !important;
+}
