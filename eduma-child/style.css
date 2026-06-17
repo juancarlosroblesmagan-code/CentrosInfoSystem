@@ -1313,12 +1313,24 @@ html body.home .elementor-element-bc66c40 .product-grid .product .description {
    ANTI-GRAVITY: CONTACT PAGE GRID RESPONSIVENESS (FORCE STACK)
    ============================================================ */
 @media (max-width: 1024px) {
+    /* Add nice side margins/padding to the intro text block to prevent it from touching screen edges */
+    body.page-id-16719 .infosystem-contact-intro,
+    body.page-slug-contacto .infosystem-contact-intro {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Add nice side margins/padding to the panels grid to separate it from screen edges */
     body.page-id-16719 .infosystem-contact-layout,
     body.page-slug-contacto .infosystem-contact-layout,
     html body.page-id-16719 .infosystem-contact-layout {
         display: grid !important;
         grid-template-columns: 1fr !important;
         gap: 30px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        box-sizing: border-box !important;
     }
     
     body.page-id-16719 .infosystem-contact-panel--visual,
@@ -1340,6 +1352,14 @@ html body.home .elementor-element-bc66c40 .product-grid .product .description {
         grid-column: 1 / -1 !important;
         width: 100% !important;
         max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Add nice side margins/padding to bottom CTA section */
+    body.page-id-16719 .infosystem-contact-cta,
+    body.page-slug-contacto .infosystem-contact-cta {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
         box-sizing: border-box !important;
     }
 }
