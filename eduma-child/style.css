@@ -1247,3 +1247,56 @@ body.home .elementor-element-c7360be {
         vertical-align: middle !important;
     }
 }
+
+/* === Ocultar las imágenes de los cursos en la sección "Últimos Cursos Incorporados" de la Home === */
+html body.home .elementor-element-bc66c40 .product_thumb,
+html body.home .elementor-element-bc66c40 .product-image,
+html body.home .elementor-element-bc66c40 .course-thumbnail,
+html body.home .elementor-element-bc66c40 .thim-course-image,
+html body.home .elementor-element-bc66c40 img.wp-post-image,
+html body.home .elementor-element-bc66c40 .woocommerce-placeholder {
+    display: none !important;
+}
+
+/* Forzar simetría y maquetación de tarjetas sin imagen en "Últimos Cursos Incorporados" */
+html body.home .elementor-element-bc66c40 li.product,
+html body.home .elementor-element-bc66c40 .product-grid .product {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+html body.home .elementor-element-bc66c40 li.product .content__product,
+html body.home .elementor-element-bc66c40 .product-grid .product .content__product {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    min-height: 280px !important; /* Altura mínima uniforme sin imágenes */
+    background: #ffffff !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 8px !important;
+    padding: 24px !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: var(--transition) !important;
+    box-sizing: border-box !important;
+}
+
+html body.home .elementor-element-bc66c40 li.product .content__product:hover,
+html body.home .elementor-element-bc66c40 .product-grid .product .content__product:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: var(--shadow-md) !important;
+    border-color: var(--color-secondary) !important;
+}
+
+html body.home .elementor-element-bc66c40 li.product .product__title,
+html body.home .elementor-element-bc66c40 .product-grid .product .product__title {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    margin-top: 0 !important; /* No necesita margen superior al no haber imagen */
+}
+
+html body.home .elementor-element-bc66c40 li.product .description,
+html body.home .elementor-element-bc66c40 .product-grid .product .description {
+    flex-grow: 1 !important;
+}
+
