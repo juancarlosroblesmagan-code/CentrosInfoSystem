@@ -347,3 +347,36 @@ if ( ! function_exists( 'thim_social_share' ) ) {
 	}
 }
 
+
+// ============================================================
+// 14. PROGRESSIVE WEB APP (PWA) — REGISTRO Y METATAGS
+// ============================================================
+add_action( 'wp_head', 'infosystem_pwa_metadata' );
+
+function infosystem_pwa_metadata() {
+    ?>
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="<?php echo esc_url( home_url( '/manifest.json' ) ); ?>">
+    
+    <!-- PWA Mobile Configuration (iOS y Android) -->
+    <meta name="theme-color" content="#8B1A1A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="InfoSystem">
+    <link rel="apple-touch-icon" href="/wp-content/uploads/2020/03/centrosinfosystem-fabicon-1-192x192.png">
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                console.log('PWA Service Worker registrado con éxito. Scope:', registration.scope);
+            }, function(err) {
+                console.log('Fallo al registrar el Service Worker de la PWA:', err);
+            });
+        });
+    }
+    </script>
+    <?php
+}
+
