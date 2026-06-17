@@ -1392,7 +1392,9 @@ html body.home .elementor-element-bc66c40 .product-grid .product .description {
    ANTI-GRAVITY: FOOTER CREDITS & LINKS CENTERING
    ============================================================ */
 #footer .infosystem-footer-credits,
+.site-footer .infosystem-footer-credits,
 #footer .infosystem-footer-credits p,
+.site-footer .infosystem-footer-credits p,
 .infosystem-footer-credits,
 .infosystem-footer-credits p {
     text-align: center !important;
@@ -1412,29 +1414,32 @@ html body.home .elementor-element-bc66c40 .product-grid .product .description {
    ============================================================ */
 @media (max-width: 768px) {
     #footer,
-    #footer .widget,
-    #footer .widget_text,
-    #footer .textwidget,
-    #footer h3,
-    #footer h4,
-    #footer p,
-    #footer ul,
-    #footer li,
-    #footer a,
-    #footer .infosystem-footer-inner,
-    #footer .infosystem-footer-inner > div {
+    .site-footer,
+    .site-footer .widget,
+    .site-footer .widget_text,
+    .site-footer .textwidget,
+    .site-footer h3,
+    .site-footer h4,
+    .site-footer p,
+    .site-footer ul,
+    .site-footer li,
+    .site-footer a,
+    .site-footer .infosystem-footer-inner,
+    .site-footer .infosystem-footer-inner > div {
         text-align: center !important;
     }
 
     /* Center navigation lists in the footer */
-    #footer ul {
+    #footer ul,
+    .site-footer ul {
         padding-left: 0 !important;
         margin-left: 0 !important;
         list-style-position: inside !important;
         display: block !important;
     }
     
-    #footer li {
+    #footer li,
+    .site-footer li {
         display: block !important;
         text-align: center !important;
     }
