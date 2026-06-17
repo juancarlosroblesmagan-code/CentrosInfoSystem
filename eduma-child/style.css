@@ -1029,6 +1029,44 @@ body.home .elementor-element-c7360be {
         padding-inline-end: 15px !important;
         box-sizing: border-box !important;
     }
+
+    /* Stack la sección de registro/contacto en vertical (texto/contador y formulario) */
+    body.home .elementor-element-13251ef {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 30px !important;
+        padding-inline-start: 15px !important;
+        padding-inline-end: 15px !important;
+        box-sizing: border-box !important;
+    }
+
+    body.home .elementor-element-e7657e1,
+    body.home .elementor-element-ba75f78 {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+
+    /* Stack la sección de testimonios en vertical (imagen/cabecera y opinión del alumno) */
+    body.home .elementor-element-40afa39 {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 30px !important;
+        padding-inline-start: 15px !important;
+        padding-inline-end: 15px !important;
+        box-sizing: border-box !important;
+    }
+
+    body.home .elementor-element-f70fa44,
+    body.home .elementor-element-5c9ae4e {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
 }
 
 /* === Ajustes del acordeón "¿Por Qué Elegirnos?" en el Inicio === */
