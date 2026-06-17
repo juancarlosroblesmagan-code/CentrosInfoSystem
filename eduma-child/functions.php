@@ -705,6 +705,29 @@ function infosystem_pwa_metadata() {
         display: block !important;
     }
 
+    /* Hide the theme preloader overlay immediately to prevent white screens on delayed JS execution (WP Rocket) */
+    div#preload,
+    #preload,
+    .thim-loading-container,
+    .cssload-container {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    body.thim-body-preload,
+    body.thim-body-load-overlay {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    body.thim-body-preload #wrapper-container,
+    body.thim-body-preload #main-content,
+    body.thim-body-load-overlay #wrapper-container,
+    body.thim-body-load-overlay #main-content {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
     /* Fix Elementor entrance animations on mobile when JS execution is delayed (e.g. WP Rocket) */
     @media (max-width: 1024px) {
         .elementor-invisible {
