@@ -27,8 +27,8 @@ function infosystem_child_enqueue_styles() {
         wp_get_theme()->get( 'Version' )
     );
 
-    // Estilos de maquetación de la home (parche para Elementor V4 y contenedores optimizados)
-    if ( is_front_page() ) {
+    // Estilos de maquetación de la home (parche para Elementor V4 y contenedores optimizados solo en local)
+    if ( is_front_page() && ( strpos( $_SERVER['HTTP_HOST'], 'localhost' ) !== false || strpos( $_SERVER['HTTP_HOST'], '127.0.0.1' ) !== false ) ) {
         wp_enqueue_style(
             'infosystem-home-layout',
             get_stylesheet_directory_uri() . '/assets/css/infosystem-home-layout.css',
