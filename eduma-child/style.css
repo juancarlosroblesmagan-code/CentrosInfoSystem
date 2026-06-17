@@ -1009,19 +1009,19 @@ body.home .elementor-element-c7360be {
     #page, 
     #main-content,
     .site-content,
-    body.home .elementor-element-63b7721,
-    body.home .elementor-element-1de9e11 {
+    html body.home .elementor-element-63b7721,
+    html body.home .elementor-element-1de9e11 {
         max-width: 100% !important;
         overflow: hidden !important;
     }
 
     /* Ocultar las tarjetas de estadísticas (badges de valoración, alumnos y cursos) */
-    body.home .elementor-element-1023731 {
+    html body.home .elementor-element-1023731 {
         display: none !important;
     }
 
     /* Hacer que la columna del texto de la home ocupe el 100% en móvil */
-    body.home .elementor-element-c091706 {
+    html body.home .elementor-element-c091706 {
         width: 100% !important;
         max-width: 100% !important;
         flex: 1 1 100% !important;
@@ -1031,7 +1031,7 @@ body.home .elementor-element-c7360be {
     }
 
     /* Stack la sección de registro/contacto en vertical (texto/contador y formulario) */
-    body.home .elementor-element-13251ef {
+    html body.home .elementor-element-13251ef {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
@@ -1042,15 +1042,37 @@ body.home .elementor-element-c7360be {
         box-sizing: border-box !important;
     }
 
-    body.home .elementor-element-e7657e1,
-    body.home .elementor-element-ba75f78 {
+    html body.home .elementor-element-e7657e1,
+    html body.home .elementor-element-ba75f78 {
         width: 100% !important;
         max-width: 100% !important;
         flex: 1 1 100% !important;
     }
 
-    /* Stack la sección de testimonios en vertical (imagen/cabecera y opinión del alumno) */
-    body.home .elementor-element-40afa39 {
+    /* Contact Form 7 - Campos a pantalla completa con espaciado en móviles */
+    html body.home .elementor-element-ba75f78 .wpcf7-form p,
+    html body.home .elementor-element-ba75f78 .wpcf7-form-control-wrap {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    html body.home .elementor-element-ba75f78 .wpcf7-form-control:not([type="checkbox"]):not([type="radio"]) {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        box-sizing: border-box !important;
+        margin-bottom: 15px !important;
+        padding: 12px 16px !important;
+    }
+    html body.home .elementor-element-ba75f78 .wpcf7-submit {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Stack la sección de testimonios en vertical (cabecera/imagen y opinión del alumno) */
+    html body.home .elementor-element-40afa39 {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
@@ -1061,37 +1083,44 @@ body.home .elementor-element-c7360be {
         box-sizing: border-box !important;
     }
 
-    body.home .elementor-element-f70fa44,
-    body.home .elementor-element-5c9ae4e {
+    html body.home .elementor-element-f70fa44 {
         width: 100% !important;
         max-width: 100% !important;
         flex: 1 1 100% !important;
     }
-}
 
-/* === Ajustes del acordeón "¿Por Qué Elegirnos?" en el Inicio === */
-.e-n-accordion {
-    gap: 12px !important; /* Reducir la separación general entre elementos */
-    margin-right: 45px !important; /* Espacio de más de 1 cm (45px) entre las cruces (+) y la imagen de la derecha */
-}
-
-@media (max-width: 768px) {
-    .e-n-accordion {
-        margin-right: 0 !important; /* Restablecer en móviles ya que se apilan verticalmente */
+    /* Imagen superior de testimonios a pantalla completa (edge-to-edge) */
+    html body.home .elementor-element-9247b75 {
+        width: calc(100% + 30px) !important;
+        max-width: calc(100% + 30px) !important;
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+        padding: 0 !important;
+        margin-top: 25px !important;
+        margin-bottom: 25px !important;
+        display: block !important;
     }
-}
 
-.e-n-accordion-item {
-    margin-bottom: 8px !important; /* Reducir margen inferior */
-    border-bottom: 1px solid rgba(139, 26, 26, 0.1) !important; /* Línea divisoria muy sutil */
-}
+    html body.home .elementor-element-9247b75 img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        border-radius: 0 !important;
+    }
 
-/* Diseño responsivo a pantalla completa para la sección "¿Por Qué Elegirnos?" en móvil/tablet */
-@media (max-width: 1024px) {
-    /* Stack la sección en vertical (acordeón y luego la imagen inferior) */
-    body.home .elementor-element-838dd52 {
+    /* Columna de la opinión del alumno al 100% de ancho */
+    html body.home .elementor-element-5c9ae4e {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 100% !important;
+        padding: 0 !important;
+    }
+
+    /* Stack la sección "¿Por Qué Elegirnos?" en vertical (imagen arriba, acordeón abajo) */
+    html body.home .elementor-element-838dd52 {
         display: flex !important;
-        flex-direction: column !important;
+        flex-direction: column-reverse !important; /* Imagen arriba, textos abajo */
         width: 100% !important;
         max-width: 100% !important;
         gap: 30px !important;
@@ -1101,26 +1130,31 @@ body.home .elementor-element-c7360be {
     }
 
     /* Columna del acordeón al 100% de ancho */
-    body.home .elementor-element-f7833b3 {
+    html body.home .elementor-element-f7833b3 {
         width: 100% !important;
         max-width: 100% !important;
         flex: 1 1 100% !important;
+        padding: 0 !important;
     }
 
-    /* Columna de la imagen principal al 100% de ancho */
-    body.home .elementor-element-977acbf {
-        width: 100% !important;
-        max-width: 100% !important;
+    /* Columna de la imagen principal a pantalla completa (edge-to-edge) */
+    html body.home .elementor-element-977acbf {
+        width: calc(100% + 30px) !important;
+        max-width: calc(100% + 30px) !important;
+        margin-left: -15px !important;
+        margin-right: -15px !important;
+        padding: 0 !important;
         flex: 1 1 100% !important;
         display: block !important;
     }
 
     /* Imagen principal a ancho completo */
-    body.home .elementor-element-977acbf img {
+    html body.home .elementor-element-977acbf img {
         width: 100% !important;
         max-width: 100% !important;
         height: auto !important;
         display: block !important;
+        border-radius: 0 !important;
     }
 
     /* APILAR ELEMENTOS INTERNOS DEL ACORDEÓN (Texto arriba, imagen abajo) */
@@ -1151,6 +1185,7 @@ body.home .elementor-element-c7360be {
         border-radius: 8px !important;
     }
 }
+
 
 .e-n-accordion-item-title {
     padding: 10px 0 !important; /* Reducir padding vertical del título */
