@@ -1048,6 +1048,72 @@ body.home .elementor-element-c7360be {
     border-bottom: 1px solid rgba(139, 26, 26, 0.1) !important; /* Línea divisoria muy sutil */
 }
 
+/* Diseño responsivo a pantalla completa para la sección "¿Por Qué Elegirnos?" en móvil/tablet */
+@media (max-width: 1024px) {
+    /* Stack la sección en vertical (acordeón y luego la imagen inferior) */
+    body.home .elementor-element-838dd52 {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 30px !important;
+        padding-inline-start: 15px !important;
+        padding-inline-end: 15px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Columna del acordeón al 100% de ancho */
+    body.home .elementor-element-f7833b3 {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+
+    /* Columna de la imagen principal al 100% de ancho */
+    body.home .elementor-element-977acbf {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 100% !important;
+        display: block !important;
+    }
+
+    /* Imagen principal a ancho completo */
+    body.home .elementor-element-977acbf img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+    /* APILAR ELEMENTOS INTERNOS DEL ACORDEÓN (Texto arriba, imagen abajo) */
+    .e-n-accordion-item div[role="region"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        width: 100% !important;
+        padding: 15px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Contenedores hijos de texto/imagen en el acordeón al 100% */
+    .e-n-accordion-item div[role="region"] > .e-con,
+    .e-n-accordion-item div[role="region"] > .elementor-element {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+
+    /* Imagen interior del acordeón a pantalla completa */
+    .e-n-accordion-item div[role="region"] img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        margin: 15px auto 0 !important;
+        border-radius: 8px !important;
+    }
+}
+
 .e-n-accordion-item-title {
     padding: 10px 0 !important; /* Reducir padding vertical del título */
 }
