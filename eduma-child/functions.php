@@ -354,6 +354,8 @@ if ( ! function_exists( 'thim_social_share' ) ) {
 add_action( 'wp_head', 'infosystem_pwa_metadata' );
 
 function infosystem_pwa_metadata() {
+    $theme_uri = get_stylesheet_directory_uri();
+    $icon_url = $theme_uri . '/images/pwa-app-icon.jpg';
     ?>
     <!-- PWA Manifest -->
     <link rel="manifest" href="<?php echo esc_url( home_url( '/manifest.json' ) ); ?>">
@@ -363,9 +365,9 @@ function infosystem_pwa_metadata() {
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="InfoSystem">
-    <link rel="apple-touch-icon" href="/wp-content/uploads/2020/03/centrosinfosystem-fabicon-1-192x192.png">
+    <link rel="apple-touch-icon" href="<?php echo esc_url($icon_url); ?>">
     
-    <!-- PWA Service Worker Registration -->
+    <!-- PWA Service Worker Registration & Install Prompt -->
     <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
@@ -376,7 +378,212 @@ function infosystem_pwa_metadata() {
             });
         });
     }
+
+    // PWA Smart Installation Banner
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if running in standalone mode (already installed)
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+        if (isStandalone) return;
+
+        // Check localStorage if dismissed
+        if (localStorage.getItem('pwa_install_dismissed')) return;
+
+        // Detect iOS & Android
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        // Only show on mobile / tablet
+        const isMobile = window.innerWidth <= 1024;
+        if (!isMobile) return;
+
+        let deferredPrompt = null;
+
+        // Listen for the native PWA install prompt (Chrome / Android)
+        window.addEventListener('beforeinstallprompt', function(e) {
+            e.preventDefault();
+            deferredPrompt = e;
+            showPWABanner();
+        });
+
+        // If it's iOS Safari, show PWA banner automatically (since it doesn't support beforeinstallprompt)
+        if (isIOS) {
+            setTimeout(showPWABanner, 2500); // delay show for a smooth entry
+        }
+
+        function showPWABanner() {
+            // Create banner element if not already present
+            if (document.getElementById('pwa-install-banner')) return;
+
+            const banner = document.createElement('div');
+            banner.id = 'pwa-install-banner';
+            banner.innerHTML = `
+                <div class="pwa-banner-container">
+                    <img class="pwa-banner-icon" src="<?php echo esc_url($icon_url); ?>" alt="InfoSystem App">
+                    <div class="pwa-banner-text">
+                        <span class="pwa-banner-title">Instalar App</span>
+                        <span class="pwa-banner-subtitle">Añade a tu pantalla de inicio</span>
+                    </div>
+                    <button class="pwa-banner-btn" id="pwa-install-action">Instalar</button>
+                    <button class="pwa-banner-close" id="pwa-install-close">✕</button>
+                </div>
+                <div class="pwa-ios-instructions" id="pwa-ios-instructions" style="display: none;">
+                    <p>Para instalar en tu iPhone o iPad:</p>
+                    <ol>
+                        <li>Pulsa el botón de compartir <span class="ios-share-icon-wrapper"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ios-share-svg"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg></span> en la barra inferior de Safari.</li>
+                        <li>Desliza hacia abajo y selecciona <strong>"Añadir a la pantalla de inicio"</strong>.</li>
+                    </ol>
+                </div>
+            `;
+            document.body.appendChild(banner);
+
+            // Close button handler
+            document.getElementById('pwa-install-close').addEventListener('click', function(e) {
+                e.stopPropagation();
+                banner.style.display = 'none';
+                localStorage.setItem('pwa_install_dismissed', 'true');
+            });
+
+            // Action button handler
+            document.getElementById('pwa-install-action').addEventListener('click', function() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(function(choiceResult) {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('El usuario aceptó la instalación de la PWA');
+                            banner.style.display = 'none';
+                        }
+                        deferredPrompt = null;
+                    });
+                } else if (isIOS) {
+                    const instructions = document.getElementById('pwa-ios-instructions');
+                    if (instructions.style.display === 'none') {
+                        instructions.style.display = 'block';
+                        document.getElementById('pwa-install-action').innerText = 'Entendido';
+                    } else {
+                        instructions.style.display = 'none';
+                        document.getElementById('pwa-install-action').innerText = 'Instalar';
+                    }
+                } else {
+                    // Fallback for browsers that don't support prompt
+                    alert('Para instalar la App en tu pantalla, abre el menú del navegador y selecciona "Instalar aplicación" o "Añadir a la pantalla de inicio".');
+                }
+            });
+        }
+    });
     </script>
+    <style>
+    /* PWA Banner Styles */
+    #pwa-install-banner {
+        position: fixed;
+        bottom: 20px;
+        left: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(139, 26, 26, 0.15);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        z-index: 999999;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+        box-sizing: border-box;
+        overflow: hidden;
+        animation: pwaSlideUp 0.4s ease-out;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    @keyframes pwaSlideUp {
+        from { transform: translateY(100px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .pwa-banner-container {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+    }
+    .pwa-banner-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid #8B1A1A;
+        margin-right: 12px;
+        object-fit: cover;
+    }
+    .pwa-banner-text {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        margin-right: 10px;
+    }
+    .pwa-banner-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 2px;
+    }
+    .pwa-banner-subtitle {
+        font-size: 12px;
+        color: #666;
+    }
+    .pwa-banner-btn {
+        background-color: #8B1A1A !important;
+        border: none !important;
+        border-radius: 8px !important;
+        color: #fff !important;
+        padding: 8px 16px !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .pwa-banner-btn:hover {
+        background-color: #D4880A !important;
+    }
+    .pwa-banner-close {
+        background: none !important;
+        border: none !important;
+        font-size: 16px !important;
+        color: #999 !important;
+        cursor: pointer;
+        margin-left: 10px;
+        padding: 4px !important;
+    }
+    .pwa-banner-close:hover {
+        color: #666 !important;
+    }
+    /* iOS Instruction Styles */
+    .pwa-ios-instructions {
+        background: #fbf9f6;
+        border-top: 1px solid rgba(139, 26, 26, 0.08);
+        padding: 14px 16px;
+        font-size: 13px;
+        color: #333;
+        line-height: 1.5;
+    }
+    .pwa-ios-instructions p {
+        font-weight: 700;
+        margin: 0 0 8px 0 !important;
+        color: #8B1A1A;
+    }
+    .pwa-ios-instructions ol {
+        margin: 0 !important;
+        padding-left: 20px !important;
+    }
+    .pwa-ios-instructions li {
+        margin-bottom: 6px !important;
+    }
+    .ios-share-icon-wrapper {
+        display: inline-flex;
+        vertical-align: middle;
+        background: #e6e6e6;
+        border-radius: 4px;
+        padding: 2px 4px;
+        margin: 0 2px;
+        color: #007aff;
+    }
+    .ios-share-svg {
+        display: block;
+    }
+    </style>
     <?php
 }
 
