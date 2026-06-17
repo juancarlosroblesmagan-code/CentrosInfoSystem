@@ -1247,7 +1247,15 @@ body.home .elementor-element-c7360be {
         align-items: center !important;
         vertical-align: middle !important;
     }
+
+    /* Pushes header CTA buttons (phone & Ver cursos button) to the far right */
+    .thim-ekits-menu__nav > li.menu-right {
+        margin-left: auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
 }
+
 
 /* === Ocultar las imágenes de los cursos en la sección "Últimos Cursos Incorporados" de la Home === */
 html body.home .elementor-element-bc66c40 .product_thumb,
@@ -1300,4 +1308,58 @@ html body.home .elementor-element-bc66c40 li.product .description,
 html body.home .elementor-element-bc66c40 .product-grid .product .description {
     flex-grow: 1 !important;
 }
+
+/* ============================================================
+   ANTI-GRAVITY: GUTENBERG COLUMNS RESPONSIVENESS (CONTACT PAGE)
+   ============================================================ */
+@media (max-width: 991px) {
+    .wp-block-columns {
+        display: flex !important;
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+        gap: 30px !important;
+    }
+    .wp-block-columns .wp-block-column {
+        flex-basis: 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* ============================================================
+   ANTI-GRAVITY: CONTACT FORM 7 RESPONSIVE FULL WIDTH INPUTS
+   ============================================================ */
+@media (max-width: 991px) {
+    .wpcf7-form input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+    .wpcf7-form textarea,
+    .wpcf7-form select,
+    .wpcf7-form-control-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* ============================================================
+   ANTI-GRAVITY: FOOTER CREDITS & LINKS CENTERING
+   ============================================================ */
+#footer .infosystem-footer-credits,
+#footer .infosystem-footer-credits p,
+.infosystem-footer-credits,
+.infosystem-footer-credits p {
+    text-align: center !important;
+    justify-content: center !important;
+    display: block !important;
+}
+
+/* Ensure corporate links block is centered as well */
+.cis-enlaces-corporativos,
+.cis-enlaces-corporativos p {
+    text-align: center !important;
+    justify-content: center !important;
+}
+
 
