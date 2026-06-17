@@ -1226,12 +1226,28 @@ body.home .elementor-element-c7360be {
 
 /* === Centrado vertical y alineación del menú del Header === */
 @media (min-width: 1025px) {
-    #header .tm-table .table-cell,
-    .site-header .tm-table .table-cell,
+    #header .tm-table,
+    .site-header .tm-table {
+        display: table !important;
+        width: 100% !important;
+        table-layout: auto !important;
+    }
+
+    #header .tm-table .width-logo,
+    .site-header .tm-table .width-logo {
+        width: auto !important;
+        display: table-cell !important;
+        vertical-align: middle !important;
+        white-space: nowrap !important;
+    }
+
+    #header .tm-table .width-navigation,
+    .site-header .tm-table .width-navigation,
     #header .width-navigation,
     .site-header .width-navigation {
+        width: 100% !important;
+        display: table-cell !important;
         vertical-align: middle !important;
-        width: 100% !important; /* Force navigation cell to take up all remaining space */
     }
 
     .thim-ekits-menu__nav {
@@ -1241,6 +1257,7 @@ body.home .elementor-element-c7360be {
         width: 100% !important; /* Stretch menu container to full width of cell */
         margin-left: auto !important;
         margin-top: 8px !important; /* Centrarlo visualmente */
+        padding: 0 !important;
     }
 
     #header .nav > li,
@@ -1251,11 +1268,45 @@ body.home .elementor-element-c7360be {
         vertical-align: middle !important;
     }
 
-    /* Pushes header CTA buttons (phone & Ver cursos button) to the far right */
+    /* Hide the menu-right CTA (phone/button widget) on desktop to let Contacto be the rightmost element */
     .thim-ekits-menu__nav > li.menu-right {
-        margin-left: auto !important;
+        display: none !important;
+    }
+
+    /* Style Contacto (menu-item-16720) as a highlighted red button on desktop */
+    #header .nav > li.menu-item-16720 > a,
+    .thim-ekits-menu__nav > li.menu-item-16720 > a {
+        background-color: var(--color-primary) !important;
+        color: #ffffff !important;
+        padding: 8px 20px !important;
+        border-radius: 30px !important; /* Redondo / Pill-shaped button */
+        font-weight: 700 !important;
+        transition: all 0.3s ease !important;
         display: inline-flex !important;
         align-items: center !important;
+        justify-content: center !important;
+        border: none !important;
+        border-bottom: none !important;
+        margin-left: 15px !important; /* Separación con el menú */
+        box-shadow: 0 4px 10px rgba(139, 26, 26, 0.2) !important;
+        text-transform: uppercase !important;
+        font-size: 13px !important;
+    }
+
+    #header .nav > li.menu-item-16720 > a:hover,
+    .thim-ekits-menu__nav > li.menu-item-16720 > a:hover {
+        background-color: var(--color-secondary) !important; /* Dorado en hover */
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 15px rgba(212, 136, 10, 0.3) !important;
+    }
+
+    /* Remove active border bottom highlight since it is now styled as a button */
+    #header .nav > li.menu-item-16720.current-menu-item > a,
+    #header .nav > li.menu-item-16720.active > a,
+    #header .nav > li.menu-item-16720 > a:hover {
+        border-bottom: none !important;
+        color: #ffffff !important;
     }
 }
 
