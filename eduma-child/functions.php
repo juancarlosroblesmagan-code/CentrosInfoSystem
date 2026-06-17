@@ -354,8 +354,17 @@ if ( ! function_exists( 'thim_social_share' ) ) {
 add_action( 'wp_head', 'infosystem_pwa_metadata' );
 
 function infosystem_pwa_metadata() {
-    $theme_uri = get_stylesheet_directory_uri();
-    $icon_url = $theme_uri . '/images/pwa-app-icon.jpg';
+    $theme_dir = get_stylesheet_directory();
+    $icon_path = $theme_dir . '/images/pwa-app-icon.jpg';
+    $icon_url = '';
+    
+    // Check if the custom PWA icon exists in the child theme folder
+    if ( file_exists( $icon_path ) ) {
+        $icon_url = get_stylesheet_directory_uri() . '/images/pwa-app-icon.jpg';
+    } else {
+        // Fallback to WordPress Site Icon (Favicon)
+        $icon_url = get_site_icon_url( 192 );
+    }
     ?>
     <!-- PWA Manifest -->
     <link rel="manifest" href="<?php echo esc_url( home_url( '/manifest.json' ) ); ?>">
@@ -365,7 +374,9 @@ function infosystem_pwa_metadata() {
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="InfoSystem">
+    <?php if ( $icon_url ) : ?>
     <link rel="apple-touch-icon" href="<?php echo esc_url($icon_url); ?>">
+    <?php endif; ?>
     
     <!-- PWA Service Worker Registration & Install Prompt -->
     <script>
@@ -417,23 +428,44 @@ function infosystem_pwa_metadata() {
             banner.id = 'pwa-install-banner';
             banner.innerHTML = `
                 <div class="pwa-banner-container">
-                    <img class="pwa-banner-icon" src="<?php echo esc_url($icon_url); ?>" alt="InfoSystem App">
+                    <?php if ( $icon_url ) : ?>
+                    <img class="pwa-banner-icon" src="<?php echo esc_url($icon_url); ?>" alt="InfoSystem App" id="pwa-icon-img">
+                    <?php else: ?>
+                    <div class="pwa-banner-icon-fallback"><span>I</span></div>
+                    <?php endif; ?>
                     <div class="pwa-banner-text">
                         <span class="pwa-banner-title">Instalar App</span>
                         <span class="pwa-banner-subtitle">Añade a tu pantalla de inicio</span>
                     </div>
                     <button class="pwa-banner-btn" id="pwa-install-action">Instalar</button>
-                    <button class="pwa-banner-close" id="pwa-install-close">✕</button>
+                    <button class="pwa-banner-close" id="pwa-install-close" aria-label="Cerrar"></button>
                 </div>
                 <div class="pwa-ios-instructions" id="pwa-ios-instructions" style="display: none;">
                     <p>Para instalar en tu iPhone o iPad:</p>
                     <ol>
-                        <li>Pulsa el botón de compartir <span class="ios-share-icon-wrapper"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ios-share-svg"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg></span> en la barra inferior de Safari.</li>
-                        <li>Desliza hacia abajo y selecciona <strong>"Añadir a la pantalla de inicio"</strong>.</li>
+                        <li>Pulsa el botón de compartir <span class="ios-share-icon-wrapper"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ios-share-svg"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg></span> en la barra de Safari.</li>
+                        <li>Selecciona <strong>"Añadir a la pantalla de inicio"</strong>.</li>
                     </ol>
                 </div>
             `;
             document.body.appendChild(banner);
+
+            // Handle image error fallback dynamically in JS
+            const img = document.getElementById('pwa-icon-img');
+            if (img) {
+                img.onerror = function() {
+                    const fallbackSiteIcon = '<?php echo esc_url( get_site_icon_url( 192 ) ); ?>';
+                    if (fallbackSiteIcon && this.src !== fallbackSiteIcon) {
+                        this.src = fallbackSiteIcon;
+                    } else {
+                        // If everything fails, show the initials fallback
+                        const fallbackDiv = document.createElement('div');
+                        fallbackDiv.className = 'pwa-banner-icon-fallback';
+                        fallbackDiv.innerHTML = '<span>I</span>';
+                        this.parentNode.replaceChild(fallbackDiv, this);
+                    }
+                };
+            }
 
             // Close button handler
             document.getElementById('pwa-install-close').addEventListener('click', function(e) {
@@ -478,86 +510,143 @@ function infosystem_pwa_metadata() {
         left: 15px;
         right: 15px;
         background: rgba(255, 255, 255, 0.96);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(139, 26, 26, 0.15);
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
         z-index: 999999;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         box-sizing: border-box;
         overflow: hidden;
-        animation: pwaSlideUp 0.4s ease-out;
-        max-width: 500px;
+        animation: pwaSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+        max-width: 460px;
         margin: 0 auto;
     }
     @keyframes pwaSlideUp {
-        from { transform: translateY(100px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
+        from { transform: translateY(80px) scale(0.96); opacity: 0; }
+        to { transform: translateY(0) scale(1); opacity: 1; }
     }
     .pwa-banner-container {
         display: flex;
         align-items: center;
-        padding: 12px 16px;
+        padding: 14px 16px;
+        position: relative;
     }
     .pwa-banner-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        border: 2px solid #8B1A1A;
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
         margin-right: 12px;
         object-fit: cover;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        flex-shrink: 0;
+    }
+    .pwa-banner-icon-fallback {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #8B1A1A 0%, #D4880A 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 20px;
+        margin-right: 12px;
+        box-shadow: 0 2px 6px rgba(139, 26, 26, 0.2);
+        flex-shrink: 0;
+    }
+    .pwa-banner-icon-fallback span {
+        line-height: 1;
     }
     .pwa-banner-text {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        margin-right: 10px;
+        margin-right: 12px;
+        min-width: 0;
     }
     .pwa-banner-title {
         font-size: 15px;
         font-weight: 700;
-        color: #1a1a1a;
+        color: #1e1e1e;
         margin-bottom: 2px;
+        line-height: 1.2;
+        letter-spacing: -0.2px;
     }
     .pwa-banner-subtitle {
         font-size: 12px;
         color: #666;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .pwa-banner-btn {
-        background-color: #8B1A1A !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #a32222 100%) !important;
         border: none !important;
-        border-radius: 8px !important;
-        color: #fff !important;
-        padding: 8px 16px !important;
+        border-radius: 20px !important;
+        color: #ffffff !important;
+        padding: 7px 16px !important;
         font-size: 13px !important;
-        font-weight: 700 !important;
+        font-weight: 600 !important;
         cursor: pointer;
-        transition: background-color 0.2s;
+        box-shadow: 0 3px 8px rgba(139, 26, 26, 0.2) !important;
+        transition: all 0.2s ease;
+        white-space: nowrap !important;
+        flex-shrink: 0;
+        outline: none !important;
+        margin-right: 20px;
     }
-    .pwa-banner-btn:hover {
-        background-color: #D4880A !important;
+    .pwa-banner-btn:hover, .pwa-banner-btn:active {
+        background: linear-gradient(135deg, #D4880A 0%, #ef9d1a 100%) !important;
+        box-shadow: 0 4px 10px rgba(212, 136, 10, 0.25) !important;
+        transform: translateY(-1px);
     }
     .pwa-banner-close {
-        background: none !important;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 32px;
+        height: 32px;
+        background: transparent !important;
         border: none !important;
-        font-size: 16px !important;
-        color: #999 !important;
         cursor: pointer;
-        margin-left: 10px;
-        padding: 4px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        z-index: 10;
+        outline: none !important;
     }
-    .pwa-banner-close:hover {
-        color: #666 !important;
+    .pwa-banner-close::before {
+        content: '✕';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.05);
+        font-size: 9px;
+        color: #888;
+        font-weight: bold;
+        transition: all 0.2s ease;
+    }
+    .pwa-banner-close:hover::before, .pwa-banner-close:active::before {
+        background: rgba(0, 0, 0, 0.1);
+        color: #333;
     }
     /* iOS Instruction Styles */
     .pwa-ios-instructions {
-        background: #fbf9f6;
-        border-top: 1px solid rgba(139, 26, 26, 0.08);
-        padding: 14px 16px;
-        font-size: 13px;
-        color: #333;
-        line-height: 1.5;
+        background: #fdfcfb;
+        border-top: 1px solid rgba(139, 26, 26, 0.05);
+        padding: 12px 16px;
+        font-size: 12px;
+        color: #444;
+        line-height: 1.4;
     }
     .pwa-ios-instructions p {
         font-weight: 700;
@@ -566,19 +655,24 @@ function infosystem_pwa_metadata() {
     }
     .pwa-ios-instructions ol {
         margin: 0 !important;
-        padding-left: 20px !important;
+        padding-left: 18px !important;
     }
     .pwa-ios-instructions li {
         margin-bottom: 6px !important;
     }
+    .pwa-ios-instructions li:last-child {
+        margin-bottom: 0 !important;
+    }
     .ios-share-icon-wrapper {
         display: inline-flex;
         vertical-align: middle;
-        background: #e6e6e6;
+        background: #ffffff;
+        border: 1px solid #dcdcdc;
         border-radius: 4px;
         padding: 2px 4px;
         margin: 0 2px;
         color: #007aff;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.05);
     }
     .ios-share-svg {
         display: block;
