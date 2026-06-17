@@ -1051,23 +1051,25 @@ body.home .elementor-element-1023731 {
 }
 
 /* === Centrado vertical y alineación del menú del Header === */
-#header .tm-table .table-cell,
-.site-header .tm-table .table-cell,
-#header .width-navigation,
-.site-header .width-navigation {
-    vertical-align: middle !important;
-}
+@media (min-width: 1025px) {
+    #header .tm-table .table-cell,
+    .site-header .tm-table .table-cell,
+    #header .width-navigation,
+    .site-header .width-navigation {
+        vertical-align: middle !important;
+    }
 
-.thim-ekits-menu__nav {
-    display: flex !important;
-    align-items: center !important;
-    margin-top: 8px !important; /* Bajar un poco para centrarlo visualmente */
-}
+    .thim-ekits-menu__nav {
+        display: flex !important;
+        align-items: center !important;
+        margin-top: 8px !important; /* Bajar un poco para centrarlo visualmente */
+    }
 
-#header .nav > li,
-.thim-ekits-menu__nav > li {
-    float: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    vertical-align: middle !important;
+    #header .nav > li,
+    .thim-ekits-menu__nav > li {
+        float: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        vertical-align: middle !important;
+    }
 }
