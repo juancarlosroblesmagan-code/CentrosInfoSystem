@@ -505,84 +505,96 @@ function infosystem_pwa_metadata() {
     <style>
     /* PWA Banner Styles */
     #pwa-install-banner {
-        position: fixed;
-        bottom: 20px;
-        left: 15px;
-        right: 15px;
-        background: rgba(255, 255, 255, 0.96);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.7);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
-        z-index: 999999;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        box-sizing: border-box;
-        overflow: hidden;
-        animation: pwaSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-        max-width: 460px;
-        margin: 0 auto;
+        position: fixed !important;
+        bottom: 20px !important;
+        left: 15px !important;
+        right: 15px !important;
+        background: rgba(255, 255, 255, 0.96) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.7) !important;
+        border-radius: 20px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+        z-index: 999999 !important;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        animation: pwaSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+        max-width: 460px !important;
+        margin: 0 auto !important;
     }
     @keyframes pwaSlideUp {
         from { transform: translateY(80px) scale(0.96); opacity: 0; }
         to { transform: translateY(0) scale(1); opacity: 1; }
     }
     .pwa-banner-container {
-        display: flex;
-        align-items: center;
-        padding: 14px 16px;
-        position: relative;
+        display: flex !important;
+        align-items: center !important;
+        padding: 14px 16px !important;
+        position: relative !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
     }
     .pwa-banner-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        margin-right: 12px;
-        object-fit: cover;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-        flex-shrink: 0;
+        width: 44px !important;
+        height: 44px !important;
+        max-width: 44px !important;
+        max-height: 44px !important;
+        border-radius: 10px !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        margin-right: 12px !important;
+        object-fit: cover !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+        flex-shrink: 0 !important;
+        position: static !important;
     }
     .pwa-banner-icon-fallback {
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #8B1A1A 0%, #D4880A 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-weight: 700;
-        font-size: 20px;
-        margin-right: 12px;
-        box-shadow: 0 2px 6px rgba(139, 26, 26, 0.2);
-        flex-shrink: 0;
+        width: 44px !important;
+        height: 44px !important;
+        max-width: 44px !important;
+        max-height: 44px !important;
+        border-radius: 10px !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #D4880A 100%) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #fff !important;
+        font-weight: 700 !important;
+        font-size: 20px !important;
+        margin-right: 12px !important;
+        box-shadow: 0 2px 6px rgba(139, 26, 26, 0.2) !important;
+        flex-shrink: 0 !important;
+        position: static !important;
     }
     .pwa-banner-icon-fallback span {
-        line-height: 1;
+        line-height: 1 !important;
     }
     .pwa-banner-text {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        margin-right: 12px;
-        min-width: 0;
+        display: flex !important;
+        flex-direction: column !important;
+        flex-grow: 1 !important;
+        margin-right: 12px !important;
+        min-width: 0 !important;
+        position: static !important;
     }
     .pwa-banner-title {
-        font-size: 15px;
-        font-weight: 700;
-        color: #1e1e1e;
-        margin-bottom: 2px;
-        line-height: 1.2;
-        letter-spacing: -0.2px;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: #1e1e1e !important;
+        margin-bottom: 2px !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.2px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
     }
     .pwa-banner-subtitle {
-        font-size: 12px;
-        color: #666;
-        line-height: 1.3;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 12px !important;
+        color: #666 !important;
+        line-height: 1.3 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
     }
     .pwa-banner-btn {
         background: linear-gradient(135deg, #8B1A1A 0%, #a32222 100%) !important;
@@ -592,66 +604,81 @@ function infosystem_pwa_metadata() {
         padding: 7px 16px !important;
         font-size: 13px !important;
         font-weight: 600 !important;
-        cursor: pointer;
+        cursor: pointer !important;
         box-shadow: 0 3px 8px rgba(139, 26, 26, 0.2) !important;
-        transition: all 0.2s ease;
+        transition: all 0.2s ease !important;
         white-space: nowrap !important;
-        flex-shrink: 0;
+        flex-shrink: 0 !important;
         outline: none !important;
-        margin-right: 20px;
+        margin-right: 20px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: auto !important;
+        height: auto !important;
+        max-width: 110px !important;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
     }
     .pwa-banner-btn:hover, .pwa-banner-btn:active {
         background: linear-gradient(135deg, #D4880A 0%, #ef9d1a 100%) !important;
         box-shadow: 0 4px 10px rgba(212, 136, 10, 0.25) !important;
-        transform: translateY(-1px);
+        transform: translateY(-1px) !important;
     }
     .pwa-banner-close {
-        position: absolute;
-        top: 6px;
-        right: 6px;
-        width: 32px;
-        height: 32px;
+        position: absolute !important;
+        top: 6px !important;
+        right: 6px !important;
+        width: 32px !important;
+        height: 32px !important;
+        max-width: 32px !important;
+        max-height: 32px !important;
         background: transparent !important;
         border: none !important;
-        cursor: pointer;
+        cursor: pointer !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         padding: 0 !important;
-        z-index: 10;
+        z-index: 10 !important;
         outline: none !important;
+        bottom: auto !important;
+        left: auto !important;
     }
     .pwa-banner-close::before {
-        content: '✕';
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: rgba(0, 0, 0, 0.05);
-        font-size: 9px;
-        color: #888;
-        font-weight: bold;
-        transition: all 0.2s ease;
+        content: '✕' !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 20px !important;
+        height: 20px !important;
+        border-radius: 50% !important;
+        background: rgba(0, 0, 0, 0.05) !important;
+        font-size: 9px !important;
+        color: #888 !important;
+        font-weight: bold !important;
+        transition: all 0.2s ease !important;
     }
     .pwa-banner-close:hover::before, .pwa-banner-close:active::before {
-        background: rgba(0, 0, 0, 0.1);
-        color: #333;
+        background: rgba(0, 0, 0, 0.1) !important;
+        color: #333 !important;
     }
     /* iOS Instruction Styles */
     .pwa-ios-instructions {
-        background: #fdfcfb;
-        border-top: 1px solid rgba(139, 26, 26, 0.05);
-        padding: 12px 16px;
-        font-size: 12px;
-        color: #444;
-        line-height: 1.4;
+        background: #fdfcfb !important;
+        border-top: 1px solid rgba(139, 26, 26, 0.05) !important;
+        padding: 12px 16px !important;
+        font-size: 12px !important;
+        color: #444 !important;
+        line-height: 1.4 !important;
     }
     .pwa-ios-instructions p {
-        font-weight: 700;
+        font-weight: 700 !important;
         margin: 0 0 8px 0 !important;
-        color: #8B1A1A;
+        color: #8B1A1A !important;
     }
     .pwa-ios-instructions ol {
         margin: 0 !important;
@@ -664,18 +691,28 @@ function infosystem_pwa_metadata() {
         margin-bottom: 0 !important;
     }
     .ios-share-icon-wrapper {
-        display: inline-flex;
-        vertical-align: middle;
-        background: #ffffff;
-        border: 1px solid #dcdcdc;
-        border-radius: 4px;
-        padding: 2px 4px;
-        margin: 0 2px;
-        color: #007aff;
-        box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        display: inline-flex !important;
+        vertical-align: middle !important;
+        background: #ffffff !important;
+        border: 1px solid #dcdcdc !important;
+        border-radius: 4px !important;
+        padding: 2px 4px !important;
+        margin: 0 2px !important;
+        color: #007aff !important;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.05) !important;
     }
     .ios-share-svg {
-        display: block;
+        display: block !important;
+    }
+
+    /* Fix Elementor entrance animations on mobile when JS execution is delayed (e.g. WP Rocket) */
+    @media (max-width: 1024px) {
+        .elementor-invisible {
+            visibility: visible !important;
+            opacity: 1 !important;
+            animation: none !important;
+            animation-name: none !important;
+        }
     }
     </style>
     <?php
