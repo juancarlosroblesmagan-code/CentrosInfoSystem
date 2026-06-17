@@ -1362,6 +1362,14 @@ html body.home .elementor-element-bc66c40 .product-grid .product .description {
         padding-right: 20px !important;
         box-sizing: border-box !important;
     }
+
+    /* Add extra side margins/padding specifically to the secondary intro paragraph ("Contacta con...") on mobile */
+    body.page-id-16719 .infosystem-contact-lead--secondary,
+    body.page-slug-contacto .infosystem-contact-lead--secondary {
+        padding-left: 35px !important;
+        padding-right: 35px !important;
+        box-sizing: border-box !important;
+    }
 }
 
 /* ============================================================
