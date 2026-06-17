@@ -1236,6 +1236,7 @@ body.home .elementor-element-c7360be {
     .thim-ekits-menu__nav {
         display: flex !important;
         align-items: center !important;
+        justify-content: flex-end !important; /* Alinear a la derecha */
         margin-top: 8px !important; /* Bajar un poco para centrarlo visualmente */
     }
 
