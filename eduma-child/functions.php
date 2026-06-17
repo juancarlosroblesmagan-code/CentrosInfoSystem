@@ -705,6 +705,13 @@ function infosystem_pwa_metadata() {
         display: block !important;
     }
 
+    /* Fallback background for the home page hero section to prevent white screen before image loads */
+    body.home .elementor-section:first-of-type,
+    body.home #main-content .elementor-section:first-of-type,
+    body.home article .elementor-section:first-of-type {
+        background-color: #8B1A1A !important;
+    }
+
     /* Hide the theme preloader overlay immediately to prevent white screens on delayed JS execution (WP Rocket) */
     div#preload,
     #preload,
