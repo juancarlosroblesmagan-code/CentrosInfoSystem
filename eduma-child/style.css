@@ -1404,4 +1404,52 @@ html body.home .elementor-element-bc66c40 .product-grid .product .description {
     justify-content: center !important;
 }
 
+/* ============================================================
+   ANTI-GRAVITY: CENTER ALL FOOTER WIDGETS & TEXTS ON MOBILE
+   ============================================================ */
+@media (max-width: 768px) {
+    #footer,
+    #footer .widget,
+    #footer .widget_text,
+    #footer .textwidget,
+    #footer h3,
+    #footer h4,
+    #footer p,
+    #footer ul,
+    #footer li,
+    #footer a,
+    #footer .infosystem-footer-inner,
+    #footer .infosystem-footer-inner > div {
+        text-align: center !important;
+    }
+
+    /* Center navigation lists in the footer */
+    #footer ul {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        list-style-position: inside !important;
+        display: block !important;
+    }
+    
+    #footer li {
+        display: block !important;
+        text-align: center !important;
+    }
+
+    /* Center heading lines stylishly */
+    #footer h3,
+    #footer h4,
+    .site-footer h3,
+    .site-footer h4,
+    .thim-footer h3,
+    .thim-footer .widget-title {
+        border-bottom: 1px solid rgba(212,136,10,0.3) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: fit-content !important;
+        padding-bottom: 4px !important;
+        text-align: center !important;
+    }
+}
+
 
