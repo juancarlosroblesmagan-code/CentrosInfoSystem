@@ -1231,13 +1231,16 @@ body.home .elementor-element-c7360be {
     #header .width-navigation,
     .site-header .width-navigation {
         vertical-align: middle !important;
+        width: 100% !important; /* Force navigation cell to take up all remaining space */
     }
 
     .thim-ekits-menu__nav {
         display: flex !important;
         align-items: center !important;
-        justify-content: flex-end !important; /* Alinear a la derecha */
-        margin-top: 8px !important; /* Bajar un poco para centrarlo visualmente */
+        justify-content: flex-end !important; /* Align items to the far right */
+        width: 100% !important; /* Stretch menu container to full width of cell */
+        margin-left: auto !important;
+        margin-top: 8px !important; /* Centrarlo visualmente */
     }
 
     #header .nav > li,
