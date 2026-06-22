@@ -1193,7 +1193,7 @@ function infosystem_save_course_details( $post_id ) {
 // ============================================================
 // 20. MOSTRAR DETALLES DEL CURSO EN LA FICHA DE PRODUCTO
 // ============================================================
-add_action( 'woocommerce_single_product_summary', 'infosystem_display_course_details', 55 );
+add_action( 'woocommerce_single_product_summary', 'infosystem_display_course_details', 45 );
 function infosystem_display_course_details() {
     global $post;
     
@@ -1208,35 +1208,159 @@ function infosystem_display_course_details() {
     $formatted_start = infosystem_format_date_to_display( $start_date );
     $formatted_end = infosystem_format_date_to_display( $end_date );
     
-    echo '<div class="infosystem-course-info-boxes">';
+    // CSS inline para asegurar el diseño premium y evitar problemas de caché
+    echo '<style>
+        .infosystem-course-details-card {
+            margin: 35px 0 !important;
+            padding: 24px 28px !important;
+            background: linear-gradient(135deg, #FAF7F2 0%, #F5EFE6 100%) !important;
+            border: 1px solid rgba(139, 26, 26, 0.08) !important;
+            border-left: 5px solid #8B1A1A !important;
+            border-radius: 12px !important;
+            box-shadow: 0 10px 30px rgba(139, 26, 26, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+            box-sizing: border-box !important;
+            width: 100% !important;
+            display: block !important;
+            transition: all 0.3s ease !important;
+        }
+        .infosystem-course-details-card:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 12px 35px rgba(139, 26, 26, 0.08), 0 2px 5px rgba(0, 0, 0, 0.03) !important;
+            border-color: rgba(139, 26, 26, 0.15) !important;
+        }
+        .infosystem-course-details-card .detail-row {
+            display: flex !important;
+            align-items: center !important;
+            margin-bottom: 20px !important;
+        }
+        .infosystem-course-details-card .detail-row:last-child {
+            margin-bottom: 0 !important;
+        }
+        .infosystem-course-details-card .detail-icon-wrap {
+            width: 42px !important;
+            height: 42px !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background-color: rgba(139, 26, 26, 0.07) !important;
+            color: #8B1A1A !important;
+            margin-right: 16px !important;
+            flex-shrink: 0 !important;
+            font-size: 18px !important;
+            transition: background-color 0.3s ease !important;
+        }
+        .infosystem-course-details-card:hover .detail-icon-wrap {
+            background-color: rgba(139, 26, 26, 0.12) !important;
+        }
+        .infosystem-course-details-card .detail-content {
+            flex-grow: 1 !important;
+        }
+        .infosystem-course-details-card .detail-label {
+            display: block !important;
+            font-size: 10px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1.5px !important;
+            color: #8B1A1A !important;
+            font-weight: 700 !important;
+            margin-bottom: 4px !important;
+            opacity: 0.85 !important;
+            line-height: 1 !important;
+        }
+        .infosystem-course-details-card .detail-value {
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            color: #2C2C2C !important;
+            line-height: 1.3 !important;
+        }
+        .infosystem-course-details-card .date-range {
+            display: flex !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+            gap: 8px 12px !important;
+        }
+        .infosystem-course-details-card .date-item {
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            color: #555555 !important;
+        }
+        .infosystem-course-details-card .date-item strong {
+            font-weight: 700 !important;
+            color: #2C2C2C !important;
+        }
+        .infosystem-course-details-card .date-separator {
+            color: #CCCCCC !important;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+        }
+        @media (max-width: 480px) {
+            .infosystem-course-details-card {
+                padding: 20px 22px !important;
+            }
+            .infosystem-course-details-card .detail-row {
+                align-items: flex-start !important;
+            }
+            .infosystem-course-details-card .detail-icon-wrap {
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 16px !important;
+                margin-right: 12px !important;
+                margin-top: 2px !important;
+            }
+            .infosystem-course-details-card .detail-value {
+                font-size: 15px !important;
+            }
+            .infosystem-course-details-card .date-range {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 4px !important;
+            }
+            .infosystem-course-details-card .date-separator {
+                display: none !important;
+            }
+        }
+    </style>';
+    
+    echo '<div class="infosystem-course-details-card">';
     
     if ( ! empty( $location ) ) {
-        echo '<div class="infosystem-course-info-box location-box">';
-        echo '<strong>Impartimos en:</strong>';
-        echo '<p><i class="fa fa-map-marker-alt" aria-hidden="true" style="color:var(--color-primary); margin-right:6px;"></i> ' . esc_html( $location ) . '</p>';
+        echo '<div class="detail-row location-row">';
+        echo '<div class="detail-icon-wrap">📍</div>';
+        echo '<div class="detail-content">';
+        echo '<span class="detail-label">Lugar de impartición</span>';
+        echo '<span class="detail-value">' . esc_html( $location ) . '</span>';
+        echo '</div>';
         echo '</div>';
     }
     
     if ( ! empty( $formatted_start ) || ! empty( $formatted_end ) ) {
-        echo '<div class="infosystem-course-info-box date-box">';
-        echo '<strong>Fechas del curso:</strong>';
-        echo '<p><i class="fa fa-calendar-alt" aria-hidden="true" style="color:var(--color-primary); margin-right:6px;"></i> ';
-        $date_str = '';
-        if ( ! empty( $formatted_start ) ) {
-            $date_str .= 'Inicio: ' . esc_html( $formatted_start );
+        echo '<div class="detail-row date-row">';
+        echo '<div class="detail-icon-wrap">📅</div>';
+        echo '<div class="detail-content">';
+        echo '<span class="detail-label">Fechas del curso</span>';
+        echo '<div class="detail-value date-range">';
+        
+        $has_start = ! empty( $formatted_start );
+        $has_end = ! empty( $formatted_end );
+        
+        if ( $has_start ) {
+            echo '<span class="date-item">Inicio: <strong>' . esc_html( $formatted_start ) . '</strong></span>';
         }
-        if ( ! empty( $formatted_end ) ) {
-            if ( ! empty( $date_str ) ) {
-                $date_str .= ' &nbsp;|&nbsp; ';
-            }
-            $date_str .= 'Finaliza: ' . esc_html( $formatted_end );
+        if ( $has_start && $has_end ) {
+            echo '<span class="date-separator">|</span>';
         }
-        echo $date_str . '</p>';
+        if ( $has_end ) {
+            echo '<span class="date-item">Finaliza: <strong>' . esc_html( $formatted_end ) . '</strong></span>';
+        }
+        
+        echo '</div>';
+        echo '</div>';
         echo '</div>';
     }
     
     echo '</div>';
 }
+
 
 
 
