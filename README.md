@@ -44,13 +44,27 @@ CentrosInfoSystem/
 ├── README.md, CHANGELOG.md
 ├── docs/                     ← arquitectura, SEO, formularios, ESTADO-PROYECTO.md
 ├── snippets/                 ← snippet SEO para WPCode
-├── content/                  ← FAQ HTML de referencia
+├── content/                  ← FAQ HTML de referencia y contenidos del blog
 ├── ImagenesWeb/              ← imágenes WebP del sitio
 └── eduma-child/              ← tema hijo (referencia; no activar sin revisión)
     ├── inc/                  ← módulos PHP
     ├── assets/css|js/
-    └── tools/                ← CSS producción, fuentes WPCode, mu-plugins permitidos
+    └── tools/                ← CSS producción, mu-plugins y scripts de mantenimiento
+        ├── update-seo-v2.php ➔ Script de optimización de posts y Rank Math SEO V2.1
+        ├── manage-cf7-akismet.php ➔ Script de protección anti-spam Akismet y limpieza de CF7
+        └── mu-plugins/       ← Plugins imprescindibles (plesk user fix, seo custom schemas)
 ```
+
+---
+
+## Scripts de Mantenimiento (tools/)
+
+En la carpeta `eduma-child/tools/` dispones de herramientas en PHP para tareas automatizadas en producción:
+
+1. **`update-seo-v2.php`**: Automatiza la inyección de palabras clave con tildes correctas en español, inserta bloques de imágenes con textos alternativos optimizados, añade bloques de preguntas frecuentes (FAQs) para sobrepasar las 600 palabras exigidas por Rank Math, y fuerza la actualización de metadatos SEO en la base de datos para obtener puntuaciones >90.
+2. **`manage-cf7-akismet.php`**: Analiza el uso real de los formularios (en contenido, widgets, Elementor y el plugin de presupuestos de WooCommerce), borra los formularios no utilizados, inyecta las etiquetas de Akismet para protección anti-spam en los formularios activos y traduce automáticamente todas las respuestas de validación al español.
+
+*Instrucciones de uso: Subir temporalmente a la raíz de producción (`httpdocs/`), ejecutar en navegador mediante el parámetro `?clave=infosystem-recuperar` y eliminar del servidor inmediatamente después.*
 
 ---
 

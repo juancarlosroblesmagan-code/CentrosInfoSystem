@@ -5,7 +5,7 @@ Description:  Child Theme de Eduma para Infosystem - Centro de Educación Poliva
 Author:       Juan Carlos Robles Magán
 Author URI:   http://roblesmagan.com/
 Template:     eduma
-Version:      1.0.0
+Version:      1.3.1
 License:      GNU General Public License v2 or later
 License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  infosystem-child
@@ -1000,15 +1000,47 @@ body.home .elementor-element-c7360be {
 
 /* Evitar desbordamiento horizontal y ocultar estadísticas en móviles/tablets */
 @media (max-width: 1024px) {
-    html, body {
+    html {
         width: 100% !important;
         max-width: 100% !important;
-        overflow-x: hidden !important;
+        overflow: visible !important;
+        height: auto !important;
     }
     
+    body {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        height: auto !important;
+        min-height: 100% !important;
+        touch-action: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    #wrapper-container,
     #page, 
     #main-content,
-    .site-content,
+    .content-pusher,
+    .site-content {
+        max-width: 100% !important;
+        /* Use clip to hide horizontal overflow without creating a nested scroll port */
+        overflow-x: clip !important;
+        overflow-y: visible !important;
+        height: auto !important;
+    }
+
+    /* Asegurar que el menú móvil no intercepte gestos ni bloquee toques cuando está cerrado */
+    .mobile-menu-wrapper {
+        pointer-events: none !important;
+        visibility: hidden !important;
+    }
+    
+    /* Restaurar interacción sólo cuando el menú móvil está abierto */
+    body.mobile-menu-open .mobile-menu-wrapper {
+        pointer-events: auto !important;
+        visibility: visible !important;
+    }
+    
     html body.home .elementor-element-63b7721,
     html body.home .elementor-element-1de9e11 {
         max-width: 100% !important;

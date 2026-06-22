@@ -172,6 +172,92 @@ function infosystem_dynamic_css() {
             --color-primary:   <?php echo esc_attr( $primary ); ?>;
             --color-secondary: <?php echo esc_attr( $secondary ); ?>;
         }
+
+        /* Fix header menu alignment and style Contacto button on desktop (failsafe inline CSS) */
+        @media (min-width: 1025px) {
+            #header .tm-table,
+            .site-header .tm-table {
+                display: table !important;
+                width: 100% !important;
+                table-layout: auto !important;
+            }
+
+            #header .tm-table .width-logo,
+            .site-header .tm-table .width-logo {
+                width: auto !important;
+                display: table-cell !important;
+                vertical-align: middle !important;
+                white-space: nowrap !important;
+            }
+
+            #header .tm-table .width-navigation,
+            .site-header .tm-table .width-navigation,
+            #header .width-navigation,
+            .site-header .width-navigation {
+                width: 100% !important;
+                display: table-cell !important;
+                vertical-align: middle !important;
+            }
+
+            .thim-ekits-menu__nav {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: flex-end !important; /* Align items to the far right */
+                width: 100% !important; /* Stretch menu container to full width of cell */
+                margin-left: auto !important;
+                margin-top: 8px !important; /* Centrarlo visualmente */
+                padding: 0 !important;
+            }
+
+            #header .nav > li,
+            .thim-ekits-menu__nav > li {
+                float: none !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                vertical-align: middle !important;
+            }
+
+            /* Hide the menu-right CTA (phone/button widget) on desktop to let Contacto be the rightmost element */
+            .thim-ekits-menu__nav > li.menu-right {
+                display: none !important;
+            }
+
+            /* Style Contacto (menu-item-16720) as a highlighted red button on desktop */
+            #header .nav > li.menu-item-16720 > a,
+            .thim-ekits-menu__nav > li.menu-item-16720 > a {
+                background-color: var(--color-primary) !important;
+                color: #ffffff !important;
+                padding: 8px 20px !important;
+                border-radius: 30px !important; /* Redondo / Pill-shaped button */
+                font-weight: 700 !important;
+                transition: all 0.3s ease !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                border: none !important;
+                border-bottom: none !important;
+                margin-left: 15px !important; /* Separación con el menú */
+                box-shadow: 0 4px 10px rgba(139, 26, 26, 0.2) !important;
+                text-transform: uppercase !important;
+                font-size: 13px !important;
+            }
+
+            #header .nav > li.menu-item-16720 > a:hover,
+            .thim-ekits-menu__nav > li.menu-item-16720 > a:hover {
+                background-color: var(--color-secondary) !important; /* Dorado en hover */
+                color: #ffffff !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 6px 15px rgba(212, 136, 10, 0.3) !important;
+            }
+
+            /* Remove active border bottom highlight since it is now styled as a button */
+            #header .nav > li.menu-item-16720.current-menu-item > a,
+            #header .nav > li.menu-item-16720.active > a,
+            #header .nav > li.menu-item-16720 > a:hover {
+                border-bottom: none !important;
+                color: #ffffff !important;
+            }
+        }
     </style>
     <?php
 }
@@ -356,395 +442,472 @@ add_action( 'wp_head', 'infosystem_pwa_metadata' );
 function infosystem_pwa_metadata() {
     $theme_dir = get_stylesheet_directory();
     $icon_path = $theme_dir . '/images/pwa-app-icon.jpg';
-    $icon_url = '';
-    
-    // Check if the custom PWA icon exists in the child theme folder
+    $icon_url  = '';
+
     if ( file_exists( $icon_path ) ) {
         $icon_url = get_stylesheet_directory_uri() . '/images/pwa-app-icon.jpg';
     } else {
-        // Fallback to WordPress Site Icon (Favicon)
         $icon_url = get_site_icon_url( 192 );
     }
     ?>
     <!-- PWA Manifest -->
     <link rel="manifest" href="<?php echo esc_url( home_url( '/manifest.json' ) ); ?>">
-    
+
     <!-- PWA Mobile Configuration (iOS y Android) -->
     <meta name="theme-color" content="#8B1A1A">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="InfoSystem">
     <?php if ( $icon_url ) : ?>
-    <link rel="apple-touch-icon" href="<?php echo esc_url($icon_url); ?>">
+    <link rel="apple-touch-icon" href="<?php echo esc_url( $icon_url ); ?>">
     <?php endif; ?>
-    
-    <!-- PWA Service Worker Registration & Install Prompt -->
+
+    <!-- [PWA] Capturar beforeinstallprompt INMEDIATAMENTE — solo guarda flags, nunca muestra nada -->
     <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-                console.log('PWA Service Worker registrado con éxito. Scope:', registration.scope);
-            }, function(err) {
-                console.log('Fallo al registrar el Service Worker de la PWA:', err);
-            });
-        });
-    }
-
-    // PWA Smart Installation Banner
-    document.addEventListener('DOMContentLoaded', function() {
-        // Check if running in standalone mode (already installed)
-        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-        if (isStandalone) return;
-
-        // Check localStorage if dismissed
-        if (localStorage.getItem('pwa_install_dismissed')) return;
-
-        // Detect iOS & Android
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-        // Only show on mobile / tablet
-        const isMobile = window.innerWidth <= 1024;
-        if (!isMobile) return;
-
-        let deferredPrompt = null;
-
-        // Listen for the native PWA install prompt (Chrome / Android)
-        window.addEventListener('beforeinstallprompt', function(e) {
-            e.preventDefault();
-            deferredPrompt = e;
-            showPWABanner();
-        });
-
-        // If it's iOS Safari, show PWA banner automatically (since it doesn't support beforeinstallprompt)
-        if (isIOS) {
-            setTimeout(showPWABanner, 2500); // delay show for a smooth entry
-        }
-
-        function showPWABanner() {
-            // Create banner element if not already present
-            if (document.getElementById('pwa-install-banner')) return;
-
-            const banner = document.createElement('div');
-            banner.id = 'pwa-install-banner';
-            banner.innerHTML = `
-                <div class="pwa-banner-container">
-                    <?php if ( $icon_url ) : ?>
-                    <img class="pwa-banner-icon" src="<?php echo esc_url($icon_url); ?>" alt="InfoSystem App" id="pwa-icon-img">
-                    <?php else: ?>
-                    <div class="pwa-banner-icon-fallback"><span>I</span></div>
-                    <?php endif; ?>
-                    <div class="pwa-banner-text">
-                        <span class="pwa-banner-title">Instalar App</span>
-                        <span class="pwa-banner-subtitle">Añade a tu pantalla de inicio</span>
-                    </div>
-                    <button class="pwa-banner-btn" id="pwa-install-action">Instalar</button>
-                    <button class="pwa-banner-close" id="pwa-install-close" aria-label="Cerrar"></button>
-                </div>
-                <div class="pwa-ios-instructions" id="pwa-ios-instructions" style="display: none;">
-                    <p>Para instalar en tu iPhone o iPad:</p>
-                    <ol>
-                        <li>Pulsa el botón de compartir <span class="ios-share-icon-wrapper"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ios-share-svg"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg></span> en la barra de Safari.</li>
-                        <li>Selecciona <strong>"Añadir a la pantalla de inicio"</strong>.</li>
-                    </ol>
-                </div>
-            `;
-            document.body.appendChild(banner);
-
-            // Handle image error fallback dynamically in JS
-            const img = document.getElementById('pwa-icon-img');
-            if (img) {
-                img.onerror = function() {
-                    const fallbackSiteIcon = '<?php echo esc_url( get_site_icon_url( 192 ) ); ?>';
-                    if (fallbackSiteIcon && this.src !== fallbackSiteIcon) {
-                        this.src = fallbackSiteIcon;
-                    } else {
-                        // If everything fails, show the initials fallback
-                        const fallbackDiv = document.createElement('div');
-                        fallbackDiv.className = 'pwa-banner-icon-fallback';
-                        fallbackDiv.innerHTML = '<span>I</span>';
-                        this.parentNode.replaceChild(fallbackDiv, this);
-                    }
-                };
-            }
-
-            // Close button handler
-            document.getElementById('pwa-install-close').addEventListener('click', function(e) {
-                e.stopPropagation();
-                banner.style.display = 'none';
-                localStorage.setItem('pwa_install_dismissed', 'true');
-            });
-
-            // Action button handler
-            document.getElementById('pwa-install-action').addEventListener('click', function() {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(function(choiceResult) {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('El usuario aceptó la instalación de la PWA');
-                            banner.style.display = 'none';
-                        }
-                        deferredPrompt = null;
-                    });
-                } else if (isIOS) {
-                    const instructions = document.getElementById('pwa-ios-instructions');
-                    if (instructions.style.display === 'none') {
-                        instructions.style.display = 'block';
-                        document.getElementById('pwa-install-action').innerText = 'Entendido';
-                    } else {
-                        instructions.style.display = 'none';
-                        document.getElementById('pwa-install-action').innerText = 'Instalar';
-                    }
-                } else {
-                    // Fallback for browsers that don't support prompt
-                    alert('Para instalar la App en tu pantalla, abre el menú del navegador y selecciona "Instalar aplicación" o "Añadir a la pantalla de inicio".');
-                }
-            });
-        }
+    window.__pwaInstallPrompt = null;
+    window.__pwaShowBanner   = false;
+    window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        window.__pwaInstallPrompt = e;
+        window.__pwaShowBanner   = true;
+        // NO mostramos el banner aquí: el script del footer se encarga (incluye comprobación de móvil)
     });
     </script>
+
+    <!-- PWA Service Worker Registration -->
+    <script data-no-optimize="1" data-cfasync="false">
+    (function() {
+        function registerSW() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(function(r) { console.log('SW registrado:', r.scope); })
+                    .catch(function(e) { console.log('SW error:', e); });
+            }
+        }
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            registerSW();
+        } else {
+            window.addEventListener('load', registerSW);
+        }
+    })();
+    </script>
     <style>
-    /* PWA Banner Styles */
-    #pwa-install-banner {
-        position: fixed !important;
-        bottom: 20px !important;
-        left: 15px !important;
-        right: 15px !important;
-        background: rgba(255, 255, 255, 0.96) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.7) !important;
-        border-radius: 20px !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
-        z-index: 999999 !important;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important;
-        animation: pwaSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-        max-width: 460px !important;
-        margin: 0 auto !important;
-    }
-    @keyframes pwaSlideUp {
-        from { transform: translateY(80px) scale(0.96); opacity: 0; }
-        to { transform: translateY(0) scale(1); opacity: 1; }
-    }
-    .pwa-banner-container {
-        display: flex !important;
-        align-items: center !important;
-        padding: 14px 16px !important;
-        position: relative !important;
-        box-sizing: border-box !important;
-        width: 100% !important;
-    }
-    .pwa-banner-icon {
-        width: 44px !important;
-        height: 44px !important;
-        max-width: 44px !important;
-        max-height: 44px !important;
-        border-radius: 10px !important;
-        border: 1px solid rgba(0, 0, 0, 0.08) !important;
-        margin-right: 12px !important;
-        object-fit: cover !important;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
-        flex-shrink: 0 !important;
-        position: static !important;
-    }
-    .pwa-banner-icon-fallback {
-        width: 44px !important;
-        height: 44px !important;
-        max-width: 44px !important;
-        max-height: 44px !important;
-        border-radius: 10px !important;
-        background: linear-gradient(135deg, #8B1A1A 0%, #D4880A 100%) !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        color: #fff !important;
-        font-weight: 700 !important;
-        font-size: 20px !important;
-        margin-right: 12px !important;
-        box-shadow: 0 2px 6px rgba(139, 26, 26, 0.2) !important;
-        flex-shrink: 0 !important;
-        position: static !important;
-    }
-    .pwa-banner-icon-fallback span {
-        line-height: 1 !important;
-    }
-    .pwa-banner-text {
-        display: flex !important;
-        flex-direction: column !important;
-        flex-grow: 1 !important;
-        margin-right: 12px !important;
-        min-width: 0 !important;
-        position: static !important;
-    }
-    .pwa-banner-title {
-        font-size: 15px !important;
-        font-weight: 700 !important;
-        color: #1e1e1e !important;
-        margin-bottom: 2px !important;
-        line-height: 1.2 !important;
-        letter-spacing: -0.2px !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    .pwa-banner-subtitle {
-        font-size: 12px !important;
-        color: #666 !important;
-        line-height: 1.3 !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    .pwa-banner-btn {
-        background: linear-gradient(135deg, #8B1A1A 0%, #a32222 100%) !important;
-        border: none !important;
-        border-radius: 20px !important;
-        color: #ffffff !important;
-        padding: 7px 16px !important;
-        font-size: 13px !important;
-        font-weight: 600 !important;
-        cursor: pointer !important;
-        box-shadow: 0 3px 8px rgba(139, 26, 26, 0.2) !important;
-        transition: all 0.2s ease !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
-        outline: none !important;
-        margin-right: 20px !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: auto !important;
-        height: auto !important;
-        max-width: 110px !important;
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-    }
-    .pwa-banner-btn:hover, .pwa-banner-btn:active {
-        background: linear-gradient(135deg, #D4880A 0%, #ef9d1a 100%) !important;
-        box-shadow: 0 4px 10px rgba(212, 136, 10, 0.25) !important;
-        transform: translateY(-1px) !important;
-    }
-    .pwa-banner-close {
-        position: absolute !important;
-        top: 6px !important;
-        right: 6px !important;
-        width: 32px !important;
-        height: 32px !important;
-        max-width: 32px !important;
-        max-height: 32px !important;
-        background: transparent !important;
-        border: none !important;
-        cursor: pointer !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 !important;
-        z-index: 10 !important;
-        outline: none !important;
-        bottom: auto !important;
-        left: auto !important;
-    }
-    .pwa-banner-close::before {
-        content: '✕' !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 20px !important;
-        height: 20px !important;
-        border-radius: 50% !important;
-        background: rgba(0, 0, 0, 0.05) !important;
-        font-size: 9px !important;
-        color: #888 !important;
-        font-weight: bold !important;
-        transition: all 0.2s ease !important;
-    }
-    .pwa-banner-close:hover::before, .pwa-banner-close:active::before {
-        background: rgba(0, 0, 0, 0.1) !important;
-        color: #333 !important;
-    }
-    /* iOS Instruction Styles */
-    .pwa-ios-instructions {
-        background: #fdfcfb !important;
-        border-top: 1px solid rgba(139, 26, 26, 0.05) !important;
-        padding: 12px 16px !important;
-        font-size: 12px !important;
-        color: #444 !important;
-        line-height: 1.4 !important;
-    }
-    .pwa-ios-instructions p {
-        font-weight: 700 !important;
-        margin: 0 0 8px 0 !important;
-        color: #8B1A1A !important;
-    }
-    .pwa-ios-instructions ol {
-        margin: 0 !important;
-        padding-left: 18px !important;
-    }
-    .pwa-ios-instructions li {
-        margin-bottom: 6px !important;
-    }
-    .pwa-ios-instructions li:last-child {
-        margin-bottom: 0 !important;
-    }
-    .ios-share-icon-wrapper {
-        display: inline-flex !important;
-        vertical-align: middle !important;
-        background: #ffffff !important;
-        border: 1px solid #dcdcdc !important;
-        border-radius: 4px !important;
-        padding: 2px 4px !important;
-        margin: 0 2px !important;
-        color: #007aff !important;
-        box-shadow: 0 1px 1px rgba(0,0,0,0.05) !important;
-    }
-    .ios-share-svg {
-        display: block !important;
-    }
-
-    /* Fallback background for the home page hero section to prevent white screen before image loads */
-    body.home .elementor-section:first-of-type,
-    body.home #main-content .elementor-section:first-of-type,
-    body.home article .elementor-section:first-of-type {
-        background-color: #8B1A1A !important;
-    }
-
-    /* Hide the theme preloader overlay immediately to prevent white screens on delayed JS execution (WP Rocket) */
-    div#preload,
-    #preload,
-    .thim-loading-container,
-    .cssload-container {
+    /* Ocultar preloader del tema para evitar pantalla blanca con JS retrasado */
+    div#preload, #preload, .thim-loading-container, .cssload-container, .loading-container {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
         pointer-events: none !important;
     }
-    body.thim-body-preload,
-    body.thim-body-load-overlay {
+    /* Forzar visibilidad y opacidad de la página de forma global y con alta especificidad */
+    html body,
+    html body #wrapper-container,
+    html body .content-pusher,
+    html body #page,
+    html body #main-content {
         opacity: 1 !important;
         visibility: visible !important;
     }
-    body.thim-body-preload #wrapper-container,
-    body.thim-body-preload #main-content,
-    body.thim-body-load-overlay #wrapper-container,
-    body.thim-body-load-overlay #main-content {
+    html, html.thim-html-preload {
+        overflow: visible !important;
+        height: auto !important;
+    }
+    body, body.thim-body-preload, body.thim-body-load-overlay {
+        overflow: visible !important;
+        height: auto !important;
+        min-height: 100% !important;
+        touch-action: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    body #wrapper-container, body #page,
+    body #main-content, body .content-pusher {
+        overflow-x: clip !important;
+        overflow-y: visible !important;
+        height: auto !important;
+    }
+    .elementor-invisible,
+    [class*="ekit--"],
+    [class*="ekit-animated"],
+    .animated {
         opacity: 1 !important;
         visibility: visible !important;
-    }
-
-    /* Fix Elementor entrance animations on mobile when JS execution is delayed (e.g. WP Rocket) */
-    @media (max-width: 1024px) {
-        .elementor-invisible {
-            visibility: visible !important;
-            opacity: 1 !important;
-            animation: none !important;
-            animation-name: none !important;
-        }
+        transform: none !important;
+        animation: none !important;
+        animation-name: none !important;
     }
     </style>
     <?php
 }
 
+// ============================================================
+// 15. ELIMINAR PRELOADER AL INSTANTE (BYPASS WP ROCKET DELAYS)
+// ============================================================
+add_action( 'wp_head', 'infosystem_remove_preload_instantly', 1 );
+
+function infosystem_remove_preload_instantly() {
+    ?>
+    <script data-no-optimize="1" data-cfasync="false">
+    /* rocket-exclude: infosystem_remove_preload_instantly */
+    (function() {
+        document.documentElement.classList.remove('thim-html-preload');
+        document.documentElement.classList.remove('thim-html-load-overlay');
+        var removeBodyPreload = function() {
+            if (document.body) {
+                document.body.classList.remove('thim-body-preload');
+                document.body.classList.remove('thim-body-load-overlay');
+                var preload = document.getElementById('preload');
+                if (preload) {
+                    preload.style.display = 'none';
+                    preload.style.visibility = 'hidden';
+                    preload.style.opacity = '0';
+                    preload.style.pointerEvents = 'none';
+                }
+            } else {
+                setTimeout(removeBodyPreload, 4);
+            }
+        };
+        removeBodyPreload();
+    })();
+    </script>
+    <?php
+}
+
+// Quitar las clases de preloader del body antes de que las añada el tema padre
+add_filter( 'body_class', 'infosystem_remove_preloader_body_classes', 999 );
+function infosystem_remove_preloader_body_classes( $classes ) {
+    return array_diff( $classes, array( 'thim-body-preload', 'thim-body-load-overlay' ) );
+}
+
+// ============================================================
+// 16. PRECARGA DE HERO + WP ROCKET DELAY JS DESACTIVADO EN HOME
+// ============================================================
+// SOLUCIÓN DEFINITIVA:
+// WP Rocket "Delay JavaScript Execution" retrasa TODO el JS
+// (incluyendo Elementor que aplica background-images y el script PWA).
+// Desactivar el delay en la home page resuelve ambos problemas a la vez:
+// la imagen hero carga instantáneamente y el botón de instalar app aparece.
+
+// Excluir nuestros scripts críticos (preloader, banner y fadeout de splash) de WP Rocket Delay JS
+add_filter( 'rocket_delay_js_exclusions', 'infosystem_exclude_critical_scripts_from_delay' );
+function infosystem_exclude_critical_scripts_from_delay( $exclusions ) {
+    $exclusions[] = 'infosystem_remove_preload_instantly';
+    $exclusions[] = 'infosystem_pwa_install_banner';
+    $exclusions[] = 'infosystem_splash_fadeout';
+    return $exclusions;
+}
+
+// Excluir la imagen hero y la clase del contenedor del Lazy Load CSS de WP Rocket
+add_filter( 'rocket_lazyload_excluded_src', 'infosystem_exclude_hero_lazyload' );
+function infosystem_exclude_hero_lazyload( $srcs ) {
+    $srcs[] = 'infosysytem_home.webp';
+    return $srcs;
+}
+
+add_filter( 'rocket_lazyload_excluded_css_background_images', 'infosystem_exclude_hero_bg_lazyload' );
+function infosystem_exclude_hero_bg_lazyload( $exclusions ) {
+    $exclusions[] = 'e-63b7721-00125a1';
+    $exclusions[] = 'elementor-element-63b7721';
+    $exclusions[] = 'infosysytem_home.webp';
+    return $exclusions;
+}
+
+// Inyectar preload + CSS de fondo hero en el <head> con prioridad máxima
+add_action( 'wp_head', 'infosystem_force_hero_bg_immediate', 1 );
+function infosystem_force_hero_bg_immediate() {
+    if ( ! is_front_page() ) return;
+    $hero_img = 'https://centrosinfosystem.com/wp-content/uploads/2026/04/infosysytem_home.webp';
+    ?>
+    <link rel="preload" as="image" href="<?php echo esc_url( $hero_img ); ?>" fetchpriority="high" crossorigin="anonymous">
+    <style id="infosystem-hero-css" data-no-optimize="1" data-cfasync="false">
+        /* Aplicar la imagen de fondo hero ANTES de que Elementor ejecute su JS */
+        .elementor-element-63b7721,
+        .e-63b7721-00125a1,
+        [data-id="63b7721"],
+        body.home .elementor-element-63b7721,
+        body.home .e-63b7721-00125a1 {
+            background-image: url("<?php echo esc_url( $hero_img ); ?>") !important;
+            background-size: cover !important;
+            background-position: center center !important;
+        }
+        .elementor-element-63b7721.elementor-invisible,
+        .e-63b7721-00125a1.elementor-invisible {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+    <?php
+}
+
+// PHP hook: añadir clase e-no-lazyload y style inline directamente en el HTML renderizado por Elementor
+add_action( 'elementor/element/before_render', 'infosystem_force_hero_inline_style', 5, 1 );
+function infosystem_force_hero_inline_style( $element ) {
+    if ( ! is_front_page() ) return;
+    if ( $element->get_id() === '63b7721' ) {
+        $hero_img = 'https://centrosinfosystem.com/wp-content/uploads/2026/04/infosysytem_home.webp';
+        $element->add_render_attribute( '_wrapper', 'style',
+            'background-image: url("' . esc_url( $hero_img ) . '") !important; ' .
+            'background-size: cover !important; ' .
+            'background-position: center center !important;',
+            true
+        );
+        $element->add_render_attribute( '_wrapper', 'class', 'e-no-lazyload', true );
+    }
+}
+
+// ============================================================
+// 17. BANNER DE INSTALACIÓN PWA (HTML + CSS + JS) — solo móvil
+// ============================================================
+add_action( 'wp_footer', 'infosystem_pwa_install_banner' );
+function infosystem_pwa_install_banner() {
+    $theme_dir  = get_stylesheet_directory();
+    $icon_path  = $theme_dir . '/images/pwa-app-icon.jpg';
+    $icon_url   = file_exists( $icon_path )
+                  ? get_stylesheet_directory_uri() . '/images/pwa-app-icon.jpg'
+                  : get_site_icon_url( 192 );
+    ?>
+    <!-- ===== HTML DEL BANNER PWA ===== -->
+    <div id="pwa-install-banner" role="complementary" aria-label="Instalar aplicación">
+        <span id="pwa-banner-accent"></span>
+        <div id="pwa-banner-row">
+            <button id="pwa-banner-close" onclick="infosystemClosePWA()" aria-label="Cerrar">&#10005;</button>
+            <div id="pwa-banner-icon-wrap">
+                <?php if ( $icon_url ) : ?>
+                <img src="<?php echo esc_url( $icon_url ); ?>" alt="Infosystem" width="54" height="54"
+                     onerror="this.parentNode.innerHTML='<div id=\'pwa-banner-icon-fallback\'>IS</div>';">
+                <?php else : ?>
+                <div id="pwa-banner-icon-fallback">IS</div>
+                <?php endif; ?>
+            </div>
+            <div id="pwa-banner-text">
+                <span id="pwa-banner-title">App Infosystem</span>
+                <span id="pwa-banner-subtitle">Gratis &bull; Formaci&oacute;n para el empleo</span>
+            </div>
+            <button id="pwa-install-action" onclick="infosystemInstallPWA()">Instalar</button>
+        </div>
+        <div id="pwa-banner-hint"></div>
+    </div>
+
+    <script data-no-optimize="1" data-cfasync="false">
+    /* rocket-exclude: infosystem_pwa_install_banner */
+    (function() {
+        // DETECCIÓN DE MÓVIL — primera comprobación antes de hacer nada
+        var ua      = navigator.userAgent || '';
+        var isIOS   = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        var isAnd   = /android/i.test(ua);
+        // Si NO es móvil, salir inmediatamente (no mostrar el banner en desktop)
+        if (!isIOS && !isAnd) return;
+
+        var KEY    = 'pwa_banner_v3';
+        var banner = document.getElementById('pwa-install-banner');
+
+        // Si el usuario ya cerró el banner en esta sesión, salir
+        if (sessionStorage.getItem(KEY)) return;
+        var hint   = document.getElementById('pwa-banner-hint');
+        if (!banner || sessionStorage.getItem(KEY)) return;
+
+        function showBanner() {
+            if (!banner || sessionStorage.getItem(KEY)) return;
+            banner.style.setProperty('display', 'flex', 'important');
+            void banner.offsetWidth;
+            banner.style.setProperty('opacity', '1', 'important');
+            banner.style.setProperty('transform', 'translateY(0)', 'important');
+        }
+
+        function hideBanner() {
+            if (!banner) return;
+            banner.style.setProperty('opacity', '0', 'important');
+            banner.style.setProperty('transform', 'translateY(24px)', 'important');
+            setTimeout(function() { if (banner) banner.style.setProperty('display', 'none', 'important'); }, 380);
+        }
+
+        window.infosystemInstallPWA = function() {
+            if (window.__pwaInstallPrompt) {
+                window.__pwaInstallPrompt.prompt();
+                window.__pwaInstallPrompt.userChoice.then(function(r) {
+                    if (r.outcome === 'accepted') hideBanner();
+                    window.__pwaInstallPrompt = null;
+                });
+            } else if (isIOS) {
+                if (hint) {
+                    hint.style.setProperty('display', 'block', 'important');
+                    hint.innerHTML = '&#128072; Pulsa <b style="all:unset;font-weight:700;">Compartir</b> (&uarr;) en Safari y toca <b style="all:unset;font-weight:700;">&ldquo;A&ntilde;adir a pantalla de inicio&rdquo;</b>.';
+                }
+            } else {
+                alert('Para instalar:\n1. Abre el men\u00fa (\u22ee)\n2. \u00abA\u00f1adir a pantalla de inicio\u00bb');
+            }
+        };
+
+        window.infosystemClosePWA = function() {
+            sessionStorage.setItem(KEY, '1');
+            hideBanner();
+        };
+
+        if (window.__pwaInstallPrompt || window.__pwaShowBanner) {
+            showBanner();
+            window.__pwaShowBanner = false;
+            return;
+        }
+
+        window.addEventListener('beforeinstallprompt', function(e) {
+            e.preventDefault();
+            window.__pwaInstallPrompt = e;
+            showBanner();
+        });
+
+        if (isIOS && !window.navigator.standalone) {
+            setTimeout(showBanner, 500);
+        }
+
+        if (isAnd) {
+            setTimeout(function() {
+                if (!window.__pwaInstallPrompt && !sessionStorage.getItem(KEY)) showBanner();
+            }, 500);
+        }
+    })();
+    </script>
+    <?php
+}
+
+// Filtro adicional para excluir la clase del hero del lazyload de Elementor via WP Rocket
+add_filter( 'rocket_lazyload_css_background_images_excluded_classes', function( $classes ) {
+    $classes[] = 'elementor-element-63b7721';
+    $classes[] = 'e-63b7721-00125a1';
+    return $classes;
+});
+
+// ============================================================
+// 18. SPLASH SCREEN TEMPORAL PARA MÓVIL EN LA HOME (PREVIEW RÁPIDA)
+// ============================================================
+add_action( 'wp_footer', 'infosystem_mobile_splash_screen' );
+function infosystem_mobile_splash_screen() {
+    if ( ! is_front_page() ) return;
+    ?>
+    <div id="infosystem-mobile-splash">
+        <div class="infosystem-splash-overlay"></div>
+        <div class="infosystem-splash-content">
+            <h5 class="infosystem-splash-subtitle">Especialistas en Formación para el Empleo</h5>
+            <h1 class="infosystem-splash-title">Formación Gratuita para Mejorar tu Futuro Profesional</h1>
+            <p class="infosystem-splash-desc">Cursos subvencionados por la Junta de Castilla La Mancha, el Ministerio de Trabajo y el Ministerio de Educación y Formación Profesional y Deportes.</p>
+            <div class="infosystem-splash-buttons">
+                <span class="infosystem-splash-btn primary">Ver cursos gratuitos</span>
+                <span class="infosystem-splash-btn outline">Solicitar información</span>
+            </div>
+        </div>
+    </div>
+    <style id="infosystem-splash-styles">
+    #infosystem-mobile-splash {
+        display: none !important;
+    }
+    @media (max-width: 1024px) {
+        body.home #infosystem-mobile-splash {
+            display: block !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background-image: url('https://centrosinfosystem.com/wp-content/uploads/2026/04/infosysytem_home.webp') !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            z-index: 9998 !important; /* Justo debajo del header y banner PWA */
+            pointer-events: none !important; /* Permite que el toque pase al body para activar WP Rocket */
+        }
+        .infosystem-splash-overlay {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(0, 0, 0, 0.45) !important;
+            z-index: 1 !important;
+        }
+        .infosystem-splash-content {
+            position: absolute !important;
+            top: 52% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 90% !important;
+            max-width: 450px !important;
+            text-align: center !important;
+            color: #ffffff !important;
+            z-index: 2 !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        }
+        .infosystem-splash-subtitle {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            color: #ffffff !important;
+            margin: 0 0 12px 0 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            line-height: 1.2 !important;
+            display: block !important;
+        }
+        .infosystem-splash-title {
+            font-size: 26px !important;
+            font-weight: 800 !important;
+            color: #ffffff !important;
+            margin: 0 0 16px 0 !important;
+            line-height: 1.3 !important;
+            display: block !important;
+        }
+        .infosystem-splash-desc {
+            font-size: 13px !important;
+            color: rgba(255, 255, 255, 0.85) !important;
+            line-height: 1.5 !important;
+            margin: 0 0 24px 0 !important;
+            display: block !important;
+        }
+        .infosystem-splash-buttons {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+            align-items: center !important;
+            width: 100% !important;
+        }
+        .infosystem-splash-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            max-width: 260px !important;
+            padding: 12px 20px !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            border-radius: 30px !important;
+            text-transform: uppercase !important;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+        }
+        .infosystem-splash-btn.primary {
+            background-color: #ffb606 !important;
+            color: #333333 !important;
+            border: none !important;
+        }
+        .infosystem-splash-btn.outline {
+            border: 2px solid #ffffff !important;
+            color: #ffffff !important;
+            background: transparent !important;
+        }
+    }
+    </style>
+    <script data-no-optimize="1" data-cfasync="false">
+    /* rocket-exclude: infosystem_splash_fadeout */
+    (function() {
+        var hideSplash = function() {
+            var splash = document.getElementById('infosystem-mobile-splash');
+            if (splash) {
+                splash.style.transition = 'opacity 0.4s ease-out';
+                splash.style.opacity = '0';
+                setTimeout(function() {
+                    if (splash && splash.parentNode) {
+                        splash.parentNode.removeChild(splash);
+                    }
+                }, 400);
+            }
+        };
+        document.addEventListener('touchstart', hideSplash, {once: true, passive: true});
+        document.addEventListener('mousedown', hideSplash, {once: true, passive: true});
+    })();
+    </script>
+    <?php
+}

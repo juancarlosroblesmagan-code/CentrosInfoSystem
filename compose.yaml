@@ -1,0 +1,37 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: centrosinfosystem-wordpress-1
+    ports:
+      - "8080:80"
+    volumes:
+      - ./httpdocs:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wp_p3c0r
+      WORDPRESS_DB_PASSWORD: "~G0bo$$EtR05mAxPl"
+      WORDPRESS_DB_NAME: wp_infoSystem
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.11
+    container_name: centrosinfosystem-db-1
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: wp_infoSystem
+      MYSQL_USER: wp_p3c0r
+      MYSQL_PASSWORD: "~G0bo$$EtR05mAxPl"
+      MYSQL_ROOT_PASSWORD: "root_password_gravity"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:

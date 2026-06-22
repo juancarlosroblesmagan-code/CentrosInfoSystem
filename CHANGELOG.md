@@ -4,6 +4,23 @@ Historial cronológico de todos los cambios realizados sobre el sitio.
 
 ---
 
+## 2026-06-22 · Protección Anti-Spam (Akismet) + Limpieza de Formularios (CF7)
+
+- **Protección Akismet integrada:** Reconfiguramos los formularios activos (`Contact Home Page`, `Contact Us`, `Trabaja con nosotros`) para incluir firmas de Akismet en los campos de Nombre, Email y Teléfono (`akismet:author`, `akismet:author_email`, `akismet:author_url`).
+- **Traducción al español:** Traducimos todos los mensajes de validación y de error por defecto al español en los formularios activos de producción.
+- **Limpieza de base de datos:** Detectamos y eliminamos los formularios de contacto no utilizados en Elementor, páginas o widgets (como el duplicado `Información Cursos` y otros obsoletos).
+- **Herramienta `manage-cf7-akismet.php`:** Creada y guardada en `eduma-child/tools/` para mantenimiento futuro de formularios.
+
+---
+
+## 2026-06-18 · Optimización Rank Math SEO V2.1 (Tildes, URLs y Word Count)
+
+- **Optimización de palabras clave:** Actualizada la base de datos para usar palabras clave de enfoque con acentos correctos en español (ej. `Formación Dual Castilla-La Mancha`).
+- **Slugs y URLs:** Limpiamos y unificamos los slugs de las 8 entradas de blog en producción para que coincidan con las palabras clave exactas de Rank Math, eliminando errores de URL.
+- **Inserción de FAQs y Ampliación de palabras (>700):** Añadimos un acordeón de 4 preguntas frecuentes detalladas a cada entrada de blog para superar el límite mínimo de 600 palabras exigido por Rank Math.
+- **Inserción de imágenes Gutenberg:** Inyectamos bloques de imágenes nativos de Gutenberg con textos alternativos (`alt`) optimizados que contienen las palabras clave exactas.
+- **Herramienta `update-seo-v2.php`:** Creada y guardada en `eduma-child/tools/` para mantenimiento futuro del SEO.
+
 ## 2026-05-26 · SMTP IONOS operativo + recipientes CF7 unificados
 
 - **WP Mail SMTP** configurado con IONOS (`smtp.ionos.es:587/TLS`, autenticación con `info@centrosinfosystem.com`).
