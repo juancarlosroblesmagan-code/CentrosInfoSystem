@@ -183,10 +183,13 @@ if ( ! function_exists( 'infosystem_wc_cursos_url' ) ) {
 	}
 }
 
-/**
- * Añadir campos de metadatos del curso en la pestaña General de WooCommerce.
- */
-add_action( 'woocommerce_product_options_general_product_data', 'infosystem_add_course_meta_fields' );
+// =========================================================================
+// ELIMINADOS POR DUPLICIDAD - AHORA SE GESTIONAN EN FUNCTIONS.PHP
+// =========================================================================
+// add_action( 'woocommerce_product_options_general_product_data', 'infosystem_add_course_meta_fields' );
+// add_action( 'woocommerce_process_product_meta', 'infosystem_save_course_meta_fields' );
+// add_action( 'woocommerce_product_meta_end', 'infosystem_display_course_meta_fields' );
+
 function infosystem_add_course_meta_fields() {
 	echo '<div class="options_group">';
 
@@ -233,7 +236,7 @@ function infosystem_add_course_meta_fields() {
 /**
  * Guardar campos de metadatos del curso al guardar el producto.
  */
-add_action( 'woocommerce_process_product_meta', 'infosystem_save_course_meta_fields' );
+// add_action( 'woocommerce_process_product_meta', 'infosystem_save_course_meta_fields' );
 function infosystem_save_course_meta_fields( $post_id ) {
 	$fields = array( '_fecha_inicio', '_fecha_fin', '_centro_imparticion' );
 	foreach ( $fields as $field ) {
@@ -246,7 +249,7 @@ function infosystem_save_course_meta_fields( $post_id ) {
 /**
  * Mostrar los campos de metadatos en la ficha del producto, debajo de categorías y etiquetas.
  */
-add_action( 'woocommerce_product_meta_end', 'infosystem_display_course_meta_fields' );
+// add_action( 'woocommerce_product_meta_end', 'infosystem_display_course_meta_fields' );
 function infosystem_display_course_meta_fields() {
 	global $product;
 	if ( ! $product ) {

@@ -1072,20 +1072,65 @@ function infosystem_add_course_meta_box() {
     );
 }
 
+// Helpers para conversión de fechas
+function infosystem_format_date_to_input( $date_str ) {
+    if ( empty( $date_str ) ) return '';
+    if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date_str ) ) {
+        return $date_str;
+    }
+    if ( preg_match( '/^(\d{2})\/(\d{2})\/(\d{4})$/', $date_str, $matches ) ) {
+        return $matches[3] . '-' . $matches[2] . '-' . $matches[1];
+    }
+    $timestamp = strtotime( $date_str );
+    if ( $timestamp ) {
+        return date( 'Y-m-d', $timestamp );
+    }
+    return $date_str;
+}
+
+function infosystem_format_date_to_display( $date_str ) {
+    if ( empty( $date_str ) ) return '';
+    if ( preg_match( '/^\d{2}\/\d{2}\/\d{4}$/', $date_str ) ) {
+        return $date_str;
+    }
+    if ( preg_match( '/^(\d{4})-(\d{2})-(\d{2})$/', $date_str, $matches ) ) {
+        return $matches[3] . '/' . $matches[2] . '/' . $matches[1];
+    }
+    $timestamp = strtotime( $date_str );
+    if ( $timestamp ) {
+        return date( 'd/m/Y', $timestamp );
+    }
+    return $date_str;
+}
+
 function infosystem_course_details_callback( $post ) {
     wp_nonce_field( 'infosystem_save_course_details', 'infosystem_course_details_nonce' );
     
-    $location = get_post_meta( $post->ID, '_course_location', true );
-    $start_date = get_post_meta( $post->ID, '_course_start_date', true );
-    $end_date = get_post_meta( $post->ID, '_course_end_date', true );
+    // Usar las claves originales para compatibilidad y migración automática
+    $location = get_post_meta( $post->ID, '_centro_imparticion', true );
+    $start_date = get_post_meta( $post->ID, '_fecha_inicio', true );
+    $end_date = get_post_meta( $post->ID, '_fecha_fin', true );
+    
+    // Convertir fechas de formato de base de datos a formato de input date (YYYY-MM-DD)
+    $start_date_input = infosystem_format_date_to_input( $start_date );
+    $end_date_input = infosystem_format_date_to_input( $end_date );
     
     $predefined_centers = array(
-        'CENTROS INFOSYSTEM | Santa Cruz de Mudela',
-        'CENTROS FORMACIÓN LAGUNA | Viso del Marqués',
-        'CENTROS INFOSYSTEM | Fuente el Fresno',
-        'CENTROS FORMACIÓN LAGUNA | Membrilla',
-        'Online / Aula Virtual'
+        'CENTROS INFOSYSTEM | Santa Cruz de Mudela' => array( 'CENTROS INFOSYSTEM | Santa Cruz de Mudela', 'Santa Cruz de Mudela' ),
+        'CENTROS FORMACIÓN LAGUNA | Viso del Marqués' => array( 'CENTROS FORMACIÓN LAGUNA | Viso del Marqués', 'Viso del Marqués' ),
+        'CENTROS INFOSYSTEM | Fuente el Fresno' => array( 'CENTROS INFOSYSTEM | Fuente el Fresno', 'Fuente el Fresno' ),
+        'CENTROS FORMACIÓN LAGUNA | Membrilla' => array( 'CENTROS FORMACIÓN LAGUNA | Membrilla', 'Membrilla' ),
+        'Online / Aula Virtual' => array( 'Online / Aula Virtual' )
     );
+    
+    // Comprobar si es un centro personalizado
+    $is_custom_location = ! empty( $location );
+    foreach ( $predefined_centers as $key => $values ) {
+        if ( in_array( $location, $values ) ) {
+            $is_custom_location = false;
+            break;
+        }
+    }
     ?>
     <style>
         .infosystem-meta-field { margin-bottom: 15px; }
@@ -1097,23 +1142,23 @@ function infosystem_course_details_callback( $post ) {
         <label for="course_location">Lugar de impartición:</label>
         <select name="course_location" id="course_location">
             <option value="">-- Seleccionar centro --</option>
-            <?php foreach ($predefined_centers as $center) : ?>
-                <option value="<?php echo esc_attr($center); ?>" <?php selected( $location, $center ); ?>><?php echo esc_html($center); ?></option>
+            <?php foreach ($predefined_centers as $display_val => $match_vals) : ?>
+                <option value="<?php echo esc_attr($display_val); ?>" <?php selected( in_array( $location, $match_vals ) ); ?>><?php echo esc_html($display_val); ?></option>
             <?php endforeach; ?>
-            <option value="custom" <?php selected( !empty($location) && !in_array($location, $predefined_centers) ); ?>>Ubicación personalizada...</option>
+            <option value="custom" <?php selected( $is_custom_location ); ?>>Ubicación personalizada...</option>
         </select>
         <p class="description" style="margin-top:5px;">O introduce una personalizada a continuación si has seleccionado "Ubicación personalizada":</p>
-        <input type="text" name="course_location_custom" id="course_location_custom" placeholder="Ej. CENTROS INFOSYSTEM | Ciudad Real..." value="<?php echo esc_attr( in_array($location, $predefined_centers) ? '' : $location ); ?>">
+        <input type="text" name="course_location_custom" id="course_location_custom" placeholder="Ej. CENTROS INFOSYSTEM | Ciudad Real..." value="<?php echo esc_attr( $is_custom_location ? $location : '' ); ?>">
     </div>
     
     <div class="infosystem-meta-field">
         <label for="course_start_date">Fecha de inicio:</label>
-        <input type="date" name="course_start_date" id="course_start_date" value="<?php echo esc_attr( $start_date ); ?>">
+        <input type="date" name="course_start_date" id="course_start_date" value="<?php echo esc_attr( $start_date_input ); ?>">
     </div>
     
     <div class="infosystem-meta-field">
         <label for="course_end_date">Fecha de finalización:</label>
-        <input type="date" name="course_end_date" id="course_end_date" value="<?php echo esc_attr( $end_date ); ?>">
+        <input type="date" name="course_end_date" id="course_end_date" value="<?php echo esc_attr( $end_date_input ); ?>">
     </div>
     <?php
 }
@@ -1135,13 +1180,13 @@ function infosystem_save_course_details( $post_id ) {
         $location = sanitize_text_field( $_POST['course_location_custom'] );
     }
     
-    update_post_meta( $post_id, '_course_location', $location );
+    update_post_meta( $post_id, '_centro_imparticion', $location );
     
     if ( isset( $_POST['course_start_date'] ) ) {
-        update_post_meta( $post_id, '_course_start_date', sanitize_text_field( $_POST['course_start_date'] ) );
+        update_post_meta( $post_id, '_fecha_inicio', sanitize_text_field( $_POST['course_start_date'] ) );
     }
     if ( isset( $_POST['course_end_date'] ) ) {
-        update_post_meta( $post_id, '_course_end_date', sanitize_text_field( $_POST['course_end_date'] ) );
+        update_post_meta( $post_id, '_fecha_fin', sanitize_text_field( $_POST['course_end_date'] ) );
     }
 }
 
@@ -1152,16 +1197,16 @@ add_action( 'woocommerce_single_product_summary', 'infosystem_display_course_det
 function infosystem_display_course_details() {
     global $post;
     
-    $location = get_post_meta( $post->ID, '_course_location', true );
-    $start_date = get_post_meta( $post->ID, '_course_start_date', true );
-    $end_date = get_post_meta( $post->ID, '_course_end_date', true );
+    $location = get_post_meta( $post->ID, '_centro_imparticion', true );
+    $start_date = get_post_meta( $post->ID, '_fecha_inicio', true );
+    $end_date = get_post_meta( $post->ID, '_fecha_fin', true );
     
     if ( empty( $location ) && empty( $start_date ) ) {
         return;
     }
     
-    $formatted_start = !empty( $start_date ) ? date( 'd/m/Y', strtotime( $start_date ) ) : '';
-    $formatted_end = !empty( $end_date ) ? date( 'd/m/Y', strtotime( $end_date ) ) : '';
+    $formatted_start = infosystem_format_date_to_display( $start_date );
+    $formatted_end = infosystem_format_date_to_display( $end_date );
     
     echo '<div class="infosystem-course-info-boxes">';
     
@@ -1192,5 +1237,6 @@ function infosystem_display_course_details() {
     
     echo '</div>';
 }
+
 
 
