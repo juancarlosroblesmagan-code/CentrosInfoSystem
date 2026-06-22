@@ -4,6 +4,14 @@ Historial cronológico de todos los cambios realizados sobre el sitio.
 
 ---
 
+## 2026-06-22 · Detalles del Curso Dinámicos (Ubicación y Fechas) en WooCommerce
+
+- **Meta Box en Edición de Producto:** Añadida sección nativa para definir "Lugar de impartición" (con selector de centros físicos predefinidos + opción de ubicación personalizada) y "Fechas de inicio y finalización" usando selectores HTML5.
+- **Visualización en Ficha de Producto:** Añadida visualización en la columna derecha de la página de curso individual (Single Product WooCommerce) con estilos corporativos granates, iconos de FontAwesome y conversión de fechas al formato español (DD/MM/YYYY).
+- **Consistencia de Estilos:** Unificados los estilos en el stylesheet del child theme tanto en desarrollo (`eduma-child`) como en producción (`infosystem-child-theme`).
+
+---
+
 ## 2026-06-22 · Protección Anti-Spam (Akismet) + Limpieza de Formularios (CF7)
 
 - **Protección Akismet integrada:** Reconfiguramos los formularios activos (`Contact Home Page`, `Contact Us`, `Trabaja con nosotros`) para incluir firmas de Akismet en los campos de Nombre, Email y Teléfono (`akismet:author`, `akismet:author_email`, `akismet:author_url`).

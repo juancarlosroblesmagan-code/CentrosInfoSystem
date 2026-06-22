@@ -1,6 +1,6 @@
 # Estado del proyecto — centrosinfosystem.com
 
-**Última revisión:** 16/06/2026
+**Última revisión:** 22/06/2026
 
 ---
 
@@ -27,7 +27,7 @@
 
 ---
 
-## Cambios de Maquetación Realizados (16/06/2026)
+## Cambios de Maquetación Realizados (22/06/2026)
 
 | Elemento | Acción realizada | Ubicación |
 |----------|------------------|-----------|
@@ -38,6 +38,7 @@
 | **Footer (Recomendados)** | Duplicado eliminado (barra negra) y VipOfertas limpio. | `antigravity-seo.php` (MU-plugin) y Widget de Texto **1210023** |
 | **Página de Cursos** | Layout expandido a 100% de la caja de ancho, sin sidebar. | `style.css` del Child Theme |
 | **Página de Cursos (Tarjetas)** | Tarjetas simétricas de igual altura, tipografía forzada y botón granate. | `style.css` del Child Theme |
+| **Detalles del Curso** | Meta box de ubicación/fechas y renderizado con iconos granates en ficha de curso. | `functions.php` y `style.css` del Child Theme |
 
 ---
 

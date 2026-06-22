@@ -665,6 +665,154 @@ function infosystem_pwa_install_banner() {
                   ? get_stylesheet_directory_uri() . '/images/pwa-app-icon.jpg'
                   : get_site_icon_url( 192 );
     ?>
+    <!-- ===== CSS RESET DEL BANNER PWA — aísla del CSS del tema ===== -->
+    <style id="pwa-banner-styles">
+    #pwa-install-banner, #pwa-install-banner * {
+        all: initial !important;
+        box-sizing: border-box !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif !important;
+    }
+    #pwa-install-banner {
+        display: none !important;
+        position: fixed !important;
+        bottom: 20px !important;
+        left: 16px !important;
+        right: 16px !important;
+        z-index: 2147483647 !important;
+        background: #ffffff !important;
+        border-radius: 20px !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.20), 0 2px 8px rgba(0,0,0,0.10) !important;
+        overflow: hidden !important;
+        opacity: 0 !important;
+        transform: translateY(24px) !important;
+        transition: opacity 0.35s cubic-bezier(.4,0,.2,1), transform 0.35s cubic-bezier(.4,0,.2,1) !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        outline: none !important;
+    }
+    #pwa-banner-accent {
+        display: block !important;
+        width: 100% !important;
+        height: 4px !important;
+        background: linear-gradient(90deg, #8B1A1A 0%, #C0392B 40%, #D4880A 100%) !important;
+        flex-shrink: 0 !important;
+    }
+    #pwa-banner-row {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+        padding: 14px 16px 16px 16px !important;
+        position: relative !important;
+        width: 100% !important;
+    }
+    #pwa-banner-icon-wrap {
+        display: flex !important;
+        flex-shrink: 0 !important;
+        width: 54px !important;
+        height: 54px !important;
+        border-radius: 14px !important;
+        overflow: hidden !important;
+        box-shadow: 0 2px 8px rgba(139,26,26,0.25) !important;
+    }
+    #pwa-banner-icon-wrap img {
+        display: block !important;
+        width: 54px !important;
+        height: 54px !important;
+        object-fit: cover !important;
+        border-radius: 14px !important;
+    }
+    #pwa-banner-icon-fallback {
+        display: flex !important;
+        width: 54px !important;
+        height: 54px !important;
+        border-radius: 14px !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #D4880A 100%) !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #ffffff !important;
+        font-size: 20px !important;
+        font-weight: 800 !important;
+    }
+    #pwa-banner-text {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+        gap: 3px !important;
+    }
+    #pwa-banner-title {
+        display: block !important;
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        color: #111111 !important;
+        line-height: 1.25 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    #pwa-banner-subtitle {
+        display: block !important;
+        font-size: 12px !important;
+        color: #666666 !important;
+        line-height: 1.4 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    #pwa-install-action {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #A52020 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 24px !important;
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        cursor: pointer !important;
+        white-space: nowrap !important;
+        box-shadow: 0 3px 10px rgba(139,26,26,0.38) !important;
+        outline: none !important;
+        line-height: 1 !important;
+        height: auto !important;
+        width: auto !important;
+        text-decoration: none !important;
+        letter-spacing: 0.2px !important;
+    }
+    #pwa-banner-close {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: absolute !important;
+        top: 8px !important;
+        right: 10px !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        color: #bbbbbb !important;
+        font-size: 18px !important;
+        line-height: 1 !important;
+        outline: none !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    #pwa-banner-hint {
+        display: none !important;
+        padding: 10px 16px 14px !important;
+        font-size: 12px !important;
+        color: #555555 !important;
+        line-height: 1.6 !important;
+        border-top: 1px solid #f0f0f0 !important;
+        background: #fafafa !important;
+    }
+    </style>
+
     <!-- ===== HTML DEL BANNER PWA ===== -->
     <div id="pwa-install-banner" role="complementary" aria-label="Instalar aplicación">
         <span id="pwa-banner-accent"></span>
@@ -690,18 +838,13 @@ function infosystem_pwa_install_banner() {
     <script data-no-optimize="1" data-cfasync="false">
     /* rocket-exclude: infosystem_pwa_install_banner */
     (function() {
-        // DETECCIÓN DE MÓVIL — primera comprobación antes de hacer nada
-        var ua      = navigator.userAgent || '';
-        var isIOS   = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        var isAnd   = /android/i.test(ua);
-        // Si NO es móvil, salir inmediatamente (no mostrar el banner en desktop)
+        var ua    = navigator.userAgent || '';
+        var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        var isAnd = /android/i.test(ua);
         if (!isIOS && !isAnd) return;
 
-        var KEY    = 'pwa_banner_v3';
+        var KEY    = 'pwa_v4';
         var banner = document.getElementById('pwa-install-banner');
-
-        // Si el usuario ya cerró el banner en esta sesión, salir
-        if (sessionStorage.getItem(KEY)) return;
         var hint   = document.getElementById('pwa-banner-hint');
         if (!banner || sessionStorage.getItem(KEY)) return;
 
@@ -717,7 +860,9 @@ function infosystem_pwa_install_banner() {
             if (!banner) return;
             banner.style.setProperty('opacity', '0', 'important');
             banner.style.setProperty('transform', 'translateY(24px)', 'important');
-            setTimeout(function() { if (banner) banner.style.setProperty('display', 'none', 'important'); }, 380);
+            setTimeout(function() {
+                if (banner) banner.style.setProperty('display', 'none', 'important');
+            }, 380);
         }
 
         window.infosystemInstallPWA = function() {
@@ -730,7 +875,7 @@ function infosystem_pwa_install_banner() {
             } else if (isIOS) {
                 if (hint) {
                     hint.style.setProperty('display', 'block', 'important');
-                    hint.innerHTML = '&#128072; Pulsa <b style="all:unset;font-weight:700;">Compartir</b> (&uarr;) en Safari y toca <b style="all:unset;font-weight:700;">&ldquo;A&ntilde;adir a pantalla de inicio&rdquo;</b>.';
+                    hint.innerHTML = '&#128072; Pulsa <b style="all:unset;font-weight:700;">Compartir</b> (&uarr;) en Safari y toca <b style="all:unset;font-weight:700;">&ldquo;A&ntilde;adir a pantalla de inicio&rdquo;</b>';
                 }
             } else {
                 alert('Para instalar:\n1. Abre el men\u00fa (\u22ee)\n2. \u00abA\u00f1adir a pantalla de inicio\u00bb');
@@ -911,3 +1056,141 @@ function infosystem_mobile_splash_screen() {
     </script>
     <?php
 }
+
+// ============================================================
+// 19. DETALLES DEL CURSO - METABOX PARA UBICACIÓN Y FECHAS (WooCommerce)
+// ============================================================
+add_action( 'add_meta_boxes', 'infosystem_add_course_meta_box' );
+function infosystem_add_course_meta_box() {
+    add_meta_box(
+        'infosystem_course_details',
+        'Detalles del Curso (Ubicación y Fechas)',
+        'infosystem_course_details_callback',
+        'product',
+        'normal',
+        'high'
+    );
+}
+
+function infosystem_course_details_callback( $post ) {
+    wp_nonce_field( 'infosystem_save_course_details', 'infosystem_course_details_nonce' );
+    
+    $location = get_post_meta( $post->ID, '_course_location', true );
+    $start_date = get_post_meta( $post->ID, '_course_start_date', true );
+    $end_date = get_post_meta( $post->ID, '_course_end_date', true );
+    
+    $predefined_centers = array(
+        'CENTROS INFOSYSTEM | Santa Cruz de Mudela',
+        'CENTROS FORMACIÓN LAGUNA | Viso del Marqués',
+        'CENTROS INFOSYSTEM | Fuente el Fresno',
+        'CENTROS FORMACIÓN LAGUNA | Membrilla',
+        'Online / Aula Virtual'
+    );
+    ?>
+    <style>
+        .infosystem-meta-field { margin-bottom: 15px; }
+        .infosystem-meta-field label { display: block; font-weight: bold; margin-bottom: 5px; }
+        .infosystem-meta-field input, .infosystem-meta-field select { width: 100%; max-width: 400px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
+    
+    <div class="infosystem-meta-field">
+        <label for="course_location">Lugar de impartición:</label>
+        <select name="course_location" id="course_location">
+            <option value="">-- Seleccionar centro --</option>
+            <?php foreach ($predefined_centers as $center) : ?>
+                <option value="<?php echo esc_attr($center); ?>" <?php selected( $location, $center ); ?>><?php echo esc_html($center); ?></option>
+            <?php endforeach; ?>
+            <option value="custom" <?php selected( !empty($location) && !in_array($location, $predefined_centers) ); ?>>Ubicación personalizada...</option>
+        </select>
+        <p class="description" style="margin-top:5px;">O introduce una personalizada a continuación si has seleccionado "Ubicación personalizada":</p>
+        <input type="text" name="course_location_custom" id="course_location_custom" placeholder="Ej. CENTROS INFOSYSTEM | Ciudad Real..." value="<?php echo esc_attr( in_array($location, $predefined_centers) ? '' : $location ); ?>">
+    </div>
+    
+    <div class="infosystem-meta-field">
+        <label for="course_start_date">Fecha de inicio:</label>
+        <input type="date" name="course_start_date" id="course_start_date" value="<?php echo esc_attr( $start_date ); ?>">
+    </div>
+    
+    <div class="infosystem-meta-field">
+        <label for="course_end_date">Fecha de finalización:</label>
+        <input type="date" name="course_end_date" id="course_end_date" value="<?php echo esc_attr( $end_date ); ?>">
+    </div>
+    <?php
+}
+
+add_action( 'save_post_product', 'infosystem_save_course_details' );
+function infosystem_save_course_details( $post_id ) {
+    if ( ! isset( $_POST['infosystem_course_details_nonce'] ) || ! wp_verify_nonce( $_POST['infosystem_course_details_nonce'], 'infosystem_save_course_details' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+    
+    $location = isset( $_POST['course_location'] ) ? sanitize_text_field( $_POST['course_location'] ) : '';
+    if ($location === 'custom' && !empty($_POST['course_location_custom'])) {
+        $location = sanitize_text_field( $_POST['course_location_custom'] );
+    }
+    
+    update_post_meta( $post_id, '_course_location', $location );
+    
+    if ( isset( $_POST['course_start_date'] ) ) {
+        update_post_meta( $post_id, '_course_start_date', sanitize_text_field( $_POST['course_start_date'] ) );
+    }
+    if ( isset( $_POST['course_end_date'] ) ) {
+        update_post_meta( $post_id, '_course_end_date', sanitize_text_field( $_POST['course_end_date'] ) );
+    }
+}
+
+// ============================================================
+// 20. MOSTRAR DETALLES DEL CURSO EN LA FICHA DE PRODUCTO
+// ============================================================
+add_action( 'woocommerce_single_product_summary', 'infosystem_display_course_details', 55 );
+function infosystem_display_course_details() {
+    global $post;
+    
+    $location = get_post_meta( $post->ID, '_course_location', true );
+    $start_date = get_post_meta( $post->ID, '_course_start_date', true );
+    $end_date = get_post_meta( $post->ID, '_course_end_date', true );
+    
+    if ( empty( $location ) && empty( $start_date ) ) {
+        return;
+    }
+    
+    $formatted_start = !empty( $start_date ) ? date( 'd/m/Y', strtotime( $start_date ) ) : '';
+    $formatted_end = !empty( $end_date ) ? date( 'd/m/Y', strtotime( $end_date ) ) : '';
+    
+    echo '<div class="infosystem-course-info-boxes">';
+    
+    if ( ! empty( $location ) ) {
+        echo '<div class="infosystem-course-info-box location-box">';
+        echo '<strong>Impartimos en:</strong>';
+        echo '<p><i class="fa fa-map-marker-alt" aria-hidden="true" style="color:var(--color-primary); margin-right:6px;"></i> ' . esc_html( $location ) . '</p>';
+        echo '</div>';
+    }
+    
+    if ( ! empty( $formatted_start ) || ! empty( $formatted_end ) ) {
+        echo '<div class="infosystem-course-info-box date-box">';
+        echo '<strong>Fechas del curso:</strong>';
+        echo '<p><i class="fa fa-calendar-alt" aria-hidden="true" style="color:var(--color-primary); margin-right:6px;"></i> ';
+        $date_str = '';
+        if ( ! empty( $formatted_start ) ) {
+            $date_str .= 'Inicio: ' . esc_html( $formatted_start );
+        }
+        if ( ! empty( $formatted_end ) ) {
+            if ( ! empty( $date_str ) ) {
+                $date_str .= ' &nbsp;|&nbsp; ';
+            }
+            $date_str .= 'Finaliza: ' . esc_html( $formatted_end );
+        }
+        echo $date_str . '</p>';
+        echo '</div>';
+    }
+    
+    echo '</div>';
+}
+
+
