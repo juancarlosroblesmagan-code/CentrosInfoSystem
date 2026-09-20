@@ -50,9 +50,17 @@ secrets.env
 .env
 .env.*
 credentials.json
+*CONTRASEÑAS*
+*contrasenas*
+*passwords*
+scratch/
+backups-seguridad/
+httpdocs/
 
 # Logs / caches
 *.log
 *.tmp
 node_modules/
 __pycache/
+.agents/
+

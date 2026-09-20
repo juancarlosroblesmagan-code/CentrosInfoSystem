@@ -79,15 +79,22 @@ En la carpeta `eduma-child/tools/` dispones de herramientas en PHP para tareas a
 
 ---
 
-## Pendientes conocidos
+## Últimas Mejoras y Rediseño de Producción (Septiembre 2026)
 
-Ver [`docs/10-pending-tasks.md`](docs/10-pending-tasks.md). Resumen:
-
-1. ✅ SMTP IONOS — hecho
-2. ✅ Dominio `centrosinfosystem.com` — activo
-3. Purgar caché del sitemap (`/post-sitemap.xml`)
-4. Activar snippets WPCode de diseño (Conócenos, blog, SEO)
-5. Validar schemas en Rich Results Test
+1. **Footer Global Dark Premium (Elementor Template 8920)**:
+   - Fondo oscuro `#121217` con acento superior granate `#8B1A1A` y 4 columnas proporcionadas sin cortes.
+   - Iconos de contacto unificados en dorado corporativo (`#D4880A` con hover `#F3B33D`): mapa, teléfono, email (`\e919` thim-ekits) y sede.
+   - Alineación vertical milimétrica de todos los textos de contacto (eje X exacto).
+   - Barra de copyright (`#0b0b0e`) en fila única: autoría a la izquierda y enlaces legales a la derecha.
+2. **Páginas Institucionales y Elementor**:
+   - **Conócenos**: Corrección del banner CTA granate a full-width real (`100vw`) eliminando la franja blanca lateral.
+   - **Cursos**: Detección y renderizado automático de la banda "FINALIZADO" según fechas de inicio y fin.
+   - **Páginas Legales**: Cabeceras unificadas con fondo granate y tipografía Merriweather; eliminación de banners redundantes.
+   - **Ancho Completo**: Eliminación de sidebars/latest posts en páginas completas según directrices de diseño.
+3. **Seguridad y Calidad**:
+   - Protección antispam de correos electrónicos mediante ofuscación Base64 y decodificación JS.
+   - `.gitignore` endurecido para prevenir subida de credenciales, backups o temporales.
+   - Sincronización íntegra de `functions.php` con el Child Theme de producción.
 
 ---
 

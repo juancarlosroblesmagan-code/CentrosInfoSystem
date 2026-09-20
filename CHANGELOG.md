@@ -2,6 +2,23 @@
 
 Historial cronológico de todos los cambios realizados sobre el sitio.
 
+## 2026-09-20 / 2026-09-21 · Rediseño Integral Footer Dark, Fixes Elementor y Calibración Visual
+
+- **Footer Global Dark (Plantilla Elementor 8920):**
+  - Transformación estética a fondo oscuro `#121217` con acento superior granate `#8B1A1A`.
+  - Reestructuración a 4 columnas amplias y equilibradas (28%, 23%, 17%, 32%) sin saltos de línea antiestéticos.
+  - Iconos de contacto unificados en dorado corporativo (`#D4880A` con hover `#F3B33D`): mapa, teléfono, email (`\e919` de `thim-ekits`) y sede.
+  - Calibración geométrica exacta: contenedor de icono a 28.75px para alinear milimétricamente el inicio de todos los textos de contacto en el mismo eje X (`1173.23px`).
+  - Barra de copyright (`#0b0b0e`) en fila única con `space-between`: créditos a la izquierda y enlaces legales a la derecha.
+- **Páginas Institucionales y Elementor:**
+  - **Conócenos:** Eliminación de la franja blanca lateral en el banner CTA granate mediante ancho completo fluido (`100vw; margin-left: calc(50% - 50vw)`).
+  - **Cursos:** Implementación de lógica dinámica para la banda "FINALIZADO" automática en los banners de cursos según fechas de inicio y finalización.
+  - **Páginas Legales:** Retirada de banners redundantes y unificación de cabeceras corporativas con tipografía Merriweather y degradado granate.
+  - **Diseño Completo:** Eliminación de sidebars/latest posts en páginas completas para una experiencia limpia y despejada.
+- **Sincronización y Seguridad:**
+  - Actualización y sincronización íntegra de `functions.php` en `eduma-child/` con producción.
+  - Endurecimiento de `.gitignore` con exclusión de archivos de contraseñas, credenciales, backups y entornos temporales.
+
 ---
 
 ## 2026-06-22 · Detalles del Curso Dinámicos (Ubicación y Fechas) en WooCommerce
