@@ -276,6 +276,217 @@ function infosystem_dynamic_css() {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
+    /* =========================================================================
+     * SECCIÓN REGÍSTRATE Y EMPIEZA HOY MISMO (HOME): MAQUETACIÓN COMPACTA SIN SCROLL
+     * ========================================================================= */
+    /* Anular recorte forzado de 65vh y scroll interno del plugin woo-quote */
+    .elementor-element-ba75f78 .wpcf7 form,
+    .elementor-element-ba75f78 .wpcf7-form,
+    body.home .wpcf7 form {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Contenedor principal de la sección equilibrado */
+    body.home .elementor-element-13251ef {
+        padding: 40px 24px 50px 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* Formulario en formato grid compacto de 2 columnas */
+    .elementor-element-ba75f78 form.wpcf7-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 14px !important;
+        background: #ffffff !important;
+        padding: 26px 28px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        border: 1px solid #f0f0f0 !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    .elementor-element-ba75f78 form.wpcf7-form > p {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Fila 1: Nombre y Email */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; }
+
+    /* Fila 2: Teléfono y Verificación/Quiz */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(5) { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Fila 3: Textarea consulta */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(4) { grid-column: span 2 !important; grid-row: 3 !important; }
+
+    /* Filas siguientes: RGPD, Checkboxes y Submit */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(6) { grid-column: span 2 !important; grid-row: 4 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa { grid-column: span 2 !important; grid-row: 5 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(7) { grid-column: span 2 !important; grid-row: 6 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .button-submit { grid-column: span 2 !important; grid-row: 7 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .wpcf7-response-output,
+    .elementor-element-ba75f78 form.wpcf7-form > .akismet-fields-container {
+        grid-column: span 2 !important;
+    }
+
+    /* Inputs estilizados y compactos */
+    .elementor-element-ba75f78 .wpcf7 input[type="text"],
+    .elementor-element-ba75f78 .wpcf7 input[type="email"],
+    .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    .elementor-element-ba75f78 .wpcf7 input:focus,
+    .elementor-element-ba75f78 .wpcf7 textarea:focus {
+        border-color: #8B1A1A !important;
+        box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+        outline: none !important;
+    }
+
+    /* Quiz / Verificación inline */
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        font-size: 12.5px !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
+        height: 40px !important;
+        max-width: 60px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
+
+    /* Textarea compacto */
+    .elementor-element-ba75f78 .wpcf7 textarea {
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        resize: vertical !important;
+        box-sizing: border-box !important;
+    }
+
+    /* RGPD caja compacta */
+    .elementor-element-ba75f78 .infosystem-rgpd-capa {
+        margin: 2px 0 4px 0 !important;
+        padding: 6px 10px !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+        background: #f8fafc !important;
+        border-left: 3px solid #8B1A1A !important;
+        border-radius: 6px !important;
+        color: #64748b !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p {
+        margin: 0 0 2px 0 !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes */
+    .elementor-element-ba75f78 .wpcf7-acceptance label,
+    .elementor-element-ba75f78 .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.3 !important;
+        cursor: pointer !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-acceptance input,
+    .elementor-element-ba75f78 .wpcf7-checkbox input {
+        margin-top: 1px !important;
+    }
+
+    /* Botón submit destacado en degradado granate */
+    .elementor-element-ba75f78 .button-submit {
+        margin-top: 4px !important;
+    }
+    .elementor-element-ba75f78 .button-submit p {
+        margin: 0 !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 11px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.2px !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
+
+    /* Columna izquierda (Contador y texto): centrada y simétrica */
+    body.home .elementor-element-e7657e1 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        padding: 32px 30px !important;
+        border-radius: 16px !important;
+        border: 1px solid #f0f0f0 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 767px) {
+        .elementor-element-ba75f78 form.wpcf7-form {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            padding: 20px 18px !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > p {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa,
+        .elementor-element-ba75f78 form.wpcf7-form > .button-submit {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+    }
+
     </style>
     <?php
 }
@@ -571,6 +782,217 @@ function infosystem_pwa_metadata() {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
+    /* =========================================================================
+     * SECCIÓN REGÍSTRATE Y EMPIEZA HOY MISMO (HOME): MAQUETACIÓN COMPACTA SIN SCROLL
+     * ========================================================================= */
+    /* Anular recorte forzado de 65vh y scroll interno del plugin woo-quote */
+    .elementor-element-ba75f78 .wpcf7 form,
+    .elementor-element-ba75f78 .wpcf7-form,
+    body.home .wpcf7 form {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Contenedor principal de la sección equilibrado */
+    body.home .elementor-element-13251ef {
+        padding: 40px 24px 50px 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* Formulario en formato grid compacto de 2 columnas */
+    .elementor-element-ba75f78 form.wpcf7-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 14px !important;
+        background: #ffffff !important;
+        padding: 26px 28px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        border: 1px solid #f0f0f0 !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    .elementor-element-ba75f78 form.wpcf7-form > p {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Fila 1: Nombre y Email */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; }
+
+    /* Fila 2: Teléfono y Verificación/Quiz */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(5) { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Fila 3: Textarea consulta */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(4) { grid-column: span 2 !important; grid-row: 3 !important; }
+
+    /* Filas siguientes: RGPD, Checkboxes y Submit */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(6) { grid-column: span 2 !important; grid-row: 4 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa { grid-column: span 2 !important; grid-row: 5 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(7) { grid-column: span 2 !important; grid-row: 6 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .button-submit { grid-column: span 2 !important; grid-row: 7 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .wpcf7-response-output,
+    .elementor-element-ba75f78 form.wpcf7-form > .akismet-fields-container {
+        grid-column: span 2 !important;
+    }
+
+    /* Inputs estilizados y compactos */
+    .elementor-element-ba75f78 .wpcf7 input[type="text"],
+    .elementor-element-ba75f78 .wpcf7 input[type="email"],
+    .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    .elementor-element-ba75f78 .wpcf7 input:focus,
+    .elementor-element-ba75f78 .wpcf7 textarea:focus {
+        border-color: #8B1A1A !important;
+        box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+        outline: none !important;
+    }
+
+    /* Quiz / Verificación inline */
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        font-size: 12.5px !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
+        height: 40px !important;
+        max-width: 60px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
+
+    /* Textarea compacto */
+    .elementor-element-ba75f78 .wpcf7 textarea {
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        resize: vertical !important;
+        box-sizing: border-box !important;
+    }
+
+    /* RGPD caja compacta */
+    .elementor-element-ba75f78 .infosystem-rgpd-capa {
+        margin: 2px 0 4px 0 !important;
+        padding: 6px 10px !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+        background: #f8fafc !important;
+        border-left: 3px solid #8B1A1A !important;
+        border-radius: 6px !important;
+        color: #64748b !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p {
+        margin: 0 0 2px 0 !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes */
+    .elementor-element-ba75f78 .wpcf7-acceptance label,
+    .elementor-element-ba75f78 .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.3 !important;
+        cursor: pointer !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-acceptance input,
+    .elementor-element-ba75f78 .wpcf7-checkbox input {
+        margin-top: 1px !important;
+    }
+
+    /* Botón submit destacado en degradado granate */
+    .elementor-element-ba75f78 .button-submit {
+        margin-top: 4px !important;
+    }
+    .elementor-element-ba75f78 .button-submit p {
+        margin: 0 !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 11px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.2px !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
+
+    /* Columna izquierda (Contador y texto): centrada y simétrica */
+    body.home .elementor-element-e7657e1 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        padding: 32px 30px !important;
+        border-radius: 16px !important;
+        border: 1px solid #f0f0f0 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 767px) {
+        .elementor-element-ba75f78 form.wpcf7-form {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            padding: 20px 18px !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > p {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa,
+        .elementor-element-ba75f78 form.wpcf7-form > .button-submit {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+    }
+
     </style>
     <?php
 }
@@ -688,6 +1110,217 @@ function infosystem_force_hero_bg_immediate() {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
+    /* =========================================================================
+     * SECCIÓN REGÍSTRATE Y EMPIEZA HOY MISMO (HOME): MAQUETACIÓN COMPACTA SIN SCROLL
+     * ========================================================================= */
+    /* Anular recorte forzado de 65vh y scroll interno del plugin woo-quote */
+    .elementor-element-ba75f78 .wpcf7 form,
+    .elementor-element-ba75f78 .wpcf7-form,
+    body.home .wpcf7 form {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Contenedor principal de la sección equilibrado */
+    body.home .elementor-element-13251ef {
+        padding: 40px 24px 50px 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* Formulario en formato grid compacto de 2 columnas */
+    .elementor-element-ba75f78 form.wpcf7-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 14px !important;
+        background: #ffffff !important;
+        padding: 26px 28px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        border: 1px solid #f0f0f0 !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    .elementor-element-ba75f78 form.wpcf7-form > p {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Fila 1: Nombre y Email */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; }
+
+    /* Fila 2: Teléfono y Verificación/Quiz */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(5) { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Fila 3: Textarea consulta */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(4) { grid-column: span 2 !important; grid-row: 3 !important; }
+
+    /* Filas siguientes: RGPD, Checkboxes y Submit */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(6) { grid-column: span 2 !important; grid-row: 4 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa { grid-column: span 2 !important; grid-row: 5 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(7) { grid-column: span 2 !important; grid-row: 6 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .button-submit { grid-column: span 2 !important; grid-row: 7 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .wpcf7-response-output,
+    .elementor-element-ba75f78 form.wpcf7-form > .akismet-fields-container {
+        grid-column: span 2 !important;
+    }
+
+    /* Inputs estilizados y compactos */
+    .elementor-element-ba75f78 .wpcf7 input[type="text"],
+    .elementor-element-ba75f78 .wpcf7 input[type="email"],
+    .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    .elementor-element-ba75f78 .wpcf7 input:focus,
+    .elementor-element-ba75f78 .wpcf7 textarea:focus {
+        border-color: #8B1A1A !important;
+        box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+        outline: none !important;
+    }
+
+    /* Quiz / Verificación inline */
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        font-size: 12.5px !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
+        height: 40px !important;
+        max-width: 60px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
+
+    /* Textarea compacto */
+    .elementor-element-ba75f78 .wpcf7 textarea {
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        resize: vertical !important;
+        box-sizing: border-box !important;
+    }
+
+    /* RGPD caja compacta */
+    .elementor-element-ba75f78 .infosystem-rgpd-capa {
+        margin: 2px 0 4px 0 !important;
+        padding: 6px 10px !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+        background: #f8fafc !important;
+        border-left: 3px solid #8B1A1A !important;
+        border-radius: 6px !important;
+        color: #64748b !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p {
+        margin: 0 0 2px 0 !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes */
+    .elementor-element-ba75f78 .wpcf7-acceptance label,
+    .elementor-element-ba75f78 .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.3 !important;
+        cursor: pointer !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-acceptance input,
+    .elementor-element-ba75f78 .wpcf7-checkbox input {
+        margin-top: 1px !important;
+    }
+
+    /* Botón submit destacado en degradado granate */
+    .elementor-element-ba75f78 .button-submit {
+        margin-top: 4px !important;
+    }
+    .elementor-element-ba75f78 .button-submit p {
+        margin: 0 !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 11px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.2px !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
+
+    /* Columna izquierda (Contador y texto): centrada y simétrica */
+    body.home .elementor-element-e7657e1 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        padding: 32px 30px !important;
+        border-radius: 16px !important;
+        border: 1px solid #f0f0f0 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 767px) {
+        .elementor-element-ba75f78 form.wpcf7-form {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            padding: 20px 18px !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > p {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa,
+        .elementor-element-ba75f78 form.wpcf7-form > .button-submit {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+    }
+
     </style>
     <?php
 }
@@ -883,6 +1516,217 @@ function infosystem_pwa_install_banner() {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
+    /* =========================================================================
+     * SECCIÓN REGÍSTRATE Y EMPIEZA HOY MISMO (HOME): MAQUETACIÓN COMPACTA SIN SCROLL
+     * ========================================================================= */
+    /* Anular recorte forzado de 65vh y scroll interno del plugin woo-quote */
+    .elementor-element-ba75f78 .wpcf7 form,
+    .elementor-element-ba75f78 .wpcf7-form,
+    body.home .wpcf7 form {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Contenedor principal de la sección equilibrado */
+    body.home .elementor-element-13251ef {
+        padding: 40px 24px 50px 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* Formulario en formato grid compacto de 2 columnas */
+    .elementor-element-ba75f78 form.wpcf7-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 14px !important;
+        background: #ffffff !important;
+        padding: 26px 28px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        border: 1px solid #f0f0f0 !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    .elementor-element-ba75f78 form.wpcf7-form > p {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Fila 1: Nombre y Email */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; }
+
+    /* Fila 2: Teléfono y Verificación/Quiz */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(5) { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Fila 3: Textarea consulta */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(4) { grid-column: span 2 !important; grid-row: 3 !important; }
+
+    /* Filas siguientes: RGPD, Checkboxes y Submit */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(6) { grid-column: span 2 !important; grid-row: 4 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa { grid-column: span 2 !important; grid-row: 5 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(7) { grid-column: span 2 !important; grid-row: 6 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .button-submit { grid-column: span 2 !important; grid-row: 7 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .wpcf7-response-output,
+    .elementor-element-ba75f78 form.wpcf7-form > .akismet-fields-container {
+        grid-column: span 2 !important;
+    }
+
+    /* Inputs estilizados y compactos */
+    .elementor-element-ba75f78 .wpcf7 input[type="text"],
+    .elementor-element-ba75f78 .wpcf7 input[type="email"],
+    .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    .elementor-element-ba75f78 .wpcf7 input:focus,
+    .elementor-element-ba75f78 .wpcf7 textarea:focus {
+        border-color: #8B1A1A !important;
+        box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+        outline: none !important;
+    }
+
+    /* Quiz / Verificación inline */
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        font-size: 12.5px !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
+        height: 40px !important;
+        max-width: 60px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
+
+    /* Textarea compacto */
+    .elementor-element-ba75f78 .wpcf7 textarea {
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        resize: vertical !important;
+        box-sizing: border-box !important;
+    }
+
+    /* RGPD caja compacta */
+    .elementor-element-ba75f78 .infosystem-rgpd-capa {
+        margin: 2px 0 4px 0 !important;
+        padding: 6px 10px !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+        background: #f8fafc !important;
+        border-left: 3px solid #8B1A1A !important;
+        border-radius: 6px !important;
+        color: #64748b !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p {
+        margin: 0 0 2px 0 !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes */
+    .elementor-element-ba75f78 .wpcf7-acceptance label,
+    .elementor-element-ba75f78 .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.3 !important;
+        cursor: pointer !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-acceptance input,
+    .elementor-element-ba75f78 .wpcf7-checkbox input {
+        margin-top: 1px !important;
+    }
+
+    /* Botón submit destacado en degradado granate */
+    .elementor-element-ba75f78 .button-submit {
+        margin-top: 4px !important;
+    }
+    .elementor-element-ba75f78 .button-submit p {
+        margin: 0 !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 11px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.2px !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
+
+    /* Columna izquierda (Contador y texto): centrada y simétrica */
+    body.home .elementor-element-e7657e1 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        padding: 32px 30px !important;
+        border-radius: 16px !important;
+        border: 1px solid #f0f0f0 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 767px) {
+        .elementor-element-ba75f78 form.wpcf7-form {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            padding: 20px 18px !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > p {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa,
+        .elementor-element-ba75f78 form.wpcf7-form > .button-submit {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+    }
+
     </style>
 
     <!-- ===== HTML DEL BANNER PWA ===== -->
@@ -1124,6 +1968,217 @@ function infosystem_mobile_splash_screen() {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
+    /* =========================================================================
+     * SECCIÓN REGÍSTRATE Y EMPIEZA HOY MISMO (HOME): MAQUETACIÓN COMPACTA SIN SCROLL
+     * ========================================================================= */
+    /* Anular recorte forzado de 65vh y scroll interno del plugin woo-quote */
+    .elementor-element-ba75f78 .wpcf7 form,
+    .elementor-element-ba75f78 .wpcf7-form,
+    body.home .wpcf7 form {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Contenedor principal de la sección equilibrado */
+    body.home .elementor-element-13251ef {
+        padding: 40px 24px 50px 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* Formulario en formato grid compacto de 2 columnas */
+    .elementor-element-ba75f78 form.wpcf7-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 14px !important;
+        background: #ffffff !important;
+        padding: 26px 28px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        border: 1px solid #f0f0f0 !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    .elementor-element-ba75f78 form.wpcf7-form > p {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Fila 1: Nombre y Email */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; }
+
+    /* Fila 2: Teléfono y Verificación/Quiz */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(5) { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Fila 3: Textarea consulta */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(4) { grid-column: span 2 !important; grid-row: 3 !important; }
+
+    /* Filas siguientes: RGPD, Checkboxes y Submit */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(6) { grid-column: span 2 !important; grid-row: 4 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa { grid-column: span 2 !important; grid-row: 5 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(7) { grid-column: span 2 !important; grid-row: 6 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .button-submit { grid-column: span 2 !important; grid-row: 7 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .wpcf7-response-output,
+    .elementor-element-ba75f78 form.wpcf7-form > .akismet-fields-container {
+        grid-column: span 2 !important;
+    }
+
+    /* Inputs estilizados y compactos */
+    .elementor-element-ba75f78 .wpcf7 input[type="text"],
+    .elementor-element-ba75f78 .wpcf7 input[type="email"],
+    .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    .elementor-element-ba75f78 .wpcf7 input:focus,
+    .elementor-element-ba75f78 .wpcf7 textarea:focus {
+        border-color: #8B1A1A !important;
+        box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+        outline: none !important;
+    }
+
+    /* Quiz / Verificación inline */
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        font-size: 12.5px !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
+        height: 40px !important;
+        max-width: 60px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
+
+    /* Textarea compacto */
+    .elementor-element-ba75f78 .wpcf7 textarea {
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        resize: vertical !important;
+        box-sizing: border-box !important;
+    }
+
+    /* RGPD caja compacta */
+    .elementor-element-ba75f78 .infosystem-rgpd-capa {
+        margin: 2px 0 4px 0 !important;
+        padding: 6px 10px !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+        background: #f8fafc !important;
+        border-left: 3px solid #8B1A1A !important;
+        border-radius: 6px !important;
+        color: #64748b !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p {
+        margin: 0 0 2px 0 !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes */
+    .elementor-element-ba75f78 .wpcf7-acceptance label,
+    .elementor-element-ba75f78 .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.3 !important;
+        cursor: pointer !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-acceptance input,
+    .elementor-element-ba75f78 .wpcf7-checkbox input {
+        margin-top: 1px !important;
+    }
+
+    /* Botón submit destacado en degradado granate */
+    .elementor-element-ba75f78 .button-submit {
+        margin-top: 4px !important;
+    }
+    .elementor-element-ba75f78 .button-submit p {
+        margin: 0 !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 11px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.2px !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
+
+    /* Columna izquierda (Contador y texto): centrada y simétrica */
+    body.home .elementor-element-e7657e1 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        padding: 32px 30px !important;
+        border-radius: 16px !important;
+        border: 1px solid #f0f0f0 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 767px) {
+        .elementor-element-ba75f78 form.wpcf7-form {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            padding: 20px 18px !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > p {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa,
+        .elementor-element-ba75f78 form.wpcf7-form > .button-submit {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+    }
+
     </style>
     <script data-no-optimize="1" data-cfasync="false">
     /* rocket-exclude: infosystem_splash_fadeout */
@@ -1308,6 +2363,217 @@ function infosystem_course_details_callback( $post ) {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
+    /* =========================================================================
+     * SECCIÓN REGÍSTRATE Y EMPIEZA HOY MISMO (HOME): MAQUETACIÓN COMPACTA SIN SCROLL
+     * ========================================================================= */
+    /* Anular recorte forzado de 65vh y scroll interno del plugin woo-quote */
+    .elementor-element-ba75f78 .wpcf7 form,
+    .elementor-element-ba75f78 .wpcf7-form,
+    body.home .wpcf7 form {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Contenedor principal de la sección equilibrado */
+    body.home .elementor-element-13251ef {
+        padding: 40px 24px 50px 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* Formulario en formato grid compacto de 2 columnas */
+    .elementor-element-ba75f78 form.wpcf7-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 14px !important;
+        background: #ffffff !important;
+        padding: 26px 28px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        border: 1px solid #f0f0f0 !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    .elementor-element-ba75f78 form.wpcf7-form > p {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Fila 1: Nombre y Email */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; }
+
+    /* Fila 2: Teléfono y Verificación/Quiz */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(5) { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Fila 3: Textarea consulta */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(4) { grid-column: span 2 !important; grid-row: 3 !important; }
+
+    /* Filas siguientes: RGPD, Checkboxes y Submit */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(6) { grid-column: span 2 !important; grid-row: 4 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa { grid-column: span 2 !important; grid-row: 5 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(7) { grid-column: span 2 !important; grid-row: 6 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .button-submit { grid-column: span 2 !important; grid-row: 7 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .wpcf7-response-output,
+    .elementor-element-ba75f78 form.wpcf7-form > .akismet-fields-container {
+        grid-column: span 2 !important;
+    }
+
+    /* Inputs estilizados y compactos */
+    .elementor-element-ba75f78 .wpcf7 input[type="text"],
+    .elementor-element-ba75f78 .wpcf7 input[type="email"],
+    .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    .elementor-element-ba75f78 .wpcf7 input:focus,
+    .elementor-element-ba75f78 .wpcf7 textarea:focus {
+        border-color: #8B1A1A !important;
+        box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+        outline: none !important;
+    }
+
+    /* Quiz / Verificación inline */
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        font-size: 12.5px !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
+        height: 40px !important;
+        max-width: 60px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
+
+    /* Textarea compacto */
+    .elementor-element-ba75f78 .wpcf7 textarea {
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        resize: vertical !important;
+        box-sizing: border-box !important;
+    }
+
+    /* RGPD caja compacta */
+    .elementor-element-ba75f78 .infosystem-rgpd-capa {
+        margin: 2px 0 4px 0 !important;
+        padding: 6px 10px !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+        background: #f8fafc !important;
+        border-left: 3px solid #8B1A1A !important;
+        border-radius: 6px !important;
+        color: #64748b !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p {
+        margin: 0 0 2px 0 !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes */
+    .elementor-element-ba75f78 .wpcf7-acceptance label,
+    .elementor-element-ba75f78 .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.3 !important;
+        cursor: pointer !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-acceptance input,
+    .elementor-element-ba75f78 .wpcf7-checkbox input {
+        margin-top: 1px !important;
+    }
+
+    /* Botón submit destacado en degradado granate */
+    .elementor-element-ba75f78 .button-submit {
+        margin-top: 4px !important;
+    }
+    .elementor-element-ba75f78 .button-submit p {
+        margin: 0 !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 11px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.2px !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
+
+    /* Columna izquierda (Contador y texto): centrada y simétrica */
+    body.home .elementor-element-e7657e1 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        padding: 32px 30px !important;
+        border-radius: 16px !important;
+        border: 1px solid #f0f0f0 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 767px) {
+        .elementor-element-ba75f78 form.wpcf7-form {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            padding: 20px 18px !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > p {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa,
+        .elementor-element-ba75f78 form.wpcf7-form > .button-submit {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+    }
+
     </style>
 
     <div class="infosystem-meta-field">
@@ -1547,6 +2813,217 @@ function infosystem_display_course_details() {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
+    /* =========================================================================
+     * SECCIÓN REGÍSTRATE Y EMPIEZA HOY MISMO (HOME): MAQUETACIÓN COMPACTA SIN SCROLL
+     * ========================================================================= */
+    /* Anular recorte forzado de 65vh y scroll interno del plugin woo-quote */
+    .elementor-element-ba75f78 .wpcf7 form,
+    .elementor-element-ba75f78 .wpcf7-form,
+    body.home .wpcf7 form {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Contenedor principal de la sección equilibrado */
+    body.home .elementor-element-13251ef {
+        padding: 40px 24px 50px 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* Formulario en formato grid compacto de 2 columnas */
+    .elementor-element-ba75f78 form.wpcf7-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 14px !important;
+        background: #ffffff !important;
+        padding: 26px 28px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        border: 1px solid #f0f0f0 !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    .elementor-element-ba75f78 form.wpcf7-form > p {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Fila 1: Nombre y Email */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; }
+
+    /* Fila 2: Teléfono y Verificación/Quiz */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(5) { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Fila 3: Textarea consulta */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(4) { grid-column: span 2 !important; grid-row: 3 !important; }
+
+    /* Filas siguientes: RGPD, Checkboxes y Submit */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(6) { grid-column: span 2 !important; grid-row: 4 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa { grid-column: span 2 !important; grid-row: 5 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(7) { grid-column: span 2 !important; grid-row: 6 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .button-submit { grid-column: span 2 !important; grid-row: 7 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .wpcf7-response-output,
+    .elementor-element-ba75f78 form.wpcf7-form > .akismet-fields-container {
+        grid-column: span 2 !important;
+    }
+
+    /* Inputs estilizados y compactos */
+    .elementor-element-ba75f78 .wpcf7 input[type="text"],
+    .elementor-element-ba75f78 .wpcf7 input[type="email"],
+    .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    .elementor-element-ba75f78 .wpcf7 input:focus,
+    .elementor-element-ba75f78 .wpcf7 textarea:focus {
+        border-color: #8B1A1A !important;
+        box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+        outline: none !important;
+    }
+
+    /* Quiz / Verificación inline */
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        font-size: 12.5px !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
+        height: 40px !important;
+        max-width: 60px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
+
+    /* Textarea compacto */
+    .elementor-element-ba75f78 .wpcf7 textarea {
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        resize: vertical !important;
+        box-sizing: border-box !important;
+    }
+
+    /* RGPD caja compacta */
+    .elementor-element-ba75f78 .infosystem-rgpd-capa {
+        margin: 2px 0 4px 0 !important;
+        padding: 6px 10px !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+        background: #f8fafc !important;
+        border-left: 3px solid #8B1A1A !important;
+        border-radius: 6px !important;
+        color: #64748b !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p {
+        margin: 0 0 2px 0 !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes */
+    .elementor-element-ba75f78 .wpcf7-acceptance label,
+    .elementor-element-ba75f78 .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.3 !important;
+        cursor: pointer !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-acceptance input,
+    .elementor-element-ba75f78 .wpcf7-checkbox input {
+        margin-top: 1px !important;
+    }
+
+    /* Botón submit destacado en degradado granate */
+    .elementor-element-ba75f78 .button-submit {
+        margin-top: 4px !important;
+    }
+    .elementor-element-ba75f78 .button-submit p {
+        margin: 0 !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 11px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.2px !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
+
+    /* Columna izquierda (Contador y texto): centrada y simétrica */
+    body.home .elementor-element-e7657e1 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        padding: 32px 30px !important;
+        border-radius: 16px !important;
+        border: 1px solid #f0f0f0 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 767px) {
+        .elementor-element-ba75f78 form.wpcf7-form {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            padding: 20px 18px !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > p {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa,
+        .elementor-element-ba75f78 form.wpcf7-form > .button-submit {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+    }
+
     </style>';
 
     echo '<div class="infosystem-course-details-card">';
@@ -1748,6 +3225,217 @@ function infosystem_courses_ribbon_styles() {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
+    /* =========================================================================
+     * SECCIÓN REGÍSTRATE Y EMPIEZA HOY MISMO (HOME): MAQUETACIÓN COMPACTA SIN SCROLL
+     * ========================================================================= */
+    /* Anular recorte forzado de 65vh y scroll interno del plugin woo-quote */
+    .elementor-element-ba75f78 .wpcf7 form,
+    .elementor-element-ba75f78 .wpcf7-form,
+    body.home .wpcf7 form {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Contenedor principal de la sección equilibrado */
+    body.home .elementor-element-13251ef {
+        padding: 40px 24px 50px 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* Formulario en formato grid compacto de 2 columnas */
+    .elementor-element-ba75f78 form.wpcf7-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 14px !important;
+        background: #ffffff !important;
+        padding: 26px 28px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        border: 1px solid #f0f0f0 !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    .elementor-element-ba75f78 form.wpcf7-form > p {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Fila 1: Nombre y Email */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; }
+
+    /* Fila 2: Teléfono y Verificación/Quiz */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(5) { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Fila 3: Textarea consulta */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(4) { grid-column: span 2 !important; grid-row: 3 !important; }
+
+    /* Filas siguientes: RGPD, Checkboxes y Submit */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(6) { grid-column: span 2 !important; grid-row: 4 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa { grid-column: span 2 !important; grid-row: 5 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(7) { grid-column: span 2 !important; grid-row: 6 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .button-submit { grid-column: span 2 !important; grid-row: 7 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .wpcf7-response-output,
+    .elementor-element-ba75f78 form.wpcf7-form > .akismet-fields-container {
+        grid-column: span 2 !important;
+    }
+
+    /* Inputs estilizados y compactos */
+    .elementor-element-ba75f78 .wpcf7 input[type="text"],
+    .elementor-element-ba75f78 .wpcf7 input[type="email"],
+    .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    .elementor-element-ba75f78 .wpcf7 input:focus,
+    .elementor-element-ba75f78 .wpcf7 textarea:focus {
+        border-color: #8B1A1A !important;
+        box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+        outline: none !important;
+    }
+
+    /* Quiz / Verificación inline */
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        font-size: 12.5px !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
+        height: 40px !important;
+        max-width: 60px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
+
+    /* Textarea compacto */
+    .elementor-element-ba75f78 .wpcf7 textarea {
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        resize: vertical !important;
+        box-sizing: border-box !important;
+    }
+
+    /* RGPD caja compacta */
+    .elementor-element-ba75f78 .infosystem-rgpd-capa {
+        margin: 2px 0 4px 0 !important;
+        padding: 6px 10px !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+        background: #f8fafc !important;
+        border-left: 3px solid #8B1A1A !important;
+        border-radius: 6px !important;
+        color: #64748b !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p {
+        margin: 0 0 2px 0 !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes */
+    .elementor-element-ba75f78 .wpcf7-acceptance label,
+    .elementor-element-ba75f78 .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.3 !important;
+        cursor: pointer !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-acceptance input,
+    .elementor-element-ba75f78 .wpcf7-checkbox input {
+        margin-top: 1px !important;
+    }
+
+    /* Botón submit destacado en degradado granate */
+    .elementor-element-ba75f78 .button-submit {
+        margin-top: 4px !important;
+    }
+    .elementor-element-ba75f78 .button-submit p {
+        margin: 0 !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 11px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.2px !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
+
+    /* Columna izquierda (Contador y texto): centrada y simétrica */
+    body.home .elementor-element-e7657e1 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        padding: 32px 30px !important;
+        border-radius: 16px !important;
+        border: 1px solid #f0f0f0 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 767px) {
+        .elementor-element-ba75f78 form.wpcf7-form {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            padding: 20px 18px !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > p {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa,
+        .elementor-element-ba75f78 form.wpcf7-form > .button-submit {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+    }
+
     </style>
     <?php
 }
@@ -2714,6 +4402,217 @@ add_action( 'wp_head', function() {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
+
+    /* =========================================================================
+     * SECCIÓN REGÍSTRATE Y EMPIEZA HOY MISMO (HOME): MAQUETACIÓN COMPACTA SIN SCROLL
+     * ========================================================================= */
+    /* Anular recorte forzado de 65vh y scroll interno del plugin woo-quote */
+    .elementor-element-ba75f78 .wpcf7 form,
+    .elementor-element-ba75f78 .wpcf7-form,
+    body.home .wpcf7 form {
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Contenedor principal de la sección equilibrado */
+    body.home .elementor-element-13251ef {
+        padding: 40px 24px 50px 24px !important;
+        align-items: stretch !important;
+    }
+
+    /* Formulario en formato grid compacto de 2 columnas */
+    .elementor-element-ba75f78 form.wpcf7-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px 14px !important;
+        background: #ffffff !important;
+        padding: 26px 28px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        border: 1px solid #f0f0f0 !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    .elementor-element-ba75f78 form.wpcf7-form > p {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Fila 1: Nombre y Email */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(1) { grid-column: 1 !important; grid-row: 1 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(2) { grid-column: 2 !important; grid-row: 1 !important; }
+
+    /* Fila 2: Teléfono y Verificación/Quiz */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(3) { grid-column: 1 !important; grid-row: 2 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(5) { 
+        grid-column: 2 !important; 
+        grid-row: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Fila 3: Textarea consulta */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(4) { grid-column: span 2 !important; grid-row: 3 !important; }
+
+    /* Filas siguientes: RGPD, Checkboxes y Submit */
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(6) { grid-column: span 2 !important; grid-row: 4 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa { grid-column: span 2 !important; grid-row: 5 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > p:nth-of-type(7) { grid-column: span 2 !important; grid-row: 6 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .button-submit { grid-column: span 2 !important; grid-row: 7 !important; }
+    .elementor-element-ba75f78 form.wpcf7-form > .wpcf7-response-output,
+    .elementor-element-ba75f78 form.wpcf7-form > .akismet-fields-container {
+        grid-column: span 2 !important;
+    }
+
+    /* Inputs estilizados y compactos */
+    .elementor-element-ba75f78 .wpcf7 input[type="text"],
+    .elementor-element-ba75f78 .wpcf7 input[type="email"],
+    .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        box-sizing: border-box !important;
+        transition: border-color 0.2s, box-shadow 0.2s !important;
+    }
+
+    .elementor-element-ba75f78 .wpcf7 input:focus,
+    .elementor-element-ba75f78 .wpcf7 textarea:focus {
+        border-color: #8B1A1A !important;
+        box-shadow: 0 0 0 3px rgba(139,26,26,0.1) !important;
+        outline: none !important;
+    }
+
+    /* Quiz / Verificación inline */
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        font-size: 12.5px !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
+        height: 40px !important;
+        max-width: 60px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+    }
+
+    /* Textarea compacto */
+    .elementor-element-ba75f78 .wpcf7 textarea {
+        width: 100% !important;
+        height: 48px !important;
+        min-height: 44px !important;
+        padding: 8px 12px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        font-size: 13.5px !important;
+        resize: vertical !important;
+        box-sizing: border-box !important;
+    }
+
+    /* RGPD caja compacta */
+    .elementor-element-ba75f78 .infosystem-rgpd-capa {
+        margin: 2px 0 4px 0 !important;
+        padding: 6px 10px !important;
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+        background: #f8fafc !important;
+        border-left: 3px solid #8B1A1A !important;
+        border-radius: 6px !important;
+        color: #64748b !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p {
+        margin: 0 0 2px 0 !important;
+    }
+    .elementor-element-ba75f78 .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes */
+    .elementor-element-ba75f78 .wpcf7-acceptance label,
+    .elementor-element-ba75f78 .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.3 !important;
+        cursor: pointer !important;
+    }
+    .elementor-element-ba75f78 .wpcf7-acceptance input,
+    .elementor-element-ba75f78 .wpcf7-checkbox input {
+        margin-top: 1px !important;
+    }
+
+    /* Botón submit destacado en degradado granate */
+    .elementor-element-ba75f78 .button-submit {
+        margin-top: 4px !important;
+    }
+    .elementor-element-ba75f78 .button-submit p {
+        margin: 0 !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 11px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.2px !important;
+    }
+    .elementor-element-ba75f78 input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
+
+    /* Columna izquierda (Contador y texto): centrada y simétrica */
+    body.home .elementor-element-e7657e1 {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        padding: 32px 30px !important;
+        border-radius: 16px !important;
+        border: 1px solid #f0f0f0 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        box-sizing: border-box !important;
+        height: 100% !important;
+    }
+
+    @media (max-width: 767px) {
+        .elementor-element-ba75f78 form.wpcf7-form {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            padding: 20px 18px !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > p {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+        .elementor-element-ba75f78 form.wpcf7-form > .infosystem-rgpd-capa,
+        .elementor-element-ba75f78 form.wpcf7-form > .button-submit {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
+    }
+
     </style>
     <?php
 }, 999 );
