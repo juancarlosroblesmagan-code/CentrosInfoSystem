@@ -13,7 +13,9 @@ Historial cronológico de todos los cambios realizados sobre el sitio.
 - **Páginas Institucionales y Elementor:**
   - **Conócenos:** Eliminación de la franja blanca lateral en el banner CTA granate mediante ancho completo fluido (`100vw; margin-left: calc(50% - 50vw)`).
   - **Cursos:** Implementación de lógica dinámica para la banda "FINALIZADO" automática en los banners de cursos según fechas de inicio y finalización.
-  - **Páginas Legales:** Retirada de banners redundantes y unificación de cabeceras corporativas con tipografía Merriweather y degradado granate.
+  - **Páginas Legales (Aviso Legal, Política de Calidad, Política de Privacidad y Cookies):**
+    - Se unificó la plantilla de WordPress a **`elementor_header_footer` (Elementor Ancho Completo)** en *Política de Calidad* y *Aviso Legal*, eliminando la cabecera duplicada por defecto del tema Eduma (`top_heading`).
+    - Todas las páginas normativas quedan idénticas a *Política de Cookies*: con cabecera corporativa única en degradado granate (`.legal-header`) y editables al 100% en Elementor sin interferencias.
   - **Diseño Completo:** Eliminación de sidebars/latest posts en páginas completas para una experiencia limpia y despejada.
 - **Sección de Registro en Home ("Regístrate y Empieza Hoy Mismo"):**
   - **Eliminación de scroll interno:** Se neutralizó la restricción de altura `max-height: 65vh; overflow: hidden auto;` forzada por el plugin de formularios de presupuesto.
