@@ -15,8 +15,13 @@ Historial cronológico de todos los cambios realizados sobre el sitio.
   - **Cursos:** Implementación de lógica dinámica para la banda "FINALIZADO" automática en los banners de cursos según fechas de inicio y finalización.
   - **Páginas Legales:** Retirada de banners redundantes y unificación de cabeceras corporativas con tipografía Merriweather y degradado granate.
   - **Diseño Completo:** Eliminación de sidebars/latest posts en páginas completas para una experiencia limpia y despejada.
+- **Sección de Registro en Home ("Regístrate y Empieza Hoy Mismo"):**
+  - **Eliminación de scroll interno:** Se neutralizó la restricción de altura `max-height: 65vh; overflow: hidden auto;` forzada por el plugin de formularios de presupuesto.
+  - **Diseño en tarjetas simétricas:** Se unificó la columna derecha (formulario) como una tarjeta blanca (`#ffffff`, bordes redondeados `16px`, sombra sutil `0 10px 35px rgba(0,0,0,0.06)`, padding equilibrado `36px 32px`) a juego con la columna izquierda de cuenta atrás.
+  - **Márgenes y diseño de casillas (inputs):** Se dotó a los campos de texto, email, teléfono y consulta de márgenes limpios sobre el fondo blanco, bordes refinados (`#dcdfe4`) y foco con acento granate (`#8B1A1A`), integrando el campo anti-spam de verificación en una sola línea horizontal.
 - **Sincronización y Seguridad:**
-  - Actualización y sincronización íntegra de `functions.php` en `eduma-child/` con producción.
+  - Actualización, depuración y eliminación de bloques CSS duplicados en `functions.php`.
+  - Sincronización íntegra de `functions.php` en `eduma-child/` con producción.
   - Endurecimiento de `.gitignore` con exclusión de archivos de contraseñas, credenciales, backups y entornos temporales.
 
 ---
