@@ -806,6 +806,65 @@ function infosystem_dynamic_css() {
     /* =========================================================================
      * PÁGINA DE CONTACTO (/contacto/): MAQUETACIÓN LIMPIA, RESPIRACIÓN Y SIN SCROLL
      * ========================================================================= */
+    body.page-id-16719 .infosystem-contact-layout,
+    body.page-slug-contacto .infosystem-contact-layout {
+        align-items: stretch !important;
+        gap: 24px !important;
+    }
+
+    /* Columna 1: Panel visual con imagen adaptada 100% y leyenda flotante */
+    body.page-id-16719 .infosystem-contact-panel--visual,
+    body.page-slug-contacto .infosystem-contact-panel--visual {
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+        padding: 0 !important;
+        border-radius: 18px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        background: #111 !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--visual figure,
+    body.page-id-16719 .infosystem-contact-panel--visual .wp-block-image {
+        flex: 1 1 100% !important;
+        display: flex !important;
+        height: 100% !important;
+        margin: 0 !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--visual img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center 20% !important;
+        border-radius: 18px 18px 0 0 !important;
+    }
+    body.page-id-16719 .infosystem-contact-visual-caption,
+    body.page-slug-contacto .infosystem-contact-visual-caption {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: linear-gradient(0deg, rgba(15,10,10,0.92) 0%, rgba(15,10,10,0.65) 65%, transparent 100%) !important;
+        padding: 24px 20px 18px 20px !important;
+        color: #ffffff !important;
+        z-index: 2 !important;
+    }
+
+    /* Columna 2: Panel de datos de contacto distribuido armoniosamente */
+    body.page-id-16719 .infosystem-contact-panel--info,
+    body.page-slug-contacto .infosystem-contact-panel--info {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        border-radius: 18px !important;
+        padding: 28px 24px !important;
+    }
+    body.page-id-16719 .infosystem-contact-hours,
+    body.page-slug-contacto .infosystem-contact-hours {
+        margin-top: auto !important;
+    }
+
+    /* Columna 3: Panel de formulario sin scroll y perfectamente estructurado */
     body.page-id-16719 .infosystem-contact-panel--form,
     body.page-slug-contacto .infosystem-contact-panel--form,
     .infosystem-contact-panel--form {
@@ -813,10 +872,11 @@ function infosystem_dynamic_css() {
         min-height: 0 !important;
         max-height: none !important;
         overflow: visible !important;
-        padding: 28px 24px 32px 24px !important;
+        padding: 28px 26px 32px 26px !important;
+        border-radius: 18px !important;
     }
 
-    /* Anular cualquier scroll interno o recorte forzado en form de Contact Form 7 */
+    /* Anular cualquier scroll interno forzado en Contact Form 7 */
     body.page-id-16719 .infosystem-contact-panel--form form.wpcf7-form,
     body.page-slug-contacto .infosystem-contact-panel--form form.wpcf7-form,
     body.page-id-16719 .wpcf7 form,
@@ -828,33 +888,80 @@ function infosystem_dynamic_css() {
         padding: 0 !important;
     }
 
-    /* Alinear las 3 columnas de la cuadrícula de contacto de forma armónica */
-    body.page-id-16719 .infosystem-contact-layout,
-    body.page-slug-contacto .infosystem-contact-layout {
-        align-items: stretch !important;
-    }
-
-    /* Espaciado elegante y separación en los campos del formulario de contacto */
+    /* Espaciado de campos de texto y textarea compacta */
     body.page-id-16719 .infosystem-contact-panel--form .wpcf7-form > p,
     body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-form > p {
         margin: 0 0 10px 0 !important;
     }
+    body.page-id-16719 .infosystem-contact-panel--form textarea,
+    body.page-slug-contacto .infosystem-contact-panel--form textarea {
+        min-height: 85px !important;
+        height: 85px !important;
+        resize: vertical !important;
+        margin-bottom: 0 !important;
+    }
 
-    /* Caja de información RGPD estilizada, limpia y compacta */
+    /* Verificación anti-spam / quiz estilizada */
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-quiz-label,
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-quiz-label {
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        color: #334155 !important;
+        display: block !important;
+        margin-bottom: 4px !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--form input.wpcf7-quiz,
+    body.page-slug-contacto .infosystem-contact-panel--form input.wpcf7-quiz {
+        height: 42px !important;
+        border-radius: 10px !important;
+        border: 1px solid #e2ddd8 !important;
+        padding: 8px 14px !important;
+        font-size: 14px !important;
+        background: #fdfcfb !important;
+    }
+
+    /* Checkboxes agrupados con alineación perfecta */
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-acceptance label,
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-checkbox label,
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-acceptance label,
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-checkbox label {
+        font-size: 12.5px !important;
+        color: #334155 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 9px !important;
+        line-height: 1.38 !important;
+        cursor: pointer !important;
+        margin: 6px 0 !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-acceptance input[type="checkbox"],
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-checkbox input[type="checkbox"],
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-acceptance input[type="checkbox"],
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-checkbox input[type="checkbox"] {
+        margin-top: 2px !important;
+        flex-shrink: 0 !important;
+        width: 16px !important;
+        height: 16px !important;
+        accent-color: #8B1A1A !important;
+        cursor: pointer !important;
+    }
+
+    /* Caja de información RGPD (primera capa): limpia, elegante y bien integrada */
     body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa,
     body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa {
         font-size: 11px !important;
         line-height: 1.45 !important;
-        margin: 10px 0 14px 0 !important;
+        margin: 10px 0 16px 0 !important;
         background: #f8fafc !important;
-        padding: 10px 14px !important;
+        padding: 11px 14px !important;
         border-radius: 8px !important;
+        border: 1px solid #e2e8f0 !important;
         border-left: 3px solid #8B1A1A !important;
         color: #64748b !important;
     }
     body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa p,
     body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa p {
-        margin: 0 0 4px 0 !important;
+        margin: 0 0 3px 0 !important;
         font-size: 11px !important;
         line-height: 1.45 !important;
     }
@@ -862,34 +969,24 @@ function infosystem_dynamic_css() {
     body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa p:last-child {
         margin: 0 !important;
     }
-
-    /* Checkboxes con buena alineación y margen */
-    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-acceptance label,
-    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-checkbox label,
-    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-acceptance label,
-    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-checkbox label {
-        font-size: 12px !important;
-        color: #475569 !important;
-        display: flex !important;
-        align-items: flex-start !important;
-        gap: 8px !important;
-        line-height: 1.35 !important;
-        cursor: pointer !important;
-        margin: 6px 0 !important;
+    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa strong,
+    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa strong {
+        color: #1e293b !important;
+        font-weight: 600 !important;
     }
-    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-acceptance input,
-    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-checkbox input,
-    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-acceptance input,
-    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-checkbox input {
-        margin-top: 2px !important;
-        flex-shrink: 0 !important;
+    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa a,
+    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa a {
+        color: #8B1A1A !important;
+        text-decoration: underline !important;
+        font-weight: 600 !important;
     }
 
-    /* Botón de Enviar mensaje con sangrado limpio y holgura inferior */
+    /* Botón de Enviar mensaje con acabado premium */
     body.page-id-16719 .infosystem-contact-panel--form .button-submit,
     body.page-slug-contacto .infosystem-contact-panel--form .button-submit {
         margin-top: 14px !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 6px !important;
+        text-align: center !important;
     }
     body.page-id-16719 .infosystem-contact-panel--form .button-submit p,
     body.page-slug-contacto .infosystem-contact-panel--form .button-submit p {
@@ -902,25 +999,45 @@ function infosystem_dynamic_css() {
         color: #ffffff !important;
         border: none !important;
         border-radius: 999px !important;
-        font-size: 14.5px !important;
+        font-size: 15px !important;
         font-weight: 700 !important;
-        padding: 12px 24px !important;
+        padding: 13px 24px !important;
         cursor: pointer !important;
         transition: all 0.25s ease !important;
-        box-shadow: 0 4px 16px rgba(139,26,26,0.3) !important;
+        box-shadow: 0 4px 16px rgba(139,26,26,0.28) !important;
         letter-spacing: 0.3px !important;
     }
     body.page-id-16719 .infosystem-contact-panel--form input.wpcf7-submit:hover,
     body.page-slug-contacto .infosystem-contact-panel--form input.wpcf7-submit:hover {
         background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
         transform: translateY(-2px) !important;
-        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.38) !important;
     }
     </style>
 
     <?php
 
 }
+
+/**
+ * Reordenar armónicamente los elementos del formulario de contacto (/contacto/):
+ * Agrupa las dos casillas de verificación juntas y sitúa la capa informativa RGPD
+ * inmediatamente después de ambas casillas para una maquetación y UX perfectas.
+ */
+add_filter( 'wpcf7_form_elements', function( $elements ) {
+    if ( strpos( $elements, 'infosystem-rgpd-capa' ) !== false && strpos( $elements, 'news-acceptance' ) !== false ) {
+        if ( preg_match( '/<div class="infosystem-rgpd-capa"[^>]*>[\s\S]*?<\/div>/', $elements, $rgpd_m ) ) {
+            $rgpd_block = $rgpd_m[0];
+            $elements = str_replace( $rgpd_block, '', $elements );
+            $elements = preg_replace(
+                '/(<p><span class="wpcf7-form-control-wrap" data-name="news-acceptance">[\s\S]*?<\/p>)/',
+                '$1' . "\n" . $rgpd_block,
+                $elements
+            );
+        }
+    }
+    return $elements;
+} );
 
 
 
