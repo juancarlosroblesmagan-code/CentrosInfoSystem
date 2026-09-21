@@ -231,7 +231,7 @@ function infosystem_render_whatsapp_bot() {
             <div class="infosystem-wa-modal-header">
                 <div class="infosystem-wa-header-info">
                     <div class="infosystem-wa-avatar">
-                        <span>IS</span>
+                        <img src="https://centrosinfosystem.com/wp-content/uploads/2020/03/centrosinfosystem-fabicon-1-180x180.png" alt="Centros Infosystem" class="infosystem-wa-avatar-img">
                         <span class="infosystem-wa-avatar-status <?php echo $is_active ? 'status-online' : 'status-ai'; ?>"></span>
                     </div>
                     <div class="infosystem-wa-titles">
@@ -341,9 +341,10 @@ function infosystem_render_whatsapp_bot() {
                 <!-- Input del Chat -->
                 <form id="infosystem-chat-form" class="infosystem-chat-input-bar">
                     <input type="text" id="infosystem-chat-input" placeholder="Escribe tu pregunta aquí..." autocomplete="off">
-                    <button type="submit" id="infosystem-chat-send" aria-label="Enviar mensaje">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    <button type="submit" id="infosystem-chat-send" class="infosystem-chat-send-btn" aria-label="Enviar mensaje">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="send-icon-svg">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" fill="#ffffff"></polygon>
                         </svg>
                     </button>
                 </form>
@@ -517,27 +518,34 @@ function infosystem_render_whatsapp_bot() {
         }
         .infosystem-wa-avatar {
             position: relative;
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1.5px solid #D4880A;
+            width: 44px;
+            height: 44px;
+            background: #ffffff;
+            border: 2px solid #D4880A;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 15px;
-            color: #ffffff;
-            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+            overflow: visible;
+        }
+        .infosystem-wa-avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
         }
         .infosystem-wa-avatar-status {
             position: absolute;
             bottom: -1px;
             right: -1px;
-            width: 11px;
-            height: 11px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             border: 2px solid #8B1A1A;
+            z-index: 2;
         }
         .status-online { background: #25D366; }
         .status-ai { background: #F3B33D; }
@@ -778,21 +786,39 @@ function infosystem_render_whatsapp_bot() {
         .infosystem-chat-input-bar input:focus {
             border-color: #8B1A1A;
         }
-        .infosystem-chat-input-bar button {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #8B1A1A;
-            color: #ffffff;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
+        .infosystem-chat-input-bar button,
+        button.infosystem-chat-send-btn,
+        #infosystem-chat-send {
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+            max-width: 40px !important;
+            border-radius: 50% !important;
+            background: linear-gradient(135deg, #8B1A1A 0%, #6e1313 100%) !important;
+            color: #ffffff !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 0 !important;
+            box-shadow: 0 3px 10px rgba(139, 26, 26, 0.35) !important;
+            transition: all 0.2s ease !important;
+            flex-shrink: 0 !important;
         }
-        .infosystem-chat-input-bar button:hover {
-            background: #6e1313;
+        .infosystem-chat-input-bar button:hover,
+        button.infosystem-chat-send-btn:hover,
+        #infosystem-chat-send:hover {
+            background: linear-gradient(135deg, #a12020 0%, #7e1616 100%) !important;
+            transform: scale(1.05) !important;
+            box-shadow: 0 4px 14px rgba(139, 26, 26, 0.45) !important;
+        }
+        .infosystem-chat-send-btn .send-icon-svg {
+            display: block !important;
+            width: 18px !important;
+            height: 18px !important;
+            margin-left: 2px !important;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) !important;
         }
 
         /* Schedule Card Form */
