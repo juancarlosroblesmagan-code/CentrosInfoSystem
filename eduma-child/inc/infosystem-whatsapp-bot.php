@@ -1,6 +1,6 @@
 <?php
 /**
- * Infosystem - Widget Flotante de WhatsApp + Chatbot IA Fuera de Horario
+ * Infosystem - Widget Flotante de WhatsApp + Chatbot IA Fuera de Horario (Diseño Circular Elegante)
  *
  * Horario activo: 08:00h a 20:00h (Europe/Madrid) -> Atención directa por WhatsApp (+34 619 06 19 33)
  * Fuera de horario: 20:00h a 08:00h -> Chatbot con IA para resolver dudas y agendar citas a info@centrosinfosystem.com
@@ -206,18 +206,23 @@ function infosystem_render_whatsapp_bot() {
     $wa_number = '34619061933';
     $wa_display = '+34 619 06 19 33';
     ?>
-    <!-- INFOSYSTEM WHATSAPP & ASISTENTE IA WIDGET -->
+    <!-- INFOSYSTEM WHATSAPP & ASISTENTE IA WIDGET (DISEÑO CIRCULAR ELEGANTE) -->
     <div id="infosystem-wa-widget" class="infosystem-wa-widget" data-active="<?php echo $is_active ? '1' : '0'; ?>">
-        <!-- Botón Flotante Launcher -->
+        <!-- Tooltip flotante discreto -->
+        <div id="infosystem-wa-tooltip" class="infosystem-wa-tooltip">
+            <span id="infosystem-wa-tooltip-text"><?php echo $is_active ? '¿Tienes dudas? Chatea con nosotros' : '¿Dudas sobre cursos? Pregunta a la IA'; ?></span>
+            <button type="button" id="infosystem-wa-tooltip-close" aria-label="Cerrar aviso">×</button>
+        </div>
+
+        <!-- Botón Flotante Circular Launcher (FAB) -->
         <button id="infosystem-wa-launcher" class="infosystem-wa-launcher" type="button" aria-label="Abrir WhatsApp o Asistente de Centros Infosystem">
-            <span class="infosystem-wa-status-badge <?php echo $is_active ? 'active-hours' : 'night-hours'; ?>"></span>
+            <span class="infosystem-wa-badge-text"><?php echo $is_active ? '🟢 8h-20h' : '🌙 IA 24h'; ?></span>
             <span class="infosystem-wa-icon">
-                <!-- SVG WhatsApp Oficial -->
-                <svg viewBox="0 0 32 32" width="34" height="34" fill="#ffffff">
+                <!-- SVG WhatsApp Oficial Limpio -->
+                <svg viewBox="0 0 32 32" width="32" height="32" fill="#ffffff">
                     <path d="M16 2a13.9 13.9 0 0 0-12 21L2 30l7.2-1.9A14 14 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.3-4.4 1.1 1.2-4.2-.3-.5A11.5 11.5 0 1 1 16 27.5zm6.4-8.6c-.4-.2-2.1-1-2.4-1.2s-.6-.2-.8.2-.9 1.2-1.1 1.4-.4.2-.8 0a9.8 9.8 0 0 1-2.9-1.8 10.9 10.9 0 0 1-2-2.5c-.2-.4 0-.6.2-.8s.4-.4.5-.6.2-.4.3-.6 0-.4 0-.6-.8-1.9-1.1-2.6c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.7.1-1.1.5s-1.5 1.5-1.5 3.6 1.5 4.2 1.7 4.5 3 4.6 7.3 6.4c1 .4 1.8.7 2.4.9 1 .3 2 .3 2.7.2.8-.1 2.5-1 2.8-2s.4-1.8.3-2-.5-.3-.9-.5z"/>
                 </svg>
             </span>
-            <span class="infosystem-wa-badge-text"><?php echo $is_active ? 'WhatsApp' : 'IA 24h'; ?></span>
         </button>
 
         <!-- Ventana Modal de Chat -->
@@ -356,7 +361,7 @@ function infosystem_render_whatsapp_bot() {
         </div>
     </div>
 
-    <!-- ESTILOS Y COMPORTAMIENTO NATIVO (WPO & SIN BLOQUEO) -->
+    <!-- ESTILOS Y COMPORTAMIENTO NATIVO ELEGANTE (WPO & SIN BLOQUEO) -->
     <style id="infosystem-wa-styles">
         .infosystem-wa-widget {
             position: fixed;
@@ -365,64 +370,114 @@ function infosystem_render_whatsapp_bot() {
             z-index: 999999;
             font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
-        .infosystem-wa-launcher {
+
+        /* Tooltip flotante refinado */
+        .infosystem-wa-tooltip {
+            position: absolute;
+            bottom: 74px;
+            right: 0;
+            background: #ffffff;
+            color: #1e293b;
+            padding: 8px 14px 8px 16px;
+            border-radius: 999px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.14);
+            border: 1px solid rgba(212, 136, 10, 0.28);
+            font-size: 12.5px;
+            font-weight: 600;
+            white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 9px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: #ffffff;
-            border: none;
-            border-radius: 999px;
-            padding: 11px 18px 11px 13px;
+            gap: 10px;
+            animation: wa-float-subtle 3s ease-in-out infinite alternate;
+            pointer-events: auto;
             cursor: pointer;
-            box-shadow: 0 6px 22px rgba(18, 140, 126, 0.42);
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .infosystem-wa-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 24px;
+            width: 11px;
+            height: 11px;
+            background: #ffffff;
+            transform: rotate(45deg);
+            border-bottom: 1px solid rgba(212, 136, 10, 0.28);
+            border-right: 1px solid rgba(212, 136, 10, 0.28);
+        }
+        .infosystem-wa-tooltip button {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+        .infosystem-wa-tooltip button:hover { color: #475569; }
+        @keyframes wa-float-subtle {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-4px); }
+        }
+
+        /* Botón Circular Launcher (FAB) */
+        .infosystem-wa-launcher {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50% !important;
+            padding: 0 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(140deg, #25D366 0%, #128C7E 100%) !important;
+            box-shadow: 0 10px 26px -2px rgba(18, 140, 126, 0.52), 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            border: 2.5px solid rgba(255, 255, 255, 0.5) !important;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         }
         .infosystem-wa-launcher:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 10px 28px rgba(18, 140, 126, 0.52);
+            transform: translateY(-4px) scale(1.06) !important;
+            box-shadow: 0 16px 32px -2px rgba(18, 140, 126, 0.62), 0 6px 16px rgba(0, 0, 0, 0.18) !important;
         }
         .infosystem-wa-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
         }
+
+        /* Badge elegante micro-pill */
         .infosystem-wa-badge-text {
-            font-size: 14.5px;
-            font-weight: 700;
-            letter-spacing: 0.2px;
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #0f172a;
+            color: #fbbf24;
+            border: 1.5px solid #d97706;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 999px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.28);
+            letter-spacing: 0.3px;
             white-space: nowrap;
         }
-        .infosystem-wa-status-badge {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #4ade80;
-            box-shadow: 0 0 0 2.5px rgba(255, 255, 255, 0.85);
-            animation: pulse-green 2s infinite;
-        }
-        .infosystem-wa-status-badge.night-hours {
-            background: #fbbf24;
-            animation: pulse-amber 2.5s infinite;
-        }
-        @keyframes pulse-green {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
-        }
-        @keyframes pulse-amber {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(251, 191, 36, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+        .infosystem-wa-widget[data-active="1"] .infosystem-wa-badge-text {
+            background: #ffffff;
+            color: #0f766e;
+            border: 1.5px solid #25D366;
+            box-shadow: 0 3px 8px rgba(37, 211, 102, 0.35);
         }
 
         /* Modal Container */
         .infosystem-wa-modal {
             display: none;
             position: absolute;
-            bottom: 70px;
+            bottom: 74px;
             right: 0;
             width: 375px;
             max-width: calc(100vw - 36px);
@@ -847,29 +902,31 @@ function infosystem_render_whatsapp_bot() {
         var closeBtn = document.getElementById('infosystem-wa-close');
         var modeActive = document.getElementById('infosystem-mode-active');
         var modeNight = document.getElementById('infosystem-mode-night');
+        var tooltip = document.getElementById('infosystem-wa-tooltip');
+        var tooltipClose = document.getElementById('infosystem-wa-tooltip-close');
+        var tooltipText = document.getElementById('infosystem-wa-tooltip-text');
 
         function updateWidgetHours() {
             var active = checkMadridActiveHours();
             widget.setAttribute('data-active', active ? '1' : '0');
-            var badge = launcher.querySelector('.infosystem-wa-status-badge');
             var badgeText = launcher.querySelector('.infosystem-wa-badge-text');
             var statusDot = modal.querySelector('.infosystem-wa-avatar-status');
             var statusLabel = modal.querySelector('.infosystem-wa-status-label');
 
             if (active) {
-                badge.className = 'infosystem-wa-status-badge active-hours';
-                badgeText.textContent = 'WhatsApp';
+                badgeText.innerHTML = '🟢 8h-20h';
                 statusDot.className = 'infosystem-wa-avatar-status status-online';
                 statusLabel.innerHTML = '<span class="dot-green">●</span> En directo · Asesoría de 8:00h a 20:00h';
+                if (tooltipText) tooltipText.textContent = '¿Tienes dudas? Chatea con nosotros';
                 modeActive.classList.add('is-visible');
                 modeActive.classList.remove('is-hidden');
                 modeNight.classList.remove('is-visible');
                 modeNight.classList.add('is-hidden');
             } else {
-                badge.className = 'infosystem-wa-status-badge night-hours';
-                badgeText.textContent = 'IA 24h';
+                badgeText.innerHTML = '🌙 IA 24h';
                 statusDot.className = 'infosystem-wa-avatar-status status-ai';
                 statusLabel.innerHTML = '<span class="dot-amber">●</span> Asistente IA · Fuera de horario (8h a 20h)';
+                if (tooltipText) tooltipText.textContent = '¿Dudas sobre cursos? Pregunta a la IA';
                 modeActive.classList.remove('is-visible');
                 modeActive.classList.add('is-hidden');
                 modeNight.classList.add('is-visible');
@@ -879,6 +936,7 @@ function infosystem_render_whatsapp_bot() {
 
         // Toggle modal
         launcher.addEventListener('click', function() {
+            if (tooltip) tooltip.style.display = 'none';
             updateWidgetHours();
             var isOpen = modal.classList.contains('is-open');
             if (isOpen) {
@@ -889,6 +947,20 @@ function infosystem_render_whatsapp_bot() {
                 modal.setAttribute('aria-hidden', 'false');
             }
         });
+
+        if (tooltip) {
+            tooltip.addEventListener('click', function(e) {
+                if (e.target !== tooltipClose) {
+                    launcher.click();
+                }
+            });
+        }
+        if (tooltipClose) {
+            tooltipClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                tooltip.style.display = 'none';
+            });
+        }
 
         closeBtn.addEventListener('click', function() {
             modal.classList.remove('is-open');
