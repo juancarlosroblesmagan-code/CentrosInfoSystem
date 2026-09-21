@@ -792,6 +792,8 @@ function infosystem_dynamic_css() {
             grid-column: 1 !important;
             grid-row: auto !important;
         }
+    }
+
     /* Eliminar separación superior en el banner de Política de Calidad */
     .elementor-17765 .elementor-element.elementor-element-04b3f27,
     body.page-id-17765 .elementor > .e-con:first-child,
@@ -801,6 +803,119 @@ function infosystem_dynamic_css() {
         margin-top: 0 !important;
     }
 
+    /* =========================================================================
+     * PÁGINA DE CONTACTO (/contacto/): MAQUETACIÓN LIMPIA, RESPIRACIÓN Y SIN SCROLL
+     * ========================================================================= */
+    body.page-id-16719 .infosystem-contact-panel--form,
+    body.page-slug-contacto .infosystem-contact-panel--form,
+    .infosystem-contact-panel--form {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 28px 24px 32px 24px !important;
+    }
+
+    /* Anular cualquier scroll interno o recorte forzado en form de Contact Form 7 */
+    body.page-id-16719 .infosystem-contact-panel--form form.wpcf7-form,
+    body.page-slug-contacto .infosystem-contact-panel--form form.wpcf7-form,
+    body.page-id-16719 .wpcf7 form,
+    body.page-slug-contacto .wpcf7 form,
+    .infosystem-contact-panel--form .wpcf7 form {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 0 !important;
+    }
+
+    /* Alinear las 3 columnas de la cuadrícula de contacto de forma armónica */
+    body.page-id-16719 .infosystem-contact-layout,
+    body.page-slug-contacto .infosystem-contact-layout {
+        align-items: stretch !important;
+    }
+
+    /* Espaciado elegante y separación en los campos del formulario de contacto */
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-form > p,
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-form > p {
+        margin: 0 0 10px 0 !important;
+    }
+
+    /* Caja de información RGPD estilizada, limpia y compacta */
+    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa,
+    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa {
+        font-size: 11px !important;
+        line-height: 1.45 !important;
+        margin: 10px 0 14px 0 !important;
+        background: #f8fafc !important;
+        padding: 10px 14px !important;
+        border-radius: 8px !important;
+        border-left: 3px solid #8B1A1A !important;
+        color: #64748b !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa p,
+    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa p {
+        margin: 0 0 4px 0 !important;
+        font-size: 11px !important;
+        line-height: 1.45 !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa p:last-child,
+    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa p:last-child {
+        margin: 0 !important;
+    }
+
+    /* Checkboxes con buena alineación y margen */
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-acceptance label,
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-checkbox label,
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-acceptance label,
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-checkbox label {
+        font-size: 12px !important;
+        color: #475569 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        line-height: 1.35 !important;
+        cursor: pointer !important;
+        margin: 6px 0 !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-acceptance input,
+    body.page-id-16719 .infosystem-contact-panel--form .wpcf7-checkbox input,
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-acceptance input,
+    body.page-slug-contacto .infosystem-contact-panel--form .wpcf7-checkbox input {
+        margin-top: 2px !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Botón de Enviar mensaje con sangrado limpio y holgura inferior */
+    body.page-id-16719 .infosystem-contact-panel--form .button-submit,
+    body.page-slug-contacto .infosystem-contact-panel--form .button-submit {
+        margin-top: 14px !important;
+        margin-bottom: 8px !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--form .button-submit p,
+    body.page-slug-contacto .infosystem-contact-panel--form .button-submit p {
+        margin: 0 !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--form input.wpcf7-submit,
+    body.page-slug-contacto .infosystem-contact-panel--form input.wpcf7-submit {
+        width: 100% !important;
+        background: linear-gradient(135deg, #8B1A1A 0%, #6d1313 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 999px !important;
+        font-size: 14.5px !important;
+        font-weight: 700 !important;
+        padding: 12px 24px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+        box-shadow: 0 4px 16px rgba(139,26,26,0.3) !important;
+        letter-spacing: 0.3px !important;
+    }
+    body.page-id-16719 .infosystem-contact-panel--form input.wpcf7-submit:hover,
+    body.page-slug-contacto .infosystem-contact-panel--form input.wpcf7-submit:hover {
+        background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(139,26,26,0.4) !important;
+    }
     </style>
 
     <?php
