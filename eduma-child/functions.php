@@ -792,6 +792,13 @@ function infosystem_dynamic_css() {
             grid-column: 1 !important;
             grid-row: auto !important;
         }
+    /* Eliminar separación superior en el banner de Política de Calidad */
+    .elementor-17765 .elementor-element.elementor-element-04b3f27,
+    body.page-id-17765 .elementor > .e-con:first-child,
+    body.page-id-17765 .elementor > .elementor-element:first-child {
+        padding-top: 0 !important;
+        --padding-top: 0px !important;
+        margin-top: 0 !important;
     }
 
     </style>
