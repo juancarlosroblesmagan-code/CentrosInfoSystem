@@ -17,8 +17,8 @@ Historial cronológico de todos los cambios realizados sobre el sitio.
   - **Diseño Completo:** Eliminación de sidebars/latest posts en páginas completas para una experiencia limpia y despejada.
 - **Sección de Registro en Home ("Regístrate y Empieza Hoy Mismo"):**
   - **Eliminación de scroll interno:** Se neutralizó la restricción de altura `max-height: 65vh; overflow: hidden auto;` forzada por el plugin de formularios de presupuesto.
-  - **Diseño en tarjetas simétricas:** Se unificó la columna derecha (formulario) como una tarjeta blanca (`#ffffff`, bordes redondeados `16px`, sombra sutil `0 10px 35px rgba(0,0,0,0.06)`, padding equilibrado `36px 32px`) a juego con la columna izquierda de cuenta atrás.
-  - **Márgenes y diseño de casillas (inputs):** Se dotó a los campos de texto, email, teléfono y consulta de márgenes limpios sobre el fondo blanco, bordes refinados (`#dcdfe4`) y foco con acento granate (`#8B1A1A`), integrando el campo anti-spam de verificación en una sola línea horizontal.
+  - **Diseño en tarjetas simétricas con sangrado y respiración:** Se perfeccionó la columna derecha (formulario) como una tarjeta blanca prémium (`padding: 46px 42px 54px 42px !important; border-radius: 18px !important; box-shadow: 0 12px 40px rgba(0,0,0,0.07) !important;`) dotando al formulario de generosos márgenes perimetrales blancos ("sangre"). El botón de envío y los campos ya no quedan pegados a los bordes.
+  - **Márgenes y diseño de casillas (inputs):** Se incrementó el espacio bajo el subtítulo (24px), se ampliaron los campos a 44px de altura con relleno interno de 10px 15px, y se dotó de un margen inferior holgado de 54px bajo el botón submit "Enviar Mensaje", manteniendo la tarjeta izquierda del contador sincronizada sin quiebre de bloques.
 - **Sincronización y Seguridad:**
   - Actualización, depuración y eliminación de bloques CSS duplicados en `functions.php`.
   - Sincronización íntegra de `functions.php` en `eduma-child/` con producción.

@@ -556,38 +556,51 @@ function infosystem_dynamic_css() {
         align-items: stretch !important;
     }
 
-    /* Columna izquierda (Contador y texto): tarjeta blanca elegante */
+    /* Columna izquierda (Contador y texto): tarjeta blanca elegante armonizada */
     body.home .elementor-element-e7657e1 {
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         background: #ffffff !important;
-        padding: 36px 32px !important;
-        border-radius: 16px !important;
-        border: 1px solid #f0f0f0 !important;
-        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        padding: 44px 30px !important;
+        border-radius: 18px !important;
+        border: 1px solid #eaeaea !important;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.07) !important;
         box-sizing: border-box !important;
         height: 100% !important;
     }
 
-    /* Columna derecha (Formulario): TARJETA BLANCA CON MÁRGENES ALREDEDOR DE LAS CASILLAS */
+    body.home .elementor-element-f1b3b39 .thim-countdown {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        gap: 12px !important;
+    }
+
+    body.home .elementor-element-f1b3b39 .thim-countdown .counter-block {
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Columna derecha (Formulario): TARJETA BLANCA CON MÁRGENES GENEROSOS Y SANGRE PERIMETRAL */
     body.home .elementor-element-ba75f78 {
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         background: #ffffff !important;
-        padding: 36px 32px !important;
-        border-radius: 16px !important;
-        border: 1px solid #f0f0f0 !important;
-        box-shadow: 0 10px 35px rgba(0,0,0,0.06) !important;
+        padding: 46px 42px 54px 42px !important;
+        border-radius: 18px !important;
+        border: 1px solid #eaeaea !important;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.07) !important;
         box-sizing: border-box !important;
         height: 100% !important;
     }
 
     body.home .elementor-element-ba75f78 > p {
-        margin: 0 0 18px 0 !important;
-        font-size: 14.5px !important;
-        line-height: 1.5 !important;
+        margin: 0 0 24px 0 !important;
+        font-size: 15px !important;
+        line-height: 1.55 !important;
         color: #475569 !important;
         font-weight: 500 !important;
     }
@@ -596,13 +609,14 @@ function infosystem_dynamic_css() {
     .elementor-element-ba75f78 form.wpcf7-form {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 12px 16px !important;
+        gap: 15px 18px !important;
         background: transparent !important;
         padding: 0 !important;
         border: none !important;
         box-shadow: none !important;
         box-sizing: border-box !important;
         width: 100% !important;
+        margin: 0 !important;
     }
 
     .elementor-element-ba75f78 form.wpcf7-form > p {
@@ -637,16 +651,16 @@ function infosystem_dynamic_css() {
         grid-column: span 2 !important;
     }
 
-    /* Casillas de entrada (inputs) estilizadas con fondos nítidos y margen blanco alrededor */
+    /* Casillas de entrada (inputs) estilizadas con fondos nítidos y margen blanco perimetral */
     .elementor-element-ba75f78 .wpcf7 input[type="text"],
     .elementor-element-ba75f78 .wpcf7 input[type="email"],
     .elementor-element-ba75f78 .wpcf7 input[type="tel"] {
         width: 100% !important;
-        height: 42px !important;
-        padding: 8px 14px !important;
+        height: 44px !important;
+        padding: 10px 15px !important;
         border: 1.5px solid #dcdfe4 !important;
-        border-radius: 8px !important;
-        font-size: 13.5px !important;
+        border-radius: 9px !important;
+        font-size: 14px !important;
         background: #ffffff !important;
         box-sizing: border-box !important;
         transition: border-color 0.2s, box-shadow 0.2s !important;
@@ -674,35 +688,35 @@ function infosystem_dynamic_css() {
         white-space: nowrap !important;
     }
     .elementor-element-ba75f78 .wpcf7-form-control-wrap[data-name="anti-spam"] input {
-        height: 42px !important;
+        height: 44px !important;
         max-width: 58px !important;
         text-align: center !important;
         font-weight: 700 !important;
         border: 1.5px solid #dcdfe4 !important;
         background: #ffffff !important;
-        border-radius: 8px !important;
+        border-radius: 9px !important;
     }
 
-    /* Textarea compacto */
+    /* Textarea con tamaño optimizado */
     .elementor-element-ba75f78 .wpcf7 textarea {
         width: 100% !important;
-        height: 48px !important;
-        min-height: 44px !important;
-        padding: 8px 14px !important;
+        height: 52px !important;
+        min-height: 48px !important;
+        padding: 10px 15px !important;
         border: 1.5px solid #dcdfe4 !important;
-        border-radius: 8px !important;
-        font-size: 13.5px !important;
+        border-radius: 9px !important;
+        font-size: 14px !important;
         background: #ffffff !important;
         resize: vertical !important;
         box-sizing: border-box !important;
     }
 
-    /* RGPD caja compacta */
+    /* RGPD caja con espaciado limpio */
     .elementor-element-ba75f78 .infosystem-rgpd-capa {
-        margin: 2px 0 4px 0 !important;
-        padding: 6px 12px !important;
-        font-size: 10.5px !important;
-        line-height: 1.35 !important;
+        margin: 4px 0 6px 0 !important;
+        padding: 8px 14px !important;
+        font-size: 11px !important;
+        line-height: 1.4 !important;
         background: #f8fafc !important;
         border-left: 3px solid #8B1A1A !important;
         border-radius: 6px !important;
@@ -731,9 +745,10 @@ function infosystem_dynamic_css() {
         margin-top: 1px !important;
     }
 
-    /* Botón submit destacado */
+    /* Botón submit destacado con margen inferior para sangre limpia */
     .elementor-element-ba75f78 .button-submit {
-        margin-top: 4px !important;
+        margin-top: 12px !important;
+        margin-bottom: 6px !important;
     }
     .elementor-element-ba75f78 .button-submit p {
         margin: 0 !important;
@@ -744,13 +759,13 @@ function infosystem_dynamic_css() {
         color: #ffffff !important;
         border: none !important;
         border-radius: 999px !important;
-        font-size: 14.5px !important;
+        font-size: 15px !important;
         font-weight: 700 !important;
-        padding: 11px 20px !important;
+        padding: 13px 24px !important;
         cursor: pointer !important;
         transition: all 0.25s ease !important;
-        box-shadow: 0 4px 14px rgba(139,26,26,0.3) !important;
-        letter-spacing: 0.2px !important;
+        box-shadow: 0 4px 16px rgba(139,26,26,0.32) !important;
+        letter-spacing: 0.3px !important;
     }
     .elementor-element-ba75f78 input.wpcf7-submit:hover {
         background: linear-gradient(135deg, #a31e1e 0%, #8B1A1A 100%) !important;
@@ -761,11 +776,12 @@ function infosystem_dynamic_css() {
     @media (max-width: 767px) {
         body.home .elementor-element-e7657e1,
         body.home .elementor-element-ba75f78 {
-            padding: 24px 18px !important;
+            padding: 28px 20px 34px 20px !important;
+            border-radius: 16px !important;
         }
         .elementor-element-ba75f78 form.wpcf7-form {
             grid-template-columns: 1fr !important;
-            gap: 10px !important;
+            gap: 12px !important;
         }
         .elementor-element-ba75f78 form.wpcf7-form > p {
             grid-column: 1 !important;
