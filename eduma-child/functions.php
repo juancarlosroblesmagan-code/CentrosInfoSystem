@@ -946,36 +946,100 @@ function infosystem_dynamic_css() {
         cursor: pointer !important;
     }
 
-    /* Caja de información RGPD (primera capa): limpia, elegante y bien integrada */
-    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa,
-    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa {
-        font-size: 11px !important;
-        line-height: 1.45 !important;
-        margin: 10px 0 16px 0 !important;
-        background: #f8fafc !important;
-        padding: 11px 14px !important;
-        border-radius: 8px !important;
+    /* Caja de información RGPD (primera capa): Acordeón limpio, discreto y elegante */
+    body.page-id-16719 .infosystem-rgpd-details,
+    body.page-slug-contacto .infosystem-rgpd-details,
+    .infosystem-rgpd-details {
+        margin: 8px 0 16px 0 !important;
         border: 1px solid #e2e8f0 !important;
-        border-left: 3px solid #8B1A1A !important;
-        color: #64748b !important;
+        border-radius: 8px !important;
+        background: #f8fafc !important;
+        overflow: hidden !important;
+        transition: all 0.2s ease !important;
     }
-    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa p,
-    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa p {
-        margin: 0 0 3px 0 !important;
+    body.page-id-16719 .infosystem-rgpd-details[open],
+    body.page-slug-contacto .infosystem-rgpd-details[open],
+    .infosystem-rgpd-details[open] {
+        border-color: #cbd5e1 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+    }
+    body.page-id-16719 .infosystem-rgpd-summary,
+    body.page-slug-contacto .infosystem-rgpd-summary,
+    .infosystem-rgpd-summary {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 9px 13px !important;
+        font-size: 11.5px !important;
+        font-weight: 600 !important;
+        color: #475569 !important;
+        cursor: pointer !important;
+        user-select: none !important;
+        outline: none !important;
+        list-style: none !important;
+        transition: background 0.15s ease, color 0.15s ease !important;
+    }
+    body.page-id-16719 .infosystem-rgpd-summary::-webkit-details-marker,
+    body.page-slug-contacto .infosystem-rgpd-summary::-webkit-details-marker,
+    .infosystem-rgpd-summary::-webkit-details-marker {
+        display: none !important;
+    }
+    body.page-id-16719 .infosystem-rgpd-summary:hover,
+    body.page-slug-contacto .infosystem-rgpd-summary:hover,
+    .infosystem-rgpd-summary:hover {
+        background: #f1f5f9 !important;
+        color: #1e293b !important;
+    }
+    body.page-id-16719 .infosystem-rgpd-details[open] .infosystem-rgpd-summary,
+    body.page-slug-contacto .infosystem-rgpd-details[open] .infosystem-rgpd-summary,
+    .infosystem-rgpd-details[open] .infosystem-rgpd-summary {
+        border-bottom: 1px solid #e2e8f0 !important;
+        background: #f1f5f9 !important;
+        color: #8B1A1A !important;
+    }
+    body.page-id-16719 .infosystem-rgpd-chevron,
+    body.page-slug-contacto .infosystem-rgpd-chevron,
+    .infosystem-rgpd-chevron {
+        font-size: 12px !important;
+        color: #94a3b8 !important;
+        transition: transform 0.2s ease !important;
+    }
+    body.page-id-16719 .infosystem-rgpd-details[open] .infosystem-rgpd-chevron,
+    body.page-slug-contacto .infosystem-rgpd-details[open] .infosystem-rgpd-chevron,
+    .infosystem-rgpd-details[open] .infosystem-rgpd-chevron {
+        transform: rotate(180deg) !important;
+        color: #8B1A1A !important;
+    }
+    body.page-id-16719 .infosystem-rgpd-body,
+    body.page-slug-contacto .infosystem-rgpd-body,
+    .infosystem-rgpd-body {
+        padding: 10px 14px 12px 14px !important;
+        font-size: 11px !important;
+        line-height: 1.45 !important;
+        color: #64748b !important;
+        background: #ffffff !important;
+    }
+    body.page-id-16719 .infosystem-rgpd-body p,
+    body.page-slug-contacto .infosystem-rgpd-body p,
+    .infosystem-rgpd-body p {
+        margin: 0 0 4px 0 !important;
         font-size: 11px !important;
         line-height: 1.45 !important;
     }
-    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa p:last-child,
-    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa p:last-child {
+    body.page-id-16719 .infosystem-rgpd-body p:last-child,
+    body.page-slug-contacto .infosystem-rgpd-body p:last-child,
+    .infosystem-rgpd-body p:last-child {
         margin: 0 !important;
     }
-    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa strong,
-    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa strong {
+    body.page-id-16719 .infosystem-rgpd-body strong,
+    body.page-slug-contacto .infosystem-rgpd-body strong,
+    .infosystem-rgpd-body strong {
         color: #1e293b !important;
         font-weight: 600 !important;
     }
-    body.page-id-16719 .infosystem-contact-panel--form .infosystem-rgpd-capa a,
-    body.page-slug-contacto .infosystem-contact-panel--form .infosystem-rgpd-capa a {
+    body.page-id-16719 .infosystem-rgpd-body a,
+    body.page-slug-contacto .infosystem-rgpd-body a,
+    .infosystem-rgpd-body a {
         color: #8B1A1A !important;
         text-decoration: underline !important;
         font-weight: 600 !important;
@@ -1021,19 +1085,41 @@ function infosystem_dynamic_css() {
 
 /**
  * Reordenar armónicamente los elementos del formulario de contacto (/contacto/):
- * Agrupa las dos casillas de verificación juntas y sitúa la capa informativa RGPD
- * inmediatamente después de ambas casillas para una maquetación y UX perfectas.
+ * 1. Agrupa las dos casillas de verificación juntas.
+ * 2. Transforma la capa RGPD en un acordeón interactivo, limpio y profesional (<details>).
+ * 3. Deja la maquetación y altura del panel en proporciones perfectas.
  */
 add_filter( 'wpcf7_form_elements', function( $elements ) {
-    if ( strpos( $elements, 'infosystem-rgpd-capa' ) !== false && strpos( $elements, 'news-acceptance' ) !== false ) {
-        if ( preg_match( '/<div class="infosystem-rgpd-capa"[^>]*>[\s\S]*?<\/div>/', $elements, $rgpd_m ) ) {
-            $rgpd_block = $rgpd_m[0];
-            $elements = str_replace( $rgpd_block, '', $elements );
-            $elements = preg_replace(
-                '/(<p><span class="wpcf7-form-control-wrap" data-name="news-acceptance">[\s\S]*?<\/p>)/',
-                '$1' . "\n" . $rgpd_block,
-                $elements
-            );
+    if ( strpos( $elements, 'infosystem-rgpd-capa' ) !== false ) {
+        // En PHP PCRE, el modificador /s permite que el punto coincida con saltos de línea
+        if ( preg_match( '/<div class="infosystem-rgpd-capa"[^>]*>(.*?)<\/div>/s', $elements, $rgpd_m ) ) {
+            $full_rgpd_div = $rgpd_m[0];
+            $rgpd_inner    = $rgpd_m[1];
+            
+            // Limpiar estilos inline antiguos de los párrafos interiores
+            $clean_inner = preg_replace( '/\s*style="[^"]*"/', '', $rgpd_inner );
+            
+            // Generar acordeón semántico nativo sin dependencias JS
+            $accordion = '<details class="infosystem-rgpd-details">'
+                       . '<summary class="infosystem-rgpd-summary">'
+                       . '<span class="infosystem-rgpd-summary-left">'
+                       . '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;vertical-align:-2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+                       . 'Información básica de protección de datos (RGPD)'
+                       . '</span>'
+                       . '<span class="infosystem-rgpd-chevron">▾</span>'
+                       . '</summary>'
+                       . '<div class="infosystem-rgpd-body">' . $clean_inner . '</div>'
+                       . '</details>';
+            
+            // Eliminar el bloque antiguo de su posición entre casillas
+            $elements = str_replace( $full_rgpd_div, '', $elements );
+            
+            // Insertarlo ordenadamente después de la segunda casilla de verificación (news-acceptance)
+            if ( preg_match( '/(<p><span class="wpcf7-form-control-wrap" data-name="news-acceptance">.*?<\/p>)/s', $elements, $news_m ) ) {
+                $elements = str_replace( $news_m[0], $news_m[0] . "\n" . $accordion, $elements );
+            } else {
+                $elements = str_replace( '<div class="button-submit">', $accordion . "\n" . '<div class="button-submit">', $elements );
+            }
         }
     }
     return $elements;
