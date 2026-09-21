@@ -1,0 +1,125 @@
+import subprocess
+import asyncio
+import json
+import base64
+import websockets
+import urllib.request
+import time
+
+async def inspect_contacto_dom():
+    chrome_path = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
+    port = 9385
+    t = int(time.time())
+    
+    proc = subprocess.Popen([
+        chrome_path,
+        '--headless=new',
+        f'--remote-debugging-port={port}',
+        '--window-size=1440,900',
+        '--disable-gpu',
+        f'https://centrosinfosystem.com/contacto/?nocache={t}'
+    ])
+    
+    await asyncio.sleep(5)
+    try:
+        with urllib.request.urlopen(f'http://127.0.0.1:{port}/json') as resp:
+            pages = json.loads(resp.read().decode())
+            target = next(p for p in pages if p.get('type') == 'page')
+            ws_url = target['webSocketDebuggerUrl']
+            
+        async with websockets.connect(ws_url, max_size=20*1024*1024) as ws:
+            msg_id = 1
+            async def send(m, p=None):
+                nonlocal msg_id
+                cmd = {'id': msg_id, 'method': m}
+                if p: cmd['params'] = p
+                msg_id += 1
+                await ws.send(json.dumps(cmd))
+                while True:
+                    r = json.loads(await ws.recv())
+                    if r.get('id') == cmd['id']: return r.get('result', {})
+            
+            await send('Page.enable')
+            await asyncio.sleep(1)
+            
+            # Hide cookie banners
+            await send('Runtime.evaluate', {
+                'expression': 'document.querySelectorAll(".tc-modal, .thimcookie-banner, #cookie-banner").forEach(el => el.style.display = "none");'
+            })
+            
+            # Find elements with scroll or overflow in the contact form area
+            diag = await send('Runtime.evaluate', {
+                'expression': '''
+                (function() {
+                    var results = [];
+                    var formPanel = document.querySelector(".infosystem-contact-panel--form");
+                    var curr = formPanel;
+                    while (curr && curr !== document.body) {
+                        var style = window.getComputedStyle(curr);
+                        results.push({
+                            tag: curr.tagName,
+                            class: curr.className,
+                            overflowY: style.overflowY,
+                            height: style.height,
+                            maxHeight: style.maxHeight,
+                            scrollHeight: curr.scrollHeight,
+                            clientHeight: curr.clientHeight
+                        });
+                        curr = curr.parentElement;
+                    }
+                    
+                    // Also check inside formPanel
+                    if (formPanel) {
+                        formPanel.querySelectorAll("*").forEach(function(el) {
+                            if (el.scrollHeight > el.clientHeight && el.clientHeight > 50) {
+                                var s = window.getComputedStyle(el);
+                                results.push({
+                                    TYPE: "INNER SCROLLING ELEMENT",
+                                    tag: el.tagName,
+                                    class: el.className,
+                                    overflowY: s.overflowY,
+                                    height: s.height,
+                                    maxHeight: s.maxHeight,
+                                    scrollHeight: el.scrollHeight,
+                                    clientHeight: el.clientHeight
+                                });
+                            }
+                        });
+                    }
+                    return results;
+                })()
+                ''',
+                'returnByValue': True
+            })
+            print("DOM DIAGNOSTICS:", json.dumps(diag.get('result', {}).get('value'), indent=2))
+            
+            # Capture screenshot of the contact section
+            box_res = await send('Runtime.evaluate', {
+                'expression': '''
+                (function() {
+                    var el = document.querySelector(".infosystem-contact-layout") || document.querySelector(".infosystem-contact-panel--form");
+                    if (!el) return null;
+                    var r = el.getBoundingClientRect();
+                    return { x: r.left, y: r.top + window.scrollY, width: r.width, height: r.height };
+                })()
+                ''',
+                'returnByValue': True
+            })
+            box = box_res.get('result', {}).get('value')
+            print("Contact layout rect:", box)
+            
+            # Scroll to it and screenshot
+            if box:
+                await send('Runtime.evaluate', {
+                    'expression': f'window.scrollTo(0, {box["y"] - 80});'
+                })
+                await asyncio.sleep(1)
+                full_res = await send('Page.captureScreenshot', {'format': 'png'})
+                with open(r'C:\Users\JuanCarlosMagan\.gemini\antigravity-ide\brain\c0b69da5-6f29-4b60-97b8-33f1a7b8190e\live_contacto_page_viewport.png', 'wb') as f:
+                    f.write(base64.b64decode(full_res['data']))
+                print("Saved live_contacto_page_viewport.png!")
+    finally:
+        proc.terminate()
+
+if __name__ == '__main__':
+    asyncio.run(inspect_contacto_dom())

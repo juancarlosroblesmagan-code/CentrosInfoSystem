@@ -5134,6 +5134,26 @@ function infosystem_render_whatsapp_bot() {
         }
         .night-link-wa { color: #15803d; font-weight: 600; text-decoration: none; }
         .night-link-mail { color: #8B1A1A; font-weight: 600; text-decoration: none; }
+
+        @media (max-width: 480px) {
+            .infosystem-wa-widget {
+                bottom: 16px !important;
+                right: 16px !important;
+            }
+            .infosystem-wa-modal {
+                bottom: 72px !important;
+                right: 0 !important;
+                width: calc(100vw - 32px) !important;
+                max-width: calc(100vw - 32px) !important;
+                max-height: calc(100vh - 96px) !important;
+                border-radius: 16px !important;
+            }
+            .infosystem-wa-tooltip {
+                max-width: calc(100vw - 40px) !important;
+                white-space: normal !important;
+                right: 0 !important;
+            }
+        }
     </style>
 
     <script id="infosystem-wa-js">
