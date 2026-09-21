@@ -2,6 +2,29 @@
 
 Historial cronológico de todos los cambios realizados sobre el sitio.
 
+## 2026-09-21 · Widget Flotante de WhatsApp (+34 619 06 19 33) y Chatbot IA Fuera de Horario (8:00h a 20:00h)
+
+- **Widget Flotante Oficial de WhatsApp (+34 619 06 19 33):**
+  - Implementado en la esquina inferior derecha con diseño nativo prémium, degradado verde WhatsApp (`#25D366` a `#128C7E`), icono oficial SVG y badge de estado luminoso.
+  - Cero dependencias externas o plugins pesados: Vanilla CSS y JavaScript nativo integrado para 100% de rendimiento WPO y cero impacto en Core Web Vitals (LCP/INP).
+- **Control Horario Inteligente (Zona Horaria Europe/Madrid):**
+  - **Modo Diurno (08:00h a 20:00h):**
+    - Indicador en verde "En directo · Asesoría de 8:00h a 20:00h".
+    - Mensaje de bienvenida del equipo de admisiones y orientación formativa.
+    - Botón de acción principal para iniciar chat directo en WhatsApp (`https://wa.me/34619061933`).
+    - Botón de llamada directa al móvil `+34 619 06 19 33` y enlace al email corporativo `info@centrosinfosystem.com`.
+    - Píldoras de preguntas rápidas que preparan el mensaje para enviar con un solo clic.
+  - **Modo Nocturno / Fuera de Horario (20:00h a 08:00h):**
+    - Conmutación automática a "Asistente IA · Fuera de horario".
+    - Aviso de jornada de oficina (8:00h a 20:00h) y activación del Asistente Virtual 24/7.
+    - Respuestas automáticas con base de conocimiento oficial de Centros Infosystem (cursos 100% subvencionados por SEPE/JCCM, sedes en Ciudad Real y Mudela, requisitos para desempleados y trabajadores).
+    - Soporte integrado para la API gratuita de Google Gemini (Free Tier) y fallback inteligente local para garantizar 100% de disponibilidad sin coste.
+    - **Formulario Interactivo de Agendamiento:** Permite al usuario solicitar una cita o llamada indicando su nombre, teléfono, franja horaria preferida (Mañana, Tarde o Lo antes posible) y curso de interés.
+    - Envío automático de la solicitud a `info@centrosinfosystem.com` vía REST API (`/wp-json/infosystem/v1/bot-schedule`).
+    - Canales alternativos directos: dejar mensaje en WhatsApp o correo electrónico.
+
+---
+
 ## 2026-09-20 / 2026-09-21 · Rediseño Integral Footer Dark, Fixes Elementor y Calibración Visual
 
 - **Footer Global Dark (Plantilla Elementor 8920):**

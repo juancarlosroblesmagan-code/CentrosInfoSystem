@@ -81,7 +81,12 @@ En la carpeta `eduma-child/tools/` dispones de herramientas en PHP para tareas a
 
 ## Últimas Mejoras y Rediseño de Producción (Septiembre 2026)
 
-1. **Footer Global Dark Premium (Elementor Template 8920)**:
+1. **Widget Flotante WhatsApp (+34 619 06 19 33) y Chatbot IA Fuera de Horario**:
+   - Botón interactivo responsive en esquina inferior derecha con degradado oficial WhatsApp y badge de estado.
+   - **Horario diurno (8:00h a 20:00h)**: Atención directa por WhatsApp, botón de llamada rápida a `+34 619 06 19 33` y chips de preguntas frecuentes.
+   - **Horario nocturno / Fuera de horario (20:00h a 8:00h)**: Activación automática del Asistente Virtual 24/7 con Inteligencia Artificial (soporte Google Gemini API Free Tier y fallback de conocimiento local).
+   - **Agendamiento interactivo**: Formulario integrado en el chat para solicitar citas o llamadas con envío inmediato de notificaciones a `info@centrosinfosystem.com`.
+2. **Footer Global Dark Premium (Elementor Template 8920)**:
    - Fondo oscuro `#121217` con acento superior granate `#8B1A1A` y 4 columnas proporcionadas sin cortes.
    - Iconos de contacto unificados en dorado corporativo (`#D4880A` con hover `#F3B33D`): mapa, teléfono, email (`\e919` thim-ekits) y sede.
    - Alineación vertical milimétrica de todos los textos de contacto (eje X exacto).

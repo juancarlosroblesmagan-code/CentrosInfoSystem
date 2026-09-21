@@ -31,6 +31,7 @@
 
 | Elemento | Acción realizada | Ubicación |
 |----------|------------------|-----------|
+| **Widget WhatsApp & Asistente IA** | Widget flotante (+34 619 06 19 33) con control horario (8h a 20h directo; fuera de horario chatbot IA 24/7 y agendador automático a `info@centrosinfosystem.com`). | `functions.php` y `inc/infosystem-whatsapp-bot.php` |
 | **Footer Global Dark** | Rediseño a fondo oscuro `#121217`, acento granate, 4 columnas amplias, iconos corporativos dorados alineados geométricamente y barra de copyright en fila única. | Plantilla Elementor ID **8920** |
 | **Formulario Home ("Regístrate")** | Eliminación de scroll interno (`max-height`), tarjeta blanca con generoso margen blanco perimetral (padding 46px 42px 54px), campos estilizados y botón submit con sangría limpia. | `functions.php` (CSS dinámico) y Elementor |
 | **Páginas Legales** | Unificación a plantilla `elementor_header_footer` (Ancho Completo) en *Política de Calidad* y *Aviso Legal*, eliminando dobles cabeceras y sidebars del tema padre. | WordPress DB y `style.css` |
@@ -49,8 +50,8 @@ CentrosInfoSystem/
 ├── snippets/                ← SEO JSON-LD para WPCode
 ├── ImagenesWeb/             ← imágenes WebP del sitio
 └── eduma-child/
-    ├── LEEME-DISEÑO.md      ← guía única de diseño
     ├── functions.php        ← child setup y encolado de módulos
+    ├── inc/                 ← módulos PHP (whatsapp-bot, woocommerce, etc.)
     ├── style.css            ← CSS del child con overrides de maquetación y cursos
     ├── js/
     │   └── infosystem-custom.js ← JS personalizado (acordeón colapsado, etc.)
