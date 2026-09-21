@@ -1,6 +1,6 @@
 # Estado del proyecto — centrosinfosystem.com
 
-**Última revisión:** 22/06/2026
+**Última revisión:** 21/09/2026
 
 ---
 
@@ -10,7 +10,7 @@
 > **REGLA DE ORO DE DESARROLLO LIMPIO:**
 > Queda estrictamente prohibido introducir código PHP personalizado innecesario, añadir nuevos plugins o modificar las plantillas del tema padre que compliquen el mantenimiento.
 > Todo el diseño visual y la maquetación pertenecen a **Elementor** y **WordPress nativo**. 
-> Los estilos CSS globales y las correcciones de diseño van exclusivamente en `style.css` del Child Theme (o CSS adicional en el Customizer). La lógica de backend va en snippets individuales de **WPCode**.
+> Los estilos CSS globales y las correcciones de diseño van exclusivamente en `style.css` y `functions.php` del Child Theme.
 
 ---
 
@@ -19,28 +19,25 @@
 | Elemento | Estado |
 |----------|--------|
 | Dominio | ✅ `https://centrosinfosystem.com` |
-| Web accesible | ✅ Home, blog, cursos, formularios |
+| Web accesible | ✅ Home, blog, cursos, páginas legales, formularios |
 | wp-admin / Plesk | ✅ Tras mu-plugin `infosystem-plesk-user-query-fix.php` |
 | SMTP (IONOS) | ✅ `info@centrosinfosystem.com` |
-| Tema activo | **Eduma Child Theme** (con estructura de archivos y estilos enlazados) |
-| Caché | WP Rocket — vaciar tras cada cambio de diseño |
+| Tema activo | **Eduma Child Theme** (`eduma-child` / `infosystem-child-theme`) |
+| Caché | WP Rocket — vaciado y operativo |
 
 ---
 
-## Cambios de Maquetación Realizados (22/06/2026)
+## Cambios y Mejoras Recientes (Septiembre 2026)
 
 | Elemento | Acción realizada | Ubicación |
 |----------|------------------|-----------|
-| **Itinerarios Formativos** | Eliminado / Ocultado completamente. | `style.css` del Child Theme |
-| **Talleres y Jornadas Formativas** | Sección de eventos eliminada por completo. | `style.css` del Child Theme |
-| **Acordeón ¿Por Qué Elegirnos?** | Forzado a cargar colapsado en inicio mediante JS. | `js/infosystem-custom.js` |
-| **Contenidos del Acordeón** | Redacción profesional de los 4 desplegables con enfoque SEO. | WPCode Snippet **16837** (DB) |
-| **Footer (Recomendados)** | Duplicado eliminado (barra negra) y VipOfertas limpio. | `antigravity-seo.php` (MU-plugin) y Widget de Texto **1210023** |
-| **Página de Cursos** | Layout expandido a 100% de la caja de ancho, sin sidebar. | `style.css` del Child Theme |
-| **Página de Cursos (Tarjetas)** | Tarjetas simétricas de igual altura, tipografía forzada y botón granate. | `style.css` del Child Theme |
-| **Detalles del Curso** | Meta box de ubicación/fechas y renderizado con iconos granates en ficha de curso. | `functions.php` y `style.css` del Child Theme |
-
----
+| **Footer Global Dark** | Rediseño a fondo oscuro `#121217`, acento granate, 4 columnas amplias, iconos corporativos dorados alineados geométricamente y barra de copyright en fila única. | Plantilla Elementor ID **8920** |
+| **Formulario Home ("Regístrate")** | Eliminación de scroll interno (`max-height`), tarjeta blanca con generoso margen blanco perimetral (padding 46px 42px 54px), campos estilizados y botón submit con sangría limpia. | `functions.php` (CSS dinámico) y Elementor |
+| **Páginas Legales** | Unificación a plantilla `elementor_header_footer` (Ancho Completo) en *Política de Calidad* y *Aviso Legal*, eliminando dobles cabeceras y sidebars del tema padre. | WordPress DB y `style.css` |
+| **Política de Calidad** | Eliminación de la separación blanca superior de 20px mediante anulación de `--padding-top`, enlazando el banner a ras del menú dorado (`gap = 0 px`). | `functions.php` (`infosystem_dynamic_css`) |
+| **Conócenos** | Expansión del banner CTA granate a full-width real (`100vw`) eliminando la franja blanca lateral. | `style.css` del Child Theme |
+| **Cursos (Banda Finalizado)** | Lógica automática para detectar cursos pasados y mostrar la banda "FINALIZADO" en los banners. | `functions.php` y `style.css` |
+| **Limpieza de Repositorio** | Eliminación de la carpeta temporal `scratch/` (más de 380 archivos) y notas obsoletas del child theme. | Repositorio Git |
 
 ## Repositorio (Estructura Canónica)
 

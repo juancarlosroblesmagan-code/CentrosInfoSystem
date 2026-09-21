@@ -30,8 +30,8 @@ Sitio oficial de **Infosystem — Centro de Educación Polivalente** ([centrosin
 
 | Guía | Contenido |
 |------|-----------|
-| `eduma-child/LEEME-DISEÑO.md` | Índice único: menú, CSS, Elementor, CF7 |
-| `docs/ESTADO-PROYECTO.md` | Checklist actual y WPCode IDs |
+| `docs/ESTADO-PROYECTO.md` | Checklist actual, arquitectura y WPCode IDs |
+| `docs/04-pages.md` | Guía de páginas institucionales y legales |
 | `eduma-child/tools/CAMBIOS-SIN-SUBIR-ARCHIVOS.md` | Pasos en wp-admin sin subir PHP |
 | `eduma-child/tools/PLESK-LIMPIEZA-SERVIDOR.md` | Qué borrar en producción |
 
@@ -89,12 +89,14 @@ En la carpeta `eduma-child/tools/` dispones de herramientas en PHP para tareas a
 2. **Páginas Institucionales y Elementor**:
    - **Conócenos**: Corrección del banner CTA granate a full-width real (`100vw`) eliminando la franja blanca lateral.
    - **Cursos**: Detección y renderizado automático de la banda "FINALIZADO" según fechas de inicio y fin.
-   - **Páginas Legales**: Cabeceras unificadas con fondo granate y tipografía Merriweather; eliminación de banners redundantes.
-   - **Ancho Completo**: Eliminación de sidebars/latest posts en páginas completas según directrices de diseño.
-3. **Seguridad y Calidad**:
+   - **Páginas Legales**: Cabeceras unificadas con fondo granate (`.legal-header`) y tipografía Merriweather en Elementor Ancho Completo, eliminando cabeceras duplicadas del tema padre.
+   - **Política de Calidad**: Corrección milimétrica de la separación superior de 20px, unificando el banner a ras de la línea dorada del menú (`gap = 0 px`) idéntico a Política de Cookies y Aviso Legal.
+   - **Formulario Home ("Regístrate y Empieza Hoy Mismo")**: Maquetación de la tarjeta con generoso margen blanco perimetral (padding 46px 42px 54px), campos con espaciado uniforme, eliminación de scroll interno y botón de envío sin recortes ni pegado al borde.
+3. **Seguridad, Mantenimiento y Calidad**:
    - Protección antispam de correos electrónicos mediante ofuscación Base64 y decodificación JS.
-   - `.gitignore` endurecido para prevenir subida de credenciales, backups o temporales.
    - Sincronización íntegra de `functions.php` con el Child Theme de producción.
+   - Depuración integral del repositorio: eliminación de scripts y volcados de depuración temporales, consolidando una base de código limpia, mantenible y libre de archivos confusos.
+   - Endurecimiento de `.gitignore` para proteger credenciales, respaldos y entornos locales.
 
 ---
 

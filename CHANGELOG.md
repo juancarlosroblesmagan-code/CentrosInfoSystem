@@ -16,15 +16,17 @@ Historial cronológico de todos los cambios realizados sobre el sitio.
   - **Páginas Legales (Aviso Legal, Política de Calidad, Política de Privacidad y Cookies):**
     - Se unificó la plantilla de WordPress a **`elementor_header_footer` (Elementor Ancho Completo)** en *Política de Calidad* y *Aviso Legal*, eliminando la cabecera duplicada por defecto del tema Eduma (`top_heading`).
     - Todas las páginas normativas quedan idénticas a *Política de Cookies*: con cabecera corporativa única en degradado granate (`.legal-header`) y editables al 100% en Elementor sin interferencias.
+    - **Alineación Superior en Política de Calidad:** Se corrigió la separación de 20px generada por la variable `--padding-top: 20px` del contenedor raíz de Elementor (`.elementor-element-04b3f27`). Ahora el banner granate inicia exactamente a ras de la línea dorada inferior del menú de navegación (`gap = 0 px`), en perfecta armonía con el resto de páginas legales.
   - **Diseño Completo:** Eliminación de sidebars/latest posts en páginas completas para una experiencia limpia y despejada.
 - **Sección de Registro en Home ("Regístrate y Empieza Hoy Mismo"):**
   - **Eliminación de scroll interno:** Se neutralizó la restricción de altura `max-height: 65vh; overflow: hidden auto;` forzada por el plugin de formularios de presupuesto.
   - **Diseño en tarjetas simétricas con sangrado y respiración:** Se perfeccionó la columna derecha (formulario) como una tarjeta blanca prémium (`padding: 46px 42px 54px 42px !important; border-radius: 18px !important; box-shadow: 0 12px 40px rgba(0,0,0,0.07) !important;`) dotando al formulario de generosos márgenes perimetrales blancos ("sangre"). El botón de envío y los campos ya no quedan pegados a los bordes.
   - **Márgenes y diseño de casillas (inputs):** Se incrementó el espacio bajo el subtítulo (24px), se ampliaron los campos a 44px de altura con relleno interno de 10px 15px, y se dotó de un margen inferior holgado de 54px bajo el botón submit "Enviar Mensaje", manteniendo la tarjeta izquierda del contador sincronizada sin quiebre de bloques.
-- **Sincronización y Seguridad:**
+- **Sincronización, Mantenimiento y Limpieza del Repositorio:**
   - Actualización, depuración y eliminación de bloques CSS duplicados en `functions.php`.
   - Sincronización íntegra de `functions.php` en `eduma-child/` con producción.
   - Endurecimiento de `.gitignore` con exclusión de archivos de contraseñas, credenciales, backups y entornos temporales.
+  - **Depuración de archivos obsoletos y carpetas redundantes:** Eliminación de la carpeta temporal `scratch/` (más de 380 scripts de depuración, volcados HTML/JSON y capturas intermedias) y supresión de archivos de notas temporales desfasadas en el Child Theme (`LEEME-MAÑANA.md`, `LEEME-DISEÑO.md`, `DEPLOY-FINAL.md`, `actualizar-paginas-legales.php`, `infosystem-homepage.html`), consolidando la documentación en `README.md`, `CHANGELOG.md` y `docs/`.
 
 ---
 
