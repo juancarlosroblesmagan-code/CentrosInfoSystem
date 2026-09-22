@@ -2,6 +2,35 @@
 
 Historial cronológico de todos los cambios realizados sobre el sitio.
 
+## 2026-09-22 · Optimización Mobile, Formulario de Contacto RGPD, Branding Chatbot y Resolución Integral SEO / Search Console
+
+- **Auditoría Técnica y Corrección en Google Search Console (404 y Sitemaps):**
+  - **Eliminación de bucle 404 del Megamenú (Plantilla Elementor 13633):** Se detectó que el menú global inyectaba enlaces a cursos demo de LearnPress (`/course/create-an-lms-website-with-learnpress/`, etc.) en todas las páginas de la web, provocando que Googlebot los rastreara continuamente reportando errores 404 masivos. Se aplicó un filtro en `eduma-child/functions.php` que intercepta `the_content`, `elementor/frontend/the_content` y `elementor/theme/header/the_content`, sustituyendo las rutas demo por la URL canónica [`/cursos/`](https://centrosinfosystem.com/cursos/).
+  - **Hispanización de Categorías y Slugs en Inglés:**
+    - Reescritura nativa en WordPress: `add_rewrite_rule( '^categoria/(.+?)/?$', 'index.php?category_name=$matches[1]', 'top' )` y `category_base = 'categoria'`.
+    - Redirección 301 server-side permanente de `/category/(.+)` a `/categoria/$1` (verificada en vivo con HTTP 200 OK).
+    - Redirecciones 301 para slugs residuales: `/user-account/` -> `/mi-cuenta/`, `/become-a-teacher/` -> `/trabaja-con-nosotros/`.
+    - Redirección 301 de canibalización: `/como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha-2/` a su URL canónica limpia.
+  - **Saneamiento Radical del Sitemap XML (`page-sitemap.xml`):**
+    - Google Search Console alertaba de *"URL enviada contiene noindex"*. Se eliminaron del sitemap las páginas de utilidad de WooCommerce (`/carrito/`, `/mi-cuenta/`, `/user-account/`), la landing temporal (`/formacion-premium-con-descuento/`) y la página duplicada (`-2/`).
+    - Implementación de filtros Yoast (`wpseo_exclude_from_sitemap_by_post_ids`, `wpseo_posts_where`), purga automática de transitorios y filtrado infalible en `parse_request`.
+    - El sitemap se redujo de 11 a **7 URLs únicas, canónicas e indexables**.
+  - **Traducción del Megamenú al Español:**
+    - Reemplazo de textos de plantilla ("Ficha de curso estilo 1", etc.) por categorías reales: *Cursos Subvencionados*, *Cursos Desempleados*, *Cursos Trabajadores*, *Cursos Online Homologados*, *Certificados de Profesionalidad*, *Formación Bonificada FUNDAE*, *Cursos Madrid*, *Cursos Castilla-La Mancha*.
+
+- **Página de Contacto y Formulario (`/contacto/`):**
+  - **Eliminación de Scroll Interno:** Supresión de las barras de desplazamiento dentro del formulario, adaptando su altura al contenido de forma natural.
+  - **Acordeón Desplegable RGPD:** Sustitución del bloque denso de texto legal por un componente `<details class="infosystem-rgpd-accordion">` estilizado en tonos suaves y corporativos, colapsado por defecto y expandible con un solo clic.
+  - **Agrupación Visual de Casillas (Checkboxes):** Checkboxes de privacidad y comunicaciones alineados limpiamente con espaciado uniforme.
+  - **Botón de Envío Corporativo:** Sustitución del botón cuadrado plano por un botón granate prémium (`border-radius: 10px`, ancho completo, tipografía optimizada, efectos hover y sombras suaves).
+  - **Simetría y Maquetación:** Equilibrio estético entre la columna de información de contacto (sedes, teléfonos, mapa) y la columna del formulario.
+
+- **Widget Flotante WhatsApp & Asistente IA:**
+  - **Branding Oficial:** Integración del logotipo oficial de Centros InfoSystem (`InfoSystem-logo.png`) en el botón lanzador en sustitución de las iniciales de texto.
+  - **Optimización Mobile:** Ajustes de viewport y `z-index: 999999` para evitar solapamientos con la navegación móvil, barras inferiores o banners de cookies.
+
+---
+
 ## 2026-09-21 · Widget Flotante de WhatsApp (+34 619 06 19 33) y Chatbot IA Fuera de Horario (8:00h a 20:00h)
 
 - **Widget Flotante Oficial de WhatsApp (+34 619 06 19 33):**
