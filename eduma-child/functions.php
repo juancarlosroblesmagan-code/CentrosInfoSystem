@@ -5382,3 +5382,170 @@ function infosystem_render_whatsapp_bot() {
     </script>
     <?php
 }
+
+/**
+ * 21. ARQUITECTURA TÉCNICA SEO: HISPANIZACIÓN DE SLUGS, REDIRECCIONES 301 Y SITEMAP
+ * ----------------------------------------------------------------------------------
+ * - Hispanización de taxonomías: /category/ -> /categoria/
+ * - Redirección 301 de URLs obsoletas y demo (/courses/*, /course/*) -> /cursos/
+ * - Redirección 301 de canibalización: como-funcionan-...-2/ -> como-funcionan-.../
+ * - Redirección 301 de slugs en inglés: /user-account/ -> /mi-cuenta/, /become-a-teacher/ -> /trabaja-con-nosotros/
+ * - Exclusión de URLs 'noindex' y duplicadas del Sitemap XML de Yoast SEO
+ * - Hispanización de textos y enlaces demo del megamenú
+ */
+
+// 1. Establecer la base de categorías nativa en español ('categoria') y regla de rewrite
+add_action( 'init', function() {
+    add_rewrite_rule( '^categoria/(.+?)/?$', 'index.php?category_name=$matches[1]', 'top' );
+    if ( get_option( 'category_base' ) !== 'categoria' ) {
+        update_option( 'category_base', 'categoria' );
+    }
+}, 1 );
+
+// 2. Redirecciones permanentes 301 para SEO y resolución de errores 404
+add_action( 'template_redirect', function() {
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    $path        = parse_url( $request_uri, PHP_URL_PATH );
+    $query       = parse_url( $request_uri, PHP_URL_QUERY );
+
+    if ( empty( $path ) ) {
+        return;
+    }
+
+    $trimmed_path = '/' . trim( $path, '/' ) . '/';
+
+    // A. /category/* -> /categoria/* (301)
+    if ( preg_match( '#^/category/(.+)$#i', $trimmed_path, $matches ) ) {
+        $dest = home_url( '/categoria/' . $matches[1] );
+        if ( ! empty( $query ) ) {
+            $dest .= '?' . $query;
+        }
+        wp_safe_redirect( $dest, 301 );
+        exit;
+    }
+
+    // B. Rutas demo en inglés /courses/* y /course/* -> /cursos/ (301)
+    if ( preg_match( '#^/(?:courses|course)(?:/.*)?$#i', $trimmed_path ) ) {
+        wp_safe_redirect( home_url( '/cursos/' ), 301 );
+        exit;
+    }
+
+    // C. Canibalización: versión duplicada con sufijo '-2/' -> URL canónica
+    if ( strpos( $trimmed_path, '/como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha-2/' ) !== false ) {
+        wp_safe_redirect( home_url( '/como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha/' ), 301 );
+        exit;
+    }
+
+    // D. Slugs residuales en inglés
+    if ( $trimmed_path === '/user-account/' ) {
+        wp_safe_redirect( home_url( '/mi-cuenta/' ), 301 );
+        exit;
+    }
+    if ( $trimmed_path === '/become-a-teacher/' ) {
+        wp_safe_redirect( home_url( '/trabaja-con-nosotros/' ), 301 );
+        exit;
+    }
+}, 1 );
+
+// 3. Excluir páginas noindexadas y duplicadas del Sitemap XML de Yoast SEO
+add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', function( $excluded_ids ) {
+    // 10: Carrito (/carrito/)
+    // 12: Mi Cuenta (/mi-cuenta/)
+    // 17765: Landing con noindex (/formacion-premium-con-descuento/)
+    // 16853: Página duplicada (-2/)
+    $to_exclude = array( 10, 12, 17765, 16853 );
+    return array_unique( array_merge( (array) $excluded_ids, $to_exclude ) );
+} );
+
+// Filtro estricto URL por URL en el sitemap de Yoast
+add_filter( 'wpseo_sitemap_entry', function( $url, $type, $post ) {
+    if ( ! empty( $url['loc'] ) ) {
+        $loc = $url['loc'];
+        if ( strpos( $loc, '/carrito' ) !== false ||
+             strpos( $loc, '/mi-cuenta' ) !== false ||
+             strpos( $loc, '-2' ) !== false ||
+             strpos( $loc, '/user-account' ) !== false ||
+             strpos( $loc, '/formacion-premium-con-descuento' ) !== false ||
+             strpos( $loc, '/sin-categoria' ) !== false ) {
+            return false;
+        }
+    }
+    return $url;
+}, 10, 3 );
+
+add_filter( 'wpseo_sitemap_url', function( $url_xml, $url ) {
+    $loc = is_array( $url ) && isset( $url['loc'] ) ? $url['loc'] : ( is_string( $url ) ? $url : '' );
+    if ( strpos( $loc, '/carrito' ) !== false ||
+         strpos( $loc, '/mi-cuenta' ) !== false ||
+         strpos( $loc, '-2' ) !== false ||
+         strpos( $loc, '/user-account' ) !== false ||
+         strpos( $loc, '/formacion-premium-con-descuento' ) !== false ||
+         strpos( $loc, '/sin-categoria' ) !== false ) {
+        return '';
+    }
+    return $url_xml;
+}, 99, 2 );
+
+// Filtro SQL a nivel de consulta de Yoast para que nunca extraiga estas páginas
+add_filter( 'wpseo_posts_where', function( $where, $post_type ) {
+    if ( $post_type === 'page' ) {
+        $where .= " AND ID NOT IN (10, 12, 25, 16853, 17765) ";
+    }
+    return $where;
+}, 10, 2 );
+
+// Auto-invalidación profunda de caché y filtrado infalible en peticiones al sitemap
+add_action( 'parse_request', function( $wp ) {
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    if ( strpos( $uri, 'sitemap' ) !== false ) {
+        global $wpdb;
+        $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient%sitemap%' OR option_name LIKE '_transient%wpseo%'" );
+        delete_transient( 'wpseo_sitemap_cache_validator' );
+
+        ob_start( function( $xml ) {
+            if ( empty( $xml ) || ! is_string( $xml ) ) {
+                return $xml;
+            }
+            $patterns = array(
+                '#\s*<url>\s*<loc>[^<]*/carrito/</loc>.*?</url>#s',
+                '#\s*<url>\s*<loc>[^<]*/mi-cuenta/</loc>.*?</url>#s',
+                '#\s*<url>\s*<loc>[^<]*/user-account/</loc>.*?</url>#s',
+                '#\s*<url>\s*<loc>[^<]*-2/</loc>.*?</url>#s',
+                '#\s*<url>\s*<loc>[^<]*/formacion-premium-con-descuento/</loc>.*?</url>#s',
+                '#\s*<url>\s*<loc>[^<]*/category/sin-categoria/</loc>.*?</url>#s',
+            );
+            return preg_replace( $patterns, '', $xml );
+        } );
+    }
+}, -9999 );
+
+// 4. Hispanización y corrección de enlaces demo en la cabecera y megamenú
+add_filter( 'the_content', 'infosystem_clean_english_menu_links', 999 );
+add_filter( 'elementor/frontend/the_content', 'infosystem_clean_english_menu_links', 999 );
+add_filter( 'elementor/theme/header/the_content', 'infosystem_clean_english_menu_links', 999 );
+function infosystem_clean_english_menu_links( $content ) {
+    if ( empty( $content ) || ! is_string( $content ) ) {
+        return $content;
+    }
+
+    // Reemplazar enlaces demo a courses/ o course/ por /cursos/
+    if ( strpos( $content, '/courses' ) !== false || strpos( $content, '/course' ) !== false ) {
+        $content = preg_replace( '#https?://centrosinfosystem\.com/courses/[^"\'\s>]*#i', home_url( '/cursos/' ), $content );
+        $content = preg_replace( '#https?://centrosinfosystem\.com/course/[^"\'\s>]*#i', home_url( '/cursos/' ), $content );
+        $content = preg_replace( '#https?://centrosinfosystem\.com/courses/?(["\'\s>])#i', home_url( '/cursos/' ) . '$1', $content );
+    }
+
+    // Reemplazar textos de plantilla demo por categorías reales en español
+    $translations = array(
+        'Ficha de curso por defecto'   => 'Cursos Subvencionados',
+        'Ficha de curso estilo 1'      => 'Cursos Desempleados',
+        'Ficha de curso estilo 2'      => 'Cursos Trabajadores',
+        'Ficha de curso estilo 3'      => 'Cursos Online Homologados',
+        'Ficha de curso presencial'    => 'Certificados de Profesionalidad',
+        'Ficha de curso especializada' => 'Formación Bonificada FUNDAE',
+        'Ficha básica 1'               => 'Cursos Madrid',
+        'Ficha básica 2'               => 'Cursos Castilla-La Mancha',
+    );
+
+    return strtr( $content, $translations );
+}

@@ -84,6 +84,14 @@ def deploy():
             session.get(m_dash_purge.group(1).replace('&amp;', '&'), timeout=25)
             print("Admin-bar purge triggered!")
 
+    # Purge Yoast Sitemap Cache
+    session.get("https://centrosinfosystem.com/?purge_sitemap_cache=1", timeout=20)
+    print("Yoast Sitemap cache purged!")
+
+    # Flush WordPress rewrite rules via permalinks page
+    perm_page = session.get("https://centrosinfosystem.com/wp-admin/options-permalink.php", timeout=25)
+    print(f"Permalinks flush status: {perm_page.status_code}")
+
     return True
 
 if __name__ == '__main__':
