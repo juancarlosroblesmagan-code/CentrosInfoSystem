@@ -1,5 +1,5 @@
 # Resumen de Sesión y Guía de Continuidad — Centros InfoSystem
-**Fecha:** 22 de Septiembre de 2026  
+**Fecha:** 24 de Septiembre de 2026  
 **Sitio en Producción:** `https://centrosinfosystem.com`  
 **Tema Activo:** `eduma-child` (Child Theme del tema Eduma)
 
@@ -8,18 +8,15 @@
 ## 1. Estado Actual del Proyecto (Producción 100% Operativo)
 
 1. **Google Search Console & SEO Técnico:**
-   - **404 Eliminados:** Detectado el origen de los errores 404 masivos en la plantilla Elementor ID `13633` (Megamenú global). Se reemplazaron todas las rutas demo de LearnPress (`/courses/*`, `/course/*`) por la ruta canónica `/cursos/`.
-   - **Hispanización de Arquitectura:**
-     - `/category/*` redirige con HTTP 301 a `/categoria/*`.
-     - Regla nativa `add_rewrite_rule( '^categoria/(.+?)/?$', 'index.php?category_name=$matches[1]', 'top' )` activa y validada con **200 OK**.
-     - Slugs en inglés redirigidos con 301: `/user-account/` -> `/mi-cuenta/`, `/become-a-teacher/` -> `/trabaja-con-nosotros/`.
-     - Canibalización resuelta: `/como-funcionan-cursos-subvencionados-sepe-castilla-la-mancha-2/` -> 301 a canónica sin `-2/`.
-   - **Sitemap XML Saneado (`page-sitemap.xml`):**
-     - Exclusión estricta de páginas con noindex (`/formacion-premium-con-descuento/`), páginas de utilidad de WooCommerce (`/carrito/`, `/mi-cuenta/`, `/user-account/`) y páginas clonadas (`-2/`).
-     - Sitemap reducido a 7 URLs limpias e indexables.
-     - Caché de sitemaps purgada y filtrada a nivel de `parse_request`.
-   - **Traducción del Megamenú:**
-     - Textos demo de plantilla sustituidos por categorías formativas reales en español (*Cursos Subvencionados*, *Cursos Desempleados*, *Cursos Trabajadores*, *Cursos Online Homologados*, *Certificados de Profesionalidad*, *Formación Bonificada FUNDAE*, *Cursos Madrid*, *Cursos Castilla-La Mancha*).
+   - **404 Eliminados al 100%:** Detectados y corregidos los enlaces residuales en megamenú y Home a `/curso-ofimatica-en-la-nube-con-google-drive-clm/` y `/curso-de-gestion-de-negocios-online-2-0-clm/`. Se redirigen server-side con HTTP 301 a `/curso-de-ofimatica/` y `/cursos/`, y se sustituyen preventivamente en el DOM. Cero errores 404 en el rastreo interno.
+   - **Sitemaps XML Saneados (Yoast SEO):**
+     - Exclusión de páginas con noindex (`/cursos-subvencionados-comunidad-de-madrid/`, `/formacion-premium-con-descuento/`).
+     - `category-sitemap.xml` emite directamente las URLs en español (`/categoria/*`) eliminando los saltos 301 del sitemap.
+     - Resumen del sitemap global: 35 URLs limpias, 0 errores, 0 redirecciones, 0 noindex.
+   - **Jerarquía Semántica H1 (1 único H1 por página):**
+     - Home: Convertido el título de pantalla de precarga/splash a `div`, dejando 1 único H1.
+     - Cursos: Temarios y módulos WooCommerce convertidos a `<h3>`, dejando 1 único H1 por curso.
+     - Conócenos, Contacto y FAQ: Subtítulos internos a `<h2>`, dejando 1 único H1 por página.
 
 2. **Página de Contacto (`/contacto/`):**
    - Eliminación de barras de desplazamiento internas en el formulario.
