@@ -1,6 +1,6 @@
 # Estado del proyecto — centrosinfosystem.com
 
-**Última revisión:** 22/09/2026
+**Última revisión:** 23/09/2026
 
 ---
 
@@ -24,7 +24,9 @@
 | SMTP (IONOS) | ✅ `info@centrosinfosystem.com` |
 | Tema activo | **Eduma Child Theme** (`eduma-child` / `infosystem-child-theme`) |
 | Caché | WP Rocket — vaciado y operativo |
-| Sitemaps & Search Console | ✅ Resueltos bucles 404, sitemaps limpios (7 URLs) y 301 nativos |
+| Sitemaps & Search Console | ✅ 0 errores, 0 redirecciones, 0 noindex en Sitemaps XML (35 URLs indexables) |
+| Enlaces Internos | ✅ 0 errores 404 en rastreo interno completo |
+| Jerarquía Semántica | ✅ Exactamente 1 H1 único por página en todo el sitio |
 
 ---
 
@@ -32,6 +34,9 @@
 
 | Elemento | Acción realizada | Ubicación |
 |----------|------------------|-----------|
+| **Corrección 404 Cursos Antiguos** | Eliminación de 404 para `/curso-ofimatica-en-la-nube...` y `/curso-de-gestion-de-negocios...`. Redirección 301 server-side a `/curso-de-ofimatica/` y `/cursos/`, y reemplazo en caliente en DOM. | `eduma-child/functions.php` (Sección 21) |
+| **Saneamiento Total Sitemaps** | Exclusión de `/cursos-subvencionados-comunidad-de-madrid/` (noindex) e hispanización directa a `/categoria/*` en `category-sitemap.xml` (0 redirects). | `eduma-child/functions.php` (Sección 21) |
+| **Normalización Semántica H1** | Eliminado H1 duplicado en pantalla splash de Home (convertido a `div`). Fichas de cursos normalizadas de 20 H1s a 1 H1 (temarios a H3). Conócenos y Contacto a 1 H1. | `eduma-child/functions.php` (Secciones 18 y 21) |
 | **Resolución Google Search Console** | Eliminación de 404 de cursos demo en megamenú (`/course/create-an-lms...`), redirecciones 301 server-side de `/courses/*` a `/cursos/`. | `eduma-child/functions.php` (Sección 21) |
 | **Hispanización de Arquitectura** | Redirección 301 de `/category/*` a `/categoria/*` con rewrite nativo (200 OK). Redirección de `/user-account/` a `/mi-cuenta/` y `/become-a-teacher/` a `/trabaja-con-nosotros/`. Corrección de canibalización `-2/`. | `eduma-child/functions.php` (Sección 21) |
 | **Saneamiento Sitemap XML** | Exclusión estricta de páginas noindex y de utilidad (`/carrito/`, `/mi-cuenta/`, `/formacion-premium-con-descuento/`, `-2/`) en `page-sitemap.xml`. Purga de transitorios. De 11 a 7 URLs canónicas. | `eduma-child/functions.php` (Sección 21) |

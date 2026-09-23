@@ -2,6 +2,24 @@
 
 Historial cronológico de todos los cambios realizados sobre el sitio.
 
+## 2026-09-23 · Corrección Definitiva 404 Cursos, Saneamiento Total de Sitemaps y Normalización Semántica H1
+
+- **Resolución Completa de Enlaces Rotos 404 (Menú Global y Home):**
+  - Se detectaron dos slugs antiguos de cursos presentes en los menús y widgets: `/curso-ofimatica-en-la-nube-con-google-drive-clm/` y `/curso-de-gestion-de-negocios-online-2-0-clm/`.
+  - Se implementaron redirecciones 301 permanentes server-side hacia sus URLs canónicas en 200 OK ([`/curso-de-ofimatica/`](https://centrosinfosystem.com/curso-de-ofimatica/) y [`/cursos/`](https://centrosinfosystem.com/cursos/)).
+  - Se interceptó el renderizado del DOM en header, contenido, footer y widgets de texto sustituyendo proactivamente dichos slugs antiguos por las URLs finales en 200 OK.
+  - Cero enlaces 404 en todo el rastreo interno del sitio.
+
+- **Saneamiento Total de Sitemaps XML (Yoast SEO):**
+  - **Exclusión de Noindex:** Excluida `/cursos-subvencionados-comunidad-de-madrid/` (página con `noindex, nofollow`) de todos los sitemaps XML, previniendo alertas en Google Search Console.
+  - **Hispanización de Categorías:** En `category-sitemap.xml`, se transformaron todas las URLs de taxonomía que apuntaban a `/category/*` para emitir directamente las rutas en español `/categoria/*` con código 200 OK (0 redirecciones dentro del sitemap).
+  - El sitemap global auditado pasa a **35 URLs limpias, 0 errores, 0 redirecciones y 0 URLs noindex**.
+
+- **Normalización Jerárquica y Semántica H1 (1 H1 por página):**
+  - **Home:** Se modificó la pantalla de precarga/splash (`infosystem-splash-title`) de etiqueta `<h1>` a `<div>`, eliminando la duplicidad y dejando 1 único H1 en la Home.
+  - **Cursos (Fichas WooCommerce):** Se normalizaron los encabezados internos de los módulos y temarios a `<h3>`, reduciendo de 20 H1s a **1 único H1 oficial por curso**.
+  - **Conócenos, Contacto y FAQ:** Se degradaron los H1 secundarios internos de bloques a `<h2>`, dejando únicamente el titular de cabecera como H1 principal en cada página.
+
 ## 2026-09-22 · Optimización Mobile, Formulario de Contacto RGPD, Branding Chatbot y Resolución Integral SEO / Search Console
 
 - **Auditoría Técnica y Corrección en Google Search Console (404 y Sitemaps):**

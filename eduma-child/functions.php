@@ -2465,7 +2465,7 @@ function infosystem_mobile_splash_screen() {
 
             <h5 class="infosystem-splash-subtitle">Especialistas en Formación para el Empleo</h5>
 
-            <h1 class="infosystem-splash-title">Formación Gratuita para Mejorar tu Futuro Profesional</h1>
+            <div class="infosystem-splash-title">Formación Gratuita para Mejorar tu Futuro Profesional</div>
 
             <p class="infosystem-splash-desc">Cursos subvencionados por la Junta de Castilla La Mancha, el Ministerio de Trabajo y el Ministerio de Educación y Formación Profesional y Deportes.</p>
 
@@ -5445,6 +5445,16 @@ add_action( 'template_redirect', function() {
         wp_safe_redirect( home_url( '/trabaja-con-nosotros/' ), 301 );
         exit;
     }
+
+    // E. Redirecciones 301 de cursos obsoletos hacia homólogos activos en 200 OK
+    if ( $trimmed_path === '/curso-ofimatica-en-la-nube-con-google-drive-clm/' ) {
+        wp_safe_redirect( home_url( '/curso-de-ofimatica/' ), 301 );
+        exit;
+    }
+    if ( $trimmed_path === '/curso-de-gestion-de-negocios-online-2-0-clm/' ) {
+        wp_safe_redirect( home_url( '/cursos/' ), 301 );
+        exit;
+    }
 }, 1 );
 
 // 3. Excluir páginas noindexadas y duplicadas del Sitemap XML de Yoast SEO
@@ -5466,6 +5476,7 @@ add_filter( 'wpseo_sitemap_entry', function( $url, $type, $post ) {
              strpos( $loc, '-2' ) !== false ||
              strpos( $loc, '/user-account' ) !== false ||
              strpos( $loc, '/formacion-premium-con-descuento' ) !== false ||
+             strpos( $loc, '/cursos-subvencionados-comunidad-de-madrid' ) !== false ||
              strpos( $loc, '/sin-categoria' ) !== false ) {
             return false;
         }
@@ -5480,6 +5491,7 @@ add_filter( 'wpseo_sitemap_url', function( $url_xml, $url ) {
          strpos( $loc, '-2' ) !== false ||
          strpos( $loc, '/user-account' ) !== false ||
          strpos( $loc, '/formacion-premium-con-descuento' ) !== false ||
+         strpos( $loc, '/cursos-subvencionados-comunidad-de-madrid' ) !== false ||
          strpos( $loc, '/sin-categoria' ) !== false ) {
         return '';
     }
@@ -5512,30 +5524,63 @@ add_action( 'parse_request', function( $wp ) {
                 '#\s*<url>\s*<loc>[^<]*/user-account/</loc>.*?</url>#s',
                 '#\s*<url>\s*<loc>[^<]*-2/</loc>.*?</url>#s',
                 '#\s*<url>\s*<loc>[^<]*/formacion-premium-con-descuento/</loc>.*?</url>#s',
+                '#\s*<url>\s*<loc>[^<]*/cursos-subvencionados-comunidad-de-madrid/?</loc>.*?</url>#s',
                 '#\s*<url>\s*<loc>[^<]*/category/sin-categoria/</loc>.*?</url>#s',
             );
-            return preg_replace( $patterns, '', $xml );
+            $xml = preg_replace( $patterns, '', $xml );
+
+            // Hispanizar URLs en category-sitemap.xml para emitir directamente /categoria/ en 200 OK
+            $xml = str_replace( '<loc>https://centrosinfosystem.com/category/', '<loc>https://centrosinfosystem.com/categoria/', $xml );
+
+            return $xml;
         } );
     }
 }, -9999 );
 
-// 4. Hispanización y corrección de enlaces demo en la cabecera y megamenú
+// 4. Hispanización, corrección de 404s y normalización de enlaces internos
 add_filter( 'the_content', 'infosystem_clean_english_menu_links', 999 );
 add_filter( 'elementor/frontend/the_content', 'infosystem_clean_english_menu_links', 999 );
 add_filter( 'elementor/theme/header/the_content', 'infosystem_clean_english_menu_links', 999 );
+add_filter( 'elementor/theme/footer/the_content', 'infosystem_clean_english_menu_links', 999 );
+add_filter( 'widget_text', 'infosystem_clean_english_menu_links', 999 );
 function infosystem_clean_english_menu_links( $content ) {
     if ( empty( $content ) || ! is_string( $content ) ) {
         return $content;
     }
 
-    // Reemplazar enlaces demo a courses/ o course/ por /cursos/
+    // A. Reemplazar enlaces demo a courses/ o course/ por /cursos/
     if ( strpos( $content, '/courses' ) !== false || strpos( $content, '/course' ) !== false ) {
         $content = preg_replace( '#https?://centrosinfosystem\.com/courses/[^"\'\s>]*#i', home_url( '/cursos/' ), $content );
         $content = preg_replace( '#https?://centrosinfosystem\.com/course/[^"\'\s>]*#i', home_url( '/cursos/' ), $content );
         $content = preg_replace( '#https?://centrosinfosystem\.com/courses/?(["\'\s>])#i', home_url( '/cursos/' ) . '$1', $content );
     }
 
-    // Reemplazar textos de plantilla demo por categorías reales en español
+    // B. Reemplazar enlaces internos obsoletos o con 404 por sus canónicas 200 OK
+    $content = str_replace(
+        array(
+            '/curso-ofimatica-en-la-nube-con-google-drive-clm/',
+            '/curso-ofimatica-en-la-nube-con-google-drive-clm',
+            '/curso-de-gestion-de-negocios-online-2-0-clm/',
+            '/curso-de-gestion-de-negocios-online-2-0-clm',
+            '/become-a-teacher/',
+            '/become-a-teacher',
+            'https://centrosinfosystem.com/contacto"',
+            'https://centrosinfosystem.com/contacto\'',
+        ),
+        array(
+            '/curso-de-ofimatica/',
+            '/curso-de-ofimatica/',
+            '/cursos/',
+            '/cursos/',
+            '/trabaja-con-nosotros/',
+            '/trabaja-con-nosotros/',
+            'https://centrosinfosystem.com/contacto/"',
+            'https://centrosinfosystem.com/contacto/\'',
+        ),
+        $content
+    );
+
+    // C. Reemplazar textos de plantilla demo por categorías reales en español
     $translations = array(
         'Ficha de curso por defecto'   => 'Cursos Subvencionados',
         'Ficha de curso estilo 1'      => 'Cursos Desempleados',
@@ -5548,4 +5593,40 @@ function infosystem_clean_english_menu_links( $content ) {
     );
 
     return strtr( $content, $translations );
+}
+
+// 5. Jerarquía Semántica H1: Normalizar H1 internos en fichas de curso y contacto
+add_filter( 'the_content', 'infosystem_fix_semantic_headings', 20 );
+function infosystem_fix_semantic_headings( $content ) {
+    if ( empty( $content ) || ! is_string( $content ) ) {
+        return $content;
+    }
+
+    // En fichas individuales de producto (cursos WooCommerce), degradar los H1 internos del temario a H3
+    if ( function_exists( 'is_product' ) && is_product() ) {
+        $content = preg_replace( '#<h1(\s+[^>]*)?>#i', '<h3$1>', $content );
+        $content = preg_replace( '#</h1>#i', '</h3>', $content );
+    }
+
+    // En la página de contacto, el H1 es el título de cabecera; degradar 'Habla con nosotros' a H2
+    if ( function_exists( 'is_page' ) && is_page( 'contacto' ) ) {
+        $content = preg_replace( '#<h1([^>]*class="[^"]*wp-block-heading[^"]*"[^>]*)>#i', '<h2$1>', $content );
+        $content = preg_replace( '#Habla con nosotros</h1>#i', 'Habla con nosotros</h2>', $content );
+    }
+
+    // En la página conócenos, degradar el H1 interno del hero a H2 para preservar el H1 del tema
+    if ( function_exists( 'is_page' ) && is_page( 'conocenos' ) ) {
+        $content = preg_replace( '#<h1([^>]*class="[^"]*cis-about-hero-title[^"]*"[^>]*)>#i', '<h2$1>', $content );
+        $content = preg_replace( '#</h1>(\s*</div>\s*<!--\s*Hero Content\s*-->)#i', '</h2>$1', $content );
+        $content = preg_replace( '#<h1(\s+[^>]*)?>#i', '<h2$1>', $content );
+        $content = preg_replace( '#</h1>#i', '</h2>', $content );
+    }
+
+    // En la página de preguntas frecuentes, degradar el H1 interno del bloque a H2
+    if ( function_exists( 'is_page' ) && is_page( 'preguntas-frecuentes' ) ) {
+        $content = preg_replace( '#<h1(\s+[^>]*)?>#i', '<h2$1>', $content );
+        $content = preg_replace( '#</h1>#i', '</h2>', $content );
+    }
+
+    return $content;
 }
