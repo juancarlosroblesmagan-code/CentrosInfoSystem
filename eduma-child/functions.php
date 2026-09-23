@@ -1354,16 +1354,59 @@ function infosystem_meta_tags() {
 
 
 // ============================================================
-
-// 11. SEGURIDAD — ELIMINAR VERSIÓN DE WP DEL FRONTEND
-
+// 11. HARDENING DE SEGURIDAD Y BLINDAJE DE CABECERAS
 // ============================================================
 
+// A. Ocultar versión de WordPress y generadores
 remove_action( 'wp_head', 'wp_generator' );
-
-
-
 add_filter( 'the_generator', '__return_empty_string' );
+remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'wlwmanifest_link' );
+
+// B. Desactivar XML-RPC por completo (neutraliza ataques DDoS pingback y fuerza bruta multicall)
+add_filter( 'xmlrpc_enabled', '__return_false' );
+add_filter( 'wp_headers', function( $headers ) {
+    unset( $headers['X-Pingback'] );
+    return $headers;
+} );
+if ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
+    status_header( 403 );
+    exit( 'XML-RPC is disabled on this server.' );
+}
+
+// C. Bloquear enumeración de usuarios vía REST API (/wp-json/wp/v2/users) para no autenticados
+add_filter( 'rest_endpoints', function( $endpoints ) {
+    if ( ! is_user_logged_in() ) {
+        if ( isset( $endpoints['/wp/v2/users'] ) ) {
+            unset( $endpoints['/wp/v2/users'] );
+        }
+        if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
+            unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+        }
+    }
+    return $endpoints;
+} );
+
+// D. Bloquear enumeración de usuarios vía query (?author=N)
+add_action( 'template_redirect', function() {
+    if ( ( is_author() || ( isset( $_GET['author'] ) && ! empty( $_GET['author'] ) ) ) && ! is_admin() ) {
+        wp_safe_redirect( home_url( '/' ), 301 );
+        exit;
+    }
+}, 2 );
+
+// E. Cabeceras HTTP de seguridad (Security Headers)
+add_action( 'send_headers', function() {
+    if ( ! is_admin() ) {
+        header( 'X-Frame-Options: SAMEORIGIN' );
+        header( 'X-Content-Type-Options: nosniff' );
+        header( 'Referrer-Policy: strict-origin-when-cross-origin' );
+        header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
+        if ( function_exists( 'header_remove' ) ) {
+            header_remove( 'X-Powered-By' );
+        }
+    }
+} );
 
 
 
