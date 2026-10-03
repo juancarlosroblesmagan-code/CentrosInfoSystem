@@ -1,5 +1,18 @@
 # 10 · Pendientes y notas operativas
 
+## Actualización de cierre — 03/10/2026
+
+Consultar [informe completo](CIERRE-2026-10-03.md). Pendientes vigentes:
+
+1. Rotación de credenciales históricamente expuestas (prioritario).
+2. Axarnet: reparar protección HTTP de staging; comprobar también archivos estáticos. No retirar los bloqueos WordPress mientras tanto.
+3. CSS crítico/rendimiento móvil: aplazados por decisión del propietario; mantener Rocket/Redis y Super Cache inactivo.
+4. Prueba física final de interacciones; formularios confirmados operativos por el propietario, sin envíos del agente.
+5. Revisar integraciones y clientes externos del clon antes de cualquier comunicación real autorizada.
+6. Revisar contador fijo con fin 01/01/2027 a las 23:59.
+
+**Las notas siguientes son históricas. No ejecutar borrados manuales de cachés ni cambios de servicios como rutina de cierre; usar el control nativo de caché de página. Las tareas de contenido/perfiles sociales no se consideran realizadas por esta auditoría.**
+
 Tareas que **no se pueden resolver vía API/automatización** o que dependen de que el cliente complete configuraciones externas (dominio, buzones, etc.).
 
 ---

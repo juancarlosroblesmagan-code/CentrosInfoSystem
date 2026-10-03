@@ -2,6 +2,19 @@
 
 Historial cronológico de todos los cambios realizados sobre el sitio.
 
+## 2026-10-03 · Cierre documentado, reparaciones verificadas y ajustes móviles
+
+- Publicadas reparaciones de inicialización/dependencias JavaScript, semántica, foco, contrastes, metadatos/schemas y restauración de indexación de producción.
+- Publicada promoción selectiva probada en staging: títulos H3 conservando estilos, imagen inglesa WebP optimizada y retirada de una copia CSS idéntica.
+- Formulario móvil a una columna, consentimientos sin overflow, RGPD a todo el ancho y pregunta antispam debajo de la respuesta con 2 px de separación.
+- X de cierre de menú móvil visible sin fondo granate; footer móvil centrado, incluido contacto con icono arriba y texto debajo, compacto. Desktop conservado.
+- Contador nativo en español con fecha fija 01/01/2027 a las 23:59 (aproximadamente 90 días al configurar). Placeholder LABEL del editor no representa la web pública.
+- Tres mediciones públicas móviles Lighthouse 13.5.0: rendimiento 62/54/58, accesibilidad y buenas prácticas 100; SEO 92 por timeout de robots, comprobado válido por separado. Sin mejora global de velocidad demostrada.
+- Se mantiene WP Rocket/Redis; migración a Super Cache revertida. CSS crítico aplazado expresamente por el propietario; no se cambió licencia ni servicio.
+- Staging separado y con guard/noindex/bloqueos de comunicaciones. Protección HTTP nginx pendiente con Axarnet; archivos estáticos no cubiertos completamente.
+- Formularios operativos según el propietario; no envíos reales del agente. Credenciales y comprobación física/integraciones siguen pendientes.
+- Informe completo y reversión: [docs/CIERRE-2026-10-03.md](docs/CIERRE-2026-10-03.md). Esta entrega versiona documentación, no el despliegue completo ni cambios locales anteriores de código.
+
 ## 2026-09-23 · Corrección Definitiva 404 Cursos, Saneamiento Total de Sitemaps y Normalización Semántica H1
 
 - **Resolución Completa de Enlaces Rotos 404 (Menú Global y Home):**

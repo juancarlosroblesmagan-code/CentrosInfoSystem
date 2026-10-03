@@ -2,6 +2,18 @@
 
 Guía para tareas recurrentes y cambios habituales.
 
+## Condiciones vigentes — 03/10/2026
+
+- Leer [cierre y continuidad](CIERRE-2026-10-03.md) antes de intervenir. Prevalece sobre referencias históricas de esta guía.
+- Administración: `https://centrosinfosystem.com/wp-admin/`. No usar dominios temporales ni publicar credenciales.
+- Footer actual: plantilla Elementor **8920**, no antiguo widget HTML; centrado móvil adicional en WPCode **17898**. Editar contenido nativamente y conservar estilos/dependencias.
+- Contador de portada4524/widgetf1b3b39: fin **01/01/2027 23:59**, etiquetas españolas. Revisar fecha antes de vencer.
+- Mantener Rocket/Redis activos y Super Cache inactivo. Caché: control nativo **Borrar y Precargar Caché**; no borrar carpetas ni vaciar Redis por rutina.
+- No actualizar masivamente ni sustituir tema/plugins: respaldo, staging, autorización y reversión selectiva primero.
+- No copiar DB, noindex, guard, Force Login o bloqueo de emails del clon a producción; no modificar cron ni Laguna.
+- Pruebas que envíen correos, WhatsApp, citas o pedidos requieren autorización. Formularios confirmados operativos por el propietario al cierre.
+- Los apartados históricos siguientes deben adaptarse a estas condiciones; no son autorización de envíos, borrados, actualización o despliegue automático.
+
 ---
 
 ## Acceso

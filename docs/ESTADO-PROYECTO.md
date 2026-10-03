@@ -1,6 +1,19 @@
 # Estado del proyecto — centrosinfosystem.com
 
-**Última revisión:** 23/09/2026
+**Última revisión:** 03/10/2026
+
+## Estado vigente de cierre
+
+La referencia actual es [CIERRE-2026-10-03.md](CIERRE-2026-10-03.md): incluye cambios publicados, mediciones públicas, IDs de producción/clon, reversión y pendientes.
+
+- Ajustes solicitados de formulario, footer móvil, X y contador publicados. Formularios funcionan según confirmación del propietario.
+- Producción: WP Rocket y Redis; WP Super Cache inactivo. Indexación permitida. Clon noindex y aislado mediante WordPress, con protección HTTP de Axarnet pendiente.
+- Medición móvil pública Lighthouse: rendimiento 54–62 (mediana 58), accesibilidad/buenas prácticas 100; SEO 92 por timeout de robots en la herramienta, con robots válido en comprobación independiente.
+- CSS crítico aplazado por decisión del propietario. Pendientes seguridad: rotación de credenciales y reparación de protección HTTP del clon.
+- El contador termina el 01/01/2027 a las 23:59; no es un plazo de inscripción de cursos validado.
+- Los cambios visuales adicionales se publicaron con fragmentos WPCode separados y controles nativos, sin desplegar íntegramente el tema ni importar BD.
+
+**El contenido siguiente se conserva como historial de septiembre; no representa una auditoría vigente de todas las URLs, Search Console, servicios o permisos. Las condiciones de cierre anteriores prevalecen.**
 
 ---
 
