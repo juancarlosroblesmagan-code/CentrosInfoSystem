@@ -1,0 +1,12 @@
+# Centros Infosystem
+
+> Información pública sobre formación y cursos en Castilla-La Mancha.
+
+La disponibilidad, requisitos y modalidad deben consultarse en la ficha vigente de cada curso. Este índice no sustituye esas fichas ni constituye una política de permisos de rastreo.
+
+## Navegación principal
+
+- [Portada](https://centrosinfosystem.com/): Presentación de Centros Infosystem.
+- [Cursos subvencionados](https://centrosinfosystem.com/cursos-subvencionados-castilla-la-mancha/): Oferta formativa y enlaces a cursos.
+- [Contacto](https://centrosinfosystem.com/contacto/): Información pública de contacto y consultas.
+- [Blog](https://centrosinfosystem.com/blog/): Artículos y novedades de formación.

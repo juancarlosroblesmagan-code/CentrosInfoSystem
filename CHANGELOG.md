@@ -4,6 +4,8 @@ Historial cronológico de todos los cambios realizados sobre el sitio.
 
 ## 2026-10-03 · Cierre documentado, reparaciones verificadas y ajustes móviles
 
+- **Reapertura posterior al cierre:** reproducido 2/3 de navegación agéntica por timeout de llms.txt. Creado archivo estático de igual contenido público para evitar bootstrap WordPress; respuesta pasa de 3,04 s a 73–88 ms. Fragmento temporal administrativo17902 desactivado. Nueva auditoría pública Lighthouse13.5.0:3/3. Fuente de mantenimiento `content/llms.txt`; detalle en sección3.1 del informe. Sin cambios a Rocket/Redis/cron ni nuevas herramientas WebMCP.
+
 - Publicadas reparaciones de inicialización/dependencias JavaScript, semántica, foco, contrastes, metadatos/schemas y restauración de indexación de producción.
 - Publicada promoción selectiva probada en staging: títulos H3 conservando estilos, imagen inglesa WebP optimizada y retirada de una copia CSS idéntica.
 - Formulario móvil a una columna, consentimientos sin overflow, RGPD a todo el ancho y pregunta antispam debajo de la respuesta con 2 px de separación.

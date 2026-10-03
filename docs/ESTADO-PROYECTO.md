@@ -10,6 +10,7 @@ La referencia actual es [CIERRE-2026-10-03.md](CIERRE-2026-10-03.md): incluye ca
 - Producción: WP Rocket y Redis; WP Super Cache inactivo. Indexación permitida. Clon noindex y aislado mediante WordPress, con protección HTTP de Axarnet pendiente.
 - Medición móvil pública Lighthouse: rendimiento 54–62 (mediana 58), accesibilidad/buenas prácticas 100; SEO 92 por timeout de robots en la herramienta, con robots válido en comprobación independiente.
 - CSS crítico aplazado por decisión del propietario. Pendientes seguridad: rotación de credenciales y reparación de protección HTTP del clon.
+- Incidencia posterior de navegación agéntica 2/3 corregida: llms.txt estático, nueva auditoría pública 3/3. Detalle y mantenimiento en sección 3.1 del informe.
 - El contador termina el 01/01/2027 a las 23:59; no es un plazo de inscripción de cursos validado.
 - Los cambios visuales adicionales se publicaron con fragmentos WPCode separados y controles nativos, sin desplegar íntegramente el tema ni importar BD.
 
